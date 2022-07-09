@@ -9,11 +9,7 @@ import { accreditation } from '@/store'
       Poinformuj Wolontariusza, że przysługują mu 2 ciepłe posiłki odhaczane na
       tyle identyfikatora
 
-      <img
-        class="shadow m-8"
-        src="/img/szop-lis-dzik-back-jedzonko.png"
-        alt=""
-      />
+      <img class="shadow m-8" src="/img/szop-lis-dzik-back.png" alt="" />
     </p>
   </div>
 
