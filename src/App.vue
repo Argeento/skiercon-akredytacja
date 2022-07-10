@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { accreditation } from './store'
+import { ticket } from './store'
 </script>
 
 <template>
@@ -12,7 +12,7 @@ import { accreditation } from './store'
   </div>
 
   <div class="acc-dev bg-gray-100 border">
-    <pre>{{ accreditation }}</pre>
+    <pre>{{ ticket }}</pre>
   </div>
 </template>
 

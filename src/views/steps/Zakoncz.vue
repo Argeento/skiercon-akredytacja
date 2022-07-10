@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { accreditation } from '@/store'
+import { ticket } from '@/store'
 </script>
 
 <template>
-  <div v-if="accreditation.personType === 'Wolontariusz'">
+  <div v-if="ticket.personType === 'Wolontariusz'">
     <p>Poinformuj o tym, żeby zgłosił się do "leśniczówki"</p>
     <p>
       Poinformuj Wolontariusza, że przysługują mu 2 ciepłe posiłki odhaczane na
@@ -13,7 +13,7 @@ import { accreditation } from '@/store'
     </p>
   </div>
 
-  <div v-if="accreditation.personType === 'Gość'">
+  <div v-if="ticket.personType === 'Gość'">
     <p>
       Wydaj Pakiet Gościa (Kubek + Informator + Vinga coś tam jeszcze może doda
     </p>
@@ -24,7 +24,7 @@ import { accreditation } from '@/store'
     </p>
   </div>
 
-  <div v-if="accreditation.personType === 'Wystawca'">
+  <div v-if="ticket.personType === 'Wystawca'">
     <p>Poinformuj wystawcę, gdzie ma stoisko</p>
     <p>
       Poinformuj wystawcę, że przyjdzie do nich na stoisko Organizator w sprawie

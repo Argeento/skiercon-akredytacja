@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useRoute, useRouter } from 'vue-router'
-import { sendAccreditation } from '../../store'
+import { sendTicket } from '../../store'
 
 const props = defineProps({
   nextText: {
@@ -10,6 +10,10 @@ const props = defineProps({
   prevText: {
     type: String,
     default: 'Wstecz'
+  },
+  canMoveForward: {
+    type: Boolean,
+    default: true
   },
   end: {
     type: Boolean,
@@ -29,9 +33,11 @@ function onPrevClick() {
   }
 }
 
-function onNextClick() {
+async function onNextClick() {
+  if (!props.canMoveForward) return
+
   if (props.end) {
-    sendAccreditation()
+    await sendTicket()
     router.push('/')
   } else {
     router.push(`${route.matched[0].path}/${currentStep + 1}`)

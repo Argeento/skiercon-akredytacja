@@ -1,15 +1,11 @@
 <script lang="ts" setup>
-import { accreditation } from '@/store'
+import { ticket } from '@/store'
 
 const vendors = ['Skyweavers', 'Mama Irenka', 'Konopczyńscy'].sort()
 </script>
 
 <template>
-  <v-select
-    label="Media"
-    :options="vendors"
-    v-model="accreditation.vendorName"
-  />
+  <v-select label="Media" :options="vendors" v-model="ticket.vendorName" />
   <Pagination />
 </template>
 

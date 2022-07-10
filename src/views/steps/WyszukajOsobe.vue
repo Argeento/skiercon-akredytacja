@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import { accreditation } from '@/store'
+import { ticket } from '@/store'
 
 let options: string[]
 
-if (accreditation.value.personType === 'Gość') {
+if (ticket.value.personType === 'Gość') {
   options = ['Gość 1', 'Gość 2'].sort()
 }
 
-if (accreditation.value.personType === 'Twórca Programu') {
+if (ticket.value.personType === 'Twórca Programu') {
   options = ['Twórca 1', 'Twórca 2'].sort()
 }
 </script>
@@ -16,7 +16,7 @@ if (accreditation.value.personType === 'Twórca Programu') {
   <v-select
     label="Twórca programu"
     :options="options"
-    v-model="accreditation.personName"
+    v-model="ticket.personName"
   />
   <Pagination />
 </template>

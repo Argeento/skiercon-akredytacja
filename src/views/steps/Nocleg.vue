@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import { accreditation } from '@/store'
+import { ticket } from '@/store'
 
-let sleepValue: typeof accreditation.value.sleep = '1'
+let sleepValue: typeof ticket.value.sleep = '1'
 
-if (accreditation.value.personType === 'Wolontariusz') {
+if (ticket.value.personType === 'Wolontariusz') {
   sleepValue = 'SOSW'
 }
 
-if (accreditation.value.personType === 'Wystawca') {
+if (ticket.value.personType === 'Wystawca') {
   sleepValue = 'B2'
 }
 </script>
@@ -19,12 +19,7 @@ if (accreditation.value.personType === 'Wystawca') {
   </div>
 
   <label class="block">
-    <input
-      type="radio"
-      name="sleep"
-      value="nope"
-      v-model="accreditation.sleep"
-    />
+    <input type="radio" name="sleep" value="nope" v-model="ticket.sleep" />
     Brak noclegu
   </label>
 
@@ -33,27 +28,27 @@ if (accreditation.value.personType === 'Wystawca') {
       type="radio"
       name="sleep"
       :value="sleepValue"
-      v-model="accreditation.sleep"
+      v-model="ticket.sleep"
     />
     Sleep Room
   </label>
 
-  <label class="block" v-if="accreditation.personType !== 'Wystawca'">
-    <input type="radio" name="sleep" value="PN" v-model="accreditation.sleep" />
+  <label class="block" v-if="ticket.personType !== 'Wystawca'">
+    <input type="radio" name="sleep" value="PN" v-model="ticket.sleep" />
     Pole Namiotowe
   </label>
 
   <br />
 
-  <div v-if="accreditation.personType == 'Wolontariusz'">
+  <div v-if="ticket.personType == 'Wolontariusz'">
     Poinformuj Wolontariusza, że nocleg mają w drugiej szkole
   </div>
 
-  <div v-if="accreditation.sleep !== 'nope'">
+  <div v-if="ticket.sleep !== 'nope'">
     Wydaj do podpisu <b>Kartę Noclegową</b>
   </div>
 
-  <div v-if="accreditation.sleep === 'nope'">
+  <div v-if="ticket.sleep === 'nope'">
     Skreśl na identyfikatorze pole Sleep Room
     <img
       width="600"
@@ -63,7 +58,7 @@ if (accreditation.value.personType === 'Wystawca') {
     />
   </div>
 
-  <div v-if="accreditation.sleep === '1'">
+  <div v-if="ticket.sleep === '1'">
     Na identyfikatorze w polu Sleep Room wpisz "<b>1</b>"
     <img
       width="600"
@@ -73,7 +68,7 @@ if (accreditation.value.personType === 'Wystawca') {
     />
   </div>
 
-  <div v-if="accreditation.sleep === 'SOSW'">
+  <div v-if="ticket.sleep === 'SOSW'">
     Na identyfikatorze w polu Sleep Room wpisz "<b>SOSW</b>"
     <img
       width="600"
@@ -83,7 +78,7 @@ if (accreditation.value.personType === 'Wystawca') {
     />
   </div>
 
-  <div v-if="accreditation.sleep === 'PN'">
+  <div v-if="ticket.sleep === 'PN'">
     Na identyfikatorze w polu Sleep Room narysuj "<b>△</b>"
     <img
       width="600"
@@ -93,7 +88,7 @@ if (accreditation.value.personType === 'Wystawca') {
     />
   </div>
 
-  <div v-if="accreditation.sleep === 'B2'">
+  <div v-if="ticket.sleep === 'B2'">
     Na identyfikatorze w polu Sleep Room wpisz "<b>B2</b>"
     <img
       width="600"
@@ -103,7 +98,7 @@ if (accreditation.value.personType === 'Wystawca') {
     />
   </div>
 
-  <Pagination />
+  <Pagination :can-move-forward="!!ticket.sleep" />
 </template>
 
 <style lang="scss" scoped></style>

@@ -1,13 +1,25 @@
 , Personimport { useRoute } from 'vue-router';
 <script lang="ts" setup>
-import type { Person } from '@/store'
-import { useRoute } from 'vue-router'
-import { accreditation } from '@/store'
+import { resetTicket, type Person } from '@/store'
+import { onBeforeRouteLeave, useRoute } from 'vue-router'
+import { ticket } from '@/store'
 
 const route = useRoute()
 
-accreditation.value.personType = route.meta.person as Person
-accreditation.value.accreditationStartTime = new Date()
+ticket.value.personType = route.meta.person as Person
+ticket.value.ticketStartTime = new Date()
+
+onBeforeRouteLeave(() => {
+  if (ticket.value.personType !== undefined) {
+    const leave = confirm('Czy chcesz anulować aktualną akredytację?')
+
+    if (leave) {
+      resetTicket()
+    }
+
+    return leave
+  }
+})
 </script>
 
 <template>
