@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { addTicket } from './db'
 
 export type Person =
@@ -26,7 +26,10 @@ export type Ticket = {
   numberOfIds?: number
 }
 
-export const ticket = ref<Ticket>({})
+const loadedTicket =
+  localStorage.getItem('ticket') && JSON.parse(localStorage.getItem('ticket')!)
+
+export const ticket = ref<Ticket>(loadedTicket ?? {})
 
 export function resetTicket() {
   ticket.value = {}
@@ -37,3 +40,13 @@ export async function sendTicket() {
   await addTicket(ticket.value)
   resetTicket()
 }
+
+watch(
+  ticket,
+  ticket => {
+    window.localStorage.setItem('ticket', JSON.stringify(ticket))
+  },
+  {
+    deep: true
+  }
+)

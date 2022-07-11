@@ -6,7 +6,24 @@ body {
   overflow-y: scroll;
 }
 
+@font-face {
+  font-family: skiercon;
+  src: url('/goodtimes.otf');
+}
+
+.skierfont {
+  font-family: skiercon;
+}
+
 .container {
-  max-width: 800px;
+  max-width: 700px;
   margin: 0 auto;
+}
+
+.badge-reverse {
+  width: 450px;
+}
+
+.card {
+  @apply shadow-md mb-5 py-4 px-10 rounded-xl;
 }

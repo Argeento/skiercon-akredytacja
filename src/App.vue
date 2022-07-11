@@ -3,21 +3,19 @@ import { ticket } from './store'
 </script>
 
 <template>
-  <RouterLink to="/">
-    <h1 class="text-xl text-center my-4">SkierCon Akredytacja</h1>
-  </RouterLink>
+  <RouterView />
 
-  <div class="container">
-    <RouterView />
-  </div>
-
-  <div class="acc-dev bg-gray-100 border">
+  <div class="acc-dev">
     <pre>{{ ticket }}</pre>
   </div>
 </template>
 
 <style lang="scss">
 @import '@/assets/base.scss';
+
+.title {
+  font-family: skiercon;
+}
 
 .acc-dev {
   position: absolute;

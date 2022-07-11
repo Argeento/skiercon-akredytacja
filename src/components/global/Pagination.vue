@@ -34,7 +34,11 @@ function onPrevClick() {
 }
 
 async function onNextClick() {
-  if (!props.canMoveForward) return
+  if (
+    !props.canMoveForward &&
+    !confirm('Czy na pewno chcesz pominąć ten krok?')
+  )
+    return
 
   if (props.end) {
     await sendTicket()
@@ -51,7 +55,11 @@ async function onNextClick() {
       {{ prevText }}
     </button>
 
-    <button class="block m-2 py-2 px-5 bg-lime-300 border" @click="onNextClick">
+    <button
+      class="m-2 py-2 px-5 border flex"
+      :class="canMoveForward ? 'border-lime-500' : 'border-red-500 '"
+      @click="onNextClick"
+    >
       {{ nextText }}
     </button>
   </div>

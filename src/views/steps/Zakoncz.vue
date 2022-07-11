@@ -4,36 +4,38 @@ import { ticket } from '@/store'
 
 <template>
   <div v-if="ticket.personType === 'Wolontariusz'">
-    <p>Poinformuj o tym, żeby zgłosił się do "leśniczówki"</p>
-    <p>
-      Poinformuj Wolontariusza, że przysługują mu 2 ciepłe posiłki odhaczane na
-      tyle identyfikatora
+    <div class="card">
+      Poinformuj Wolontariusza o tym, żeby zgłosił się do "<b>Leśniczówki</b>"
+    </div>
+    <div class="card">
+      Poinformuj Wolontariusza, że przysługują mu
+      <b>2 ciepłe posiłki</b> odhaczane na tyle identyfikatora
 
-      <img class="shadow m-8" src="/img/szop-lis-dzik-back.png" alt="" />
-    </p>
+      <img class="plakietka-reverse" src="/img/szop-lis-dzik-back.png" alt="" />
+    </div>
   </div>
 
   <div v-if="ticket.personType === 'Gość'">
-    <p>
-      Wydaj Pakiet Gościa (Kubek + Informator + Vinga coś tam jeszcze może doda
-    </p>
-    <p>
+    <div class="card">Wydaj Pakiet Gościa (Kubek)</div>
+    <div class="card">
       Podaj informację, że na odwrocie identyfikatora znajdują się numery
       telefonów do Koordynatorów Gości i z danym Koordynatorem trzeba
       skontaktować się w kwestii noclegu i ewentualnego rozliczenia dojazdu
-    </p>
+    </div>
   </div>
 
   <div v-if="ticket.personType === 'Wystawca'">
-    <p>Poinformuj wystawcę, gdzie ma stoisko</p>
-    <p>
-      Poinformuj wystawcę, że przyjdzie do nich na stoisko Organizator w sprawie
-      rozliczenia i podpisania umowy
-    </p>
+    <div class="card">Poinformuj wystawcę, gdzie ma stoisko</div>
+    <div class="card">
+      Poinformuj wystawcę, że do stoiska podejdzie <b>Organizator</b> w sprawie
+      rozliczenia i&nbsp;podpisania umowy
+    </div>
   </div>
 
-  <div>Wydaj identyfikator</div>
-  <div>Zapytaj, czy potrzebna jest smycz lub folijka do identyfikatora</div>
+  <div class="card">
+    Wydaj identyfikator (zapytaj, czy potrzebna jest smycz lub folijka do
+    identyfikatora)
+  </div>
 
   <Pagination next-text="Zakończ akredytację" end />
 </template>

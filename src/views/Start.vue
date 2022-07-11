@@ -7,6 +7,7 @@ import { ticket } from '@/store'
 const route = useRoute()
 
 ticket.value.personType = route.meta.person as Person
+ticket.value.age = '18+'
 ticket.value.ticketStartTime = new Date()
 
 onBeforeRouteLeave(() => {
@@ -23,8 +24,16 @@ onBeforeRouteLeave(() => {
 </script>
 
 <template>
-  <div>{{ $route.meta.person }}</div>
-  <router-view />
+  <div class="container">
+    <div class="text-center mt-5 mb-7">
+      <RouterLink class="text-xl skierfont" to="/">
+        SkierCon akredytacja
+      </RouterLink>
+      <div>{{ $route.name }}</div>
+    </div>
+
+    <router-view />
+  </div>
 </template>
 
 <style lang="scss" scoped></style>

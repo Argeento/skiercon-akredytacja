@@ -1,7 +1,9 @@
 <script lang="ts" setup>
-import { ticket } from '@/store'
+import { ticket, type Sleep } from '@/store'
+import { getPlakietkaRevers } from '@/utils'
+import { computed } from 'vue'
 
-let sleepValue: typeof ticket.value.sleep = '1'
+let sleepValue: Sleep = '1'
 
 if (ticket.value.personType === 'Wolontariusz') {
   sleepValue = 'SOSW'
@@ -10,95 +12,125 @@ if (ticket.value.personType === 'Wolontariusz') {
 if (ticket.value.personType === 'Wystawca') {
   sleepValue = 'B2'
 }
+
+const reverseSrc = getPlakietkaRevers(ticket.value.personType!)
+const markMap: Record<Sleep, string> = {
+  '1': '1',
+  B2: 'B2',
+  PN: 'P',
+  SOSW: 'SOSW',
+  nope: 'X'
+}
+
+const mark = computed(() => {
+  return markMap[ticket.value.sleep!]
+})
 </script>
 
 <template>
-  <div>
-    Zapytaj osobę, czy chce nocować w <b>Sleep Roomie</b> lub na
-    <b>Polu Namiotowym</b>
+  <div class="card">
+    <div class="mb-3">Zapytaj o nocleg</div>
+
+    <div class="mb-3">
+      <label
+        class="block cursor-pointer"
+        :class="ticket.sleep === 'nope' && 'font-bold'"
+      >
+        <input type="radio" name="sleep" value="nope" v-model="ticket.sleep" />
+        Brak noclegu
+      </label>
+
+      <label
+        class="block cursor-pointer"
+        :class="ticket.sleep === sleepValue && 'font-bold'"
+      >
+        <input
+          type="radio"
+          name="sleep"
+          :value="sleepValue"
+          v-model="ticket.sleep"
+        />
+        Sleep Room
+      </label>
+
+      <label
+        class="block cursor-pointer"
+        :class="ticket.sleep === 'PN' && 'font-bold'"
+        v-if="ticket.personType !== 'Wystawca'"
+      >
+        <input type="radio" name="sleep" value="PN" v-model="ticket.sleep" />
+        Pole Namiotowe
+      </label>
+    </div>
   </div>
 
-  <label class="block">
-    <input type="radio" name="sleep" value="nope" v-model="ticket.sleep" />
-    Brak noclegu
-  </label>
-
-  <label class="block">
-    <input
-      type="radio"
-      name="sleep"
-      :value="sleepValue"
-      v-model="ticket.sleep"
-    />
-    Sleep Room
-  </label>
-
-  <label class="block" v-if="ticket.personType !== 'Wystawca'">
-    <input type="radio" name="sleep" value="PN" v-model="ticket.sleep" />
-    Pole Namiotowe
-  </label>
-
-  <br />
-
-  <div v-if="ticket.personType == 'Wolontariusz'">
-    Poinformuj Wolontariusza, że nocleg mają w drugiej szkole
+  <div
+    v-if="ticket.personType == 'Wolontariusz' && ticket.sleep === 'SOSW'"
+    class="card"
+  >
+    Poinformuj <i>Wolontariusza</i>, że nocleg mają w <b>Drugiej Szkole</b>
   </div>
 
-  <div v-if="ticket.sleep !== 'nope'">
-    Wydaj do podpisu <b>Kartę Noclegową</b>
+  <div v-if="ticket.sleep && ticket.sleep !== 'nope'" class="card">
+    Wydaj do podpisu <b>Kartę Noclegową</b> <br />
+    <span class="text-red-600"> Karta ma wrócić na akredytację! </span>
   </div>
 
-  <div v-if="ticket.sleep === 'nope'">
-    Skreśl na identyfikatorze pole Sleep Room
-    <img
-      width="600"
-      height="400"
-      src="https://via.placeholder.com/600x400/cccccc/000000?text=indetyfikator+ze+skreslonym+sleep+roomem"
-      alt=""
-    />
-  </div>
+  <div v-if="ticket.sleep" class="card">
+    <div>
+      Na identyfikatorze w polu <b>MIEJSCE NA SLEEP ROOMIE</b> wpisz "<b>
+        {{ mark }} </b
+      >"
+    </div>
 
-  <div v-if="ticket.sleep === '1'">
-    Na identyfikatorze w polu Sleep Room wpisz "<b>1</b>"
-    <img
-      width="600"
-      height="400"
-      src="https://via.placeholder.com/600x400/cccccc/000000?text=indetyfikator+z+wpisanym+1+w+polu+sleep+room"
-      alt=""
-    />
-  </div>
-
-  <div v-if="ticket.sleep === 'SOSW'">
-    Na identyfikatorze w polu Sleep Room wpisz "<b>SOSW</b>"
-    <img
-      width="600"
-      height="400"
-      src="https://via.placeholder.com/600x400/cccccc/000000?text=indetyfikator+z+wpisanym+SOSW+w+polu+sleep+room"
-      alt=""
-    />
-  </div>
-
-  <div v-if="ticket.sleep === 'PN'">
-    Na identyfikatorze w polu Sleep Room narysuj "<b>△</b>"
-    <img
-      width="600"
-      height="400"
-      src="https://via.placeholder.com/600x400/cccccc/000000?text=indetyfikator+z+wpisanym+PN+w+polu+sleep+room"
-      alt=""
-    />
-  </div>
-
-  <div v-if="ticket.sleep === 'B2'">
-    Na identyfikatorze w polu Sleep Room wpisz "<b>B2</b>"
-    <img
-      width="600"
-      height="400"
-      src="https://via.placeholder.com/600x400/cccccc/000000?text=indetyfikator+z+wpisanym+B2+w+polu+sleep+room"
-      alt=""
-    />
+    <div class="badge-wrap">
+      <div
+        class="badge-mark"
+        :class="{
+          'badge-mark--program': ticket.personType === 'Twórca Programu',
+          'badge-mark--volunteer': ticket.personType === 'Wolontariusz',
+          'badge-mark--small':
+            ticket.personType === 'Wolontariusz' && ticket.sleep === 'SOSW'
+        }"
+      >
+        {{ mark }}
+      </div>
+      <img class="badge-img" :src="reverseSrc" alt="" />
+    </div>
   </div>
 
   <Pagination :can-move-forward="!!ticket.sleep" />
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.badge-wrap {
+  position: relative;
+  width: 450px;
+}
+
+.badge-mark {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  top: 110px;
+  right: 33px;
+  font-size: 40px;
+  text-align: center;
+  @apply text-red-500;
+  font-family: Arial, Helvetica, sans-serif;
+
+  &--program {
+    top: 43px;
+    right: 48px;
+  }
+
+  &--volunteer {
+    top: 43px;
+  }
+
+  &--small {
+    font-size: 14px;
+    line-height: 55px;
+  }
+}
+</style>

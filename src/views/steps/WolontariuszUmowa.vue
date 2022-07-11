@@ -1,9 +1,9 @@
 <script lang="ts" setup></script>
 
 <template>
-  <div>
-    Wydaj umowę Wolontariusza do podpisania (w dwóch egzemplarzach, jedna wraca
-    do akredytacji)
+  <div class="card">
+    Wydaj do podpisu <b>Umowę dla Wolontariusza</b> <br />
+    <span class="text-red-600"> Umowa ma wrócić na akredytację! </span>
   </div>
 
   <Pagination />
