@@ -18,7 +18,8 @@ const router = createRouter({
     {
       path: '/',
       name: 'Start',
-      component: Home
+      component: Home,
+      meta: { step: 0 }
     },
     {
       path: '/uczestnik',

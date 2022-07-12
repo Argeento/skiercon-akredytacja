@@ -44,7 +44,7 @@ const links = [
     <router-link
       v-for="link in links"
       :key="link.name"
-      class="person block m-3 shadow hover:shadow-lg"
+      class="person block m-3 shadow hover:shadow-xl transition-all"
       :to="link.link"
     >
       <img
@@ -65,6 +65,6 @@ const links = [
   margin: 0 auto;
 }
 .person {
-  width: 300px;
+  width: 280px;
 }
 </style>
