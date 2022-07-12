@@ -7,11 +7,10 @@ import Start from './views/Start.vue'
 import Pelnoletnosc from './views/steps/Pelnoletnosc.vue'
 import Nocleg from './views/steps/Nocleg.vue'
 import Platnosc from './views/steps/Platnosc.vue'
-import Zakoncz from './views/steps/Zakoncz.vue'
 import WyszukajOsobe from './views/steps/WyszukajOsobe.vue'
 import WolontariuszUmowa from '@/views/steps/WolontariuszUmowa.vue'
 import WyszukajMedia from './views/steps/WyszukajMedia.vue'
-import WyszukajStoisko from './views/steps/WyszukajStoisko.vue'
+import WyszukajWystawce from './views/steps/WyszukajWystawce.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,12 +43,6 @@ const router = createRouter({
           name: 'Uczestnik - Płatność',
           meta: { step: 3 },
           component: Platnosc
-        },
-        {
-          path: '4',
-          name: 'Uczestnik - Zakończ akredytację',
-          meta: { step: 4 },
-          component: Zakoncz
         }
       ]
     },
@@ -81,7 +74,7 @@ const router = createRouter({
           path: '4',
           name: 'Twórca programu - Zakończ akredytację',
           meta: { step: 4 },
-          component: Zakoncz
+          component: Platnosc
         }
       ]
     },
@@ -119,7 +112,7 @@ const router = createRouter({
           path: '5',
           name: 'Wolontariusz - Zakończ akredytację',
           meta: { step: 5 },
-          component: Zakoncz
+          component: Platnosc
         }
       ]
     },
@@ -139,7 +132,7 @@ const router = createRouter({
           path: '2',
           name: 'Gość - Zakończ akredytację',
           meta: { step: 2 },
-          component: Zakoncz
+          component: Platnosc
         }
       ]
     },
@@ -159,7 +152,7 @@ const router = createRouter({
           path: '2',
           name: 'Media - Zakończ akredytację',
           meta: { step: 2 },
-          component: Zakoncz
+          component: Platnosc
         }
       ]
     },
@@ -173,7 +166,7 @@ const router = createRouter({
           path: '1',
           name: 'Wystawca - Nazwa stoiska',
           meta: { step: 1 },
-          component: WyszukajStoisko
+          component: WyszukajWystawce
         },
         {
           path: '2',
@@ -185,7 +178,7 @@ const router = createRouter({
           path: '3',
           name: 'Wystawca - Zakończ akredytację',
           meta: { step: 3 },
-          component: Zakoncz
+          component: Platnosc
         }
       ]
     }

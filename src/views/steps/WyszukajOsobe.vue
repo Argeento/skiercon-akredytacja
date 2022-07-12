@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import { ticket, type Person } from '@/store'
 import { onMounted, ref } from 'vue'
+import guests from '@/assets/guests.json'
 
 let options: string[]
 
 if (ticket.value.personType === 'Gość') {
-  options = ['Gość 1', 'Gość 2'].sort()
+  options = guests.sort()
 }
 
 if (ticket.value.personType === 'Twórca Programu') {
@@ -14,7 +15,8 @@ if (ticket.value.personType === 'Twórca Programu') {
 
 const searchFor: Partial<Record<Person, string>> = {
   'Twórca Programu': 'Twórcę Programu',
-  Gość: 'Gościa Skierconu'
+  Gość: 'Gościa',
+  Wolontariusz: 'Wolontariusza'
 }
 
 const vselect = ref()
@@ -28,7 +30,9 @@ onMounted(() => {
 
 <template>
   <div class="card">
-    <p class="mb-3">Wyszukaj {{ searchFor[ticket.personType!] }}:</p>
+    <div class="mb-3">
+      Wyszukaj <i>{{ searchFor[ticket.personType!] }}</i>
+    </div>
     <v-select
       ref="vselect"
       label="Twórca programu"
@@ -37,7 +41,7 @@ onMounted(() => {
       class="mb-8"
     />
   </div>
-  <Pagination />
+  <Pagination :can-move-forward="!!ticket.personName" />
 </template>
 
 <style lang="scss" scoped></style>

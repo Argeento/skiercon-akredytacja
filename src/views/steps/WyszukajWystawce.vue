@@ -5,8 +5,11 @@ const vendors = ['Skyweavers', 'Mama Irenka', 'Konopczyńscy'].sort()
 </script>
 
 <template>
-  <v-select label="Media" :options="vendors" v-model="ticket.vendorName" />
-  <Pagination />
+  <div class="card">
+    <div class="mb-3">Wyszukaj <i>Wystawcę</i></div>
+    <v-select label="Media" :options="vendors" v-model="ticket.vendorName" />
+    <Pagination />
+  </div>
 </template>
 
 <style lang="scss" scoped></style>

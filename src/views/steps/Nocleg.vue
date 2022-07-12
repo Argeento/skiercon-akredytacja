@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ticket, type Sleep } from '@/store'
-import { getPlakietkaRevers } from '@/utils'
+import { getBadgeRevers } from '@/utils'
 import { computed } from 'vue'
 
 let sleepValue: Sleep = '1'
@@ -13,7 +13,7 @@ if (ticket.value.personType === 'Wystawca') {
   sleepValue = 'B2'
 }
 
-const reverseSrc = getPlakietkaRevers(ticket.value.personType!)
+const reverseSrc = getBadgeRevers(ticket.value.personType!)
 const markMap: Record<Sleep, string> = {
   '1': '1',
   B2: 'B2',
@@ -22,9 +22,7 @@ const markMap: Record<Sleep, string> = {
   nope: 'X'
 }
 
-const mark = computed(() => {
-  return markMap[ticket.value.sleep!]
-})
+const mark = computed(() => markMap[ticket.value.sleep!])
 </script>
 
 <template>

@@ -11,7 +11,7 @@ const links = [
     link: '/tworca-programu/1'
   },
   {
-    name: ' Organizator, Szop, Lis, Dzik',
+    name: 'Organizator, Szop, Lis, Dzik',
     img: '/img/szop-front.png',
     link: '/wolontariusz/1'
   },
@@ -49,7 +49,7 @@ const links = [
     >
       <img
         class="person__img"
-        :src="link.img"
+        :src="'/skiercon-akredytacja' + link.img"
         alt=""
         width="300"
         height="173"
