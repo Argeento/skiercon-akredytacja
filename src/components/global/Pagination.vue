@@ -51,13 +51,16 @@ async function onNextClick() {
 
 <template>
   <div class="mt-10 flex justify-center">
-    <button class="block m-2 py-2 px-5 border" @click="onPrevClick">
+    <button
+      class="block m-2 py-2 px-5 border rounded-md shadow hover:shadow-md transition-all"
+      @click="onPrevClick"
+    >
       {{ prevText }}
     </button>
 
     <button
-      class="m-2 py-2 px-5 border flex"
-      :class="canMoveForward ? 'border-lime-500' : 'border-red-500 '"
+      class="m-2 py-2 px-5 border-2 rounded-md w-48 shadow hover:shadow-md transition-all"
+      :class="canMoveForward ? 'border-blue-300' : 'border-red-500 '"
       @click="onNextClick"
     >
       {{ nextText }}
