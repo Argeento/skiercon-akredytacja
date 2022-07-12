@@ -87,15 +87,15 @@ const router = createRouter({
       children: [
         {
           path: '1',
-          name: 'Wolontariusz - Wiek',
+          name: 'Wolontariusz - Wyszukaj osobę',
           meta: { step: 1 },
-          component: Pelnoletnosc
+          component: WyszukajOsobe
         },
         {
           path: '2',
-          name: 'Wolontariusz - Wyszukaj osobę',
+          name: 'Wolontariusz - Wiek',
           meta: { step: 2 },
-          component: WyszukajOsobe
+          component: Pelnoletnosc
         },
         {
           path: '3',

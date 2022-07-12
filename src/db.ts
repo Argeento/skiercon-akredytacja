@@ -32,6 +32,18 @@ export function initFirebaseInstance(apiKey: string) {
   db = getFirestore(app)
 }
 
-export function addTicket(ticket: Ticket) {
-  return addDoc(collection(db, 'tickets'), ticket)
+export async function addTicket(ticket: Ticket) {
+  for (let i = 0; i < ticket.numberOfIds; i++) {
+    // await addDoc(collection(db, 'tickets'), {
+    console.log({
+      type: ticket.personType,
+      personName: ticket.personName,
+      mediaName: ticket.mediaName,
+      vendorName: ticket.vendorName,
+      volunteerType: ticket.volunteerType,
+      sleepType: ticket.sleep,
+      accStart: ticket.ticketStartTime,
+      accEnd: new Date()
+    })
+  }
 }

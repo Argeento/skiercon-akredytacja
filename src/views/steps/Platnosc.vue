@@ -1,17 +1,45 @@
 <script lang="ts" setup>
 import { ticket } from '@/store'
+import { computed, ref } from 'vue'
 const ticketPrice = new Date().getDay() === 0 ? 20 : 40
+const children = ref(0)
+const totalPrice = computed(
+  () => ticketPrice * (ticket.value.numberOfIds - children.value)
+)
 </script>
 
 <template>
-  <div class="card" v-if="ticket.personType === 'Uczestnik'">
-    <div class="">
-      Przyjmij opłatę za konwent <b>{{ ticketPrice }}zł</b>
+  <Counter
+    v-if="ticket.personType === 'Uczestnik' && ticket.numberOfIds > 1"
+    v-model="children"
+    :min="0"
+    :max="ticket.numberOfIds! - 1"
+    label="Liczba dzieci poniżej 10 roku życia:"
+  />
+
+  <template v-if="ticket.personType === 'Uczestnik'">
+    <div v-if="ticket.numberOfIds > 1" class="card">
+      <div class="mb-3">Przyjmij opłatę za konwent:</div>
+      <div class="mb-3">
+        <div>
+          <b>{{ ticket.numberOfIds - children }}x</b>
+          Wejściówka normalna ({{ ticketPrice }}zł) - {{ totalPrice }}zł
+        </div>
+        <div v-if="children > 0">
+          <b>{{ children }}x</b> Dziecko poniżej 10 roku życia (0zł) - 0zł
+        </div>
+      </div>
+      <div>
+        Razem do zapłaty: <b>{{ totalPrice }}zł</b>
+      </div>
     </div>
-    <div class="text-red-500" v-if="ticket.personType === 'Uczestnik'">
-      Dzieci do 10 roku życia wchodzą za darmo!
+
+    <div v-else class="card">
+      <div class="mb-3">
+        Przyjmij opłatę za konwent <b>{{ totalPrice }}zł</b>
+      </div>
     </div>
-  </div>
+  </template>
 
   <div v-if="ticket.personType === 'Wolontariusz'">
     <div class="card">
@@ -24,7 +52,7 @@ const ticketPrice = new Date().getDay() === 0 ? 20 : 40
 
       <div class="relative">
         <div class="meals-mark rounded-xl absolute border-4 border-red-400" />
-        <img class="badge-reverse" src="/img/szop-lis-dzik-back.png" alt="" />
+        <img class="badge-image" src="/img/szop-lis-dzik-back.png" alt="" />
       </div>
     </div>
   </div>
@@ -44,7 +72,7 @@ const ticketPrice = new Date().getDay() === 0 ? 20 : 40
 
       <div class="relative">
         <div class="phones-mark rounded-xl absolute border-6 border-red-400" />
-        <img src="/img/gosc-back.png" class="badge-reverse" alt="" />
+        <img src="/img/gosc-back.png" class="badge-image" alt="" />
       </div>
     </div>
   </div>

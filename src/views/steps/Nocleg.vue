@@ -22,7 +22,7 @@ const markMap: Record<Sleep, string> = {
   nope: 'X'
 }
 
-const mark = computed(() => markMap[ticket.value.sleep!])
+const mark = computed(() => markMap[ticket.value.sleep])
 </script>
 
 <template>
@@ -71,7 +71,7 @@ const mark = computed(() => markMap[ticket.value.sleep!])
 
   <div v-if="ticket.sleep && ticket.sleep !== 'nope'" class="card">
     Wydaj do podpisu <b>Kartę Noclegową</b> <br />
-    <span class="text-red-600"> Karta ma wrócić na akredytację! </span>
+    <span class="text-red-600">Karta ma wrócić na akredytację!</span>
   </div>
 
   <div v-if="ticket.sleep" class="card">

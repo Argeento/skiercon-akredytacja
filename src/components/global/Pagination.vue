@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useRoute, useRouter } from 'vue-router'
-import { sendTicket } from '../../store'
+import { addTicket } from '../../db'
+import { resetTicket, ticket } from '../../store'
 
 const props = defineProps({
   nextText: {
@@ -41,7 +42,8 @@ async function onNextClick() {
     return
 
   if (props.end) {
-    await sendTicket()
+    await addTicket(ticket.value)
+    resetTicket()
     router.push('/')
   } else {
     router.push(`${route.matched[0].path}/${currentStep + 1}`)

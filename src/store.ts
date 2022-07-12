@@ -1,5 +1,6 @@
 import { ref, watch } from 'vue'
-import { addTicket } from './db'
+
+const TICKET_LS = 'ticket'
 
 export type Person =
   | 'Uczestnik'
@@ -21,32 +22,36 @@ export type Ticket = {
   mediaName?: string
   vendorName?: string
   volunteerType?: Volunteer
-  age?: Age
-  sleep?: Sleep
-  numberOfIds?: number
+  sleep: Sleep
+  numberOfIds: number
 }
 
-const loadedTicket =
-  localStorage.getItem('ticket') && JSON.parse(localStorage.getItem('ticket')!)
+export const ticket = ref<Ticket>(getTicketFromLS() ?? getDefaultTicket())
 
-export const ticket = ref<Ticket>(loadedTicket ?? {})
-
-export function resetTicket() {
-  ticket.value = {}
-}
-
-export async function sendTicket() {
-  ticket.value.ticketEndTime = new Date()
-  await addTicket(ticket.value)
-  resetTicket()
+export function resetTicket(): void {
+  ticket.value = getDefaultTicket()
 }
 
 watch(
   ticket,
   ticket => {
-    window.localStorage.setItem('ticket', JSON.stringify(ticket))
+    window.localStorage.setItem(TICKET_LS, JSON.stringify(ticket))
   },
   {
     deep: true
   }
 )
+
+function getDefaultTicket(): Ticket {
+  return {
+    numberOfIds: 1,
+    sleep: 'nope'
+  }
+}
+
+function getTicketFromLS(): Ticket | undefined {
+  const ticketString = localStorage.getItem(TICKET_LS)
+  if (ticketString) {
+    return JSON.parse(ticketString)
+  }
+}

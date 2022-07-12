@@ -1,4 +1,3 @@
-, Personimport { useRoute } from 'vue-router';
 <script lang="ts" setup>
 import { resetTicket, type Person } from '@/store'
 import { onBeforeRouteLeave, useRoute } from 'vue-router'
@@ -7,7 +6,6 @@ import { ticket } from '@/store'
 const route = useRoute()
 
 ticket.value.personType = route.meta.person as Person
-ticket.value.age = '18+'
 ticket.value.ticketStartTime = new Date()
 
 onBeforeRouteLeave(() => {
