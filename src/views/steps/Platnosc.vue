@@ -24,11 +24,7 @@ const ticketPrice = new Date().getDay() === 0 ? 20 : 40
 
       <div class="relative">
         <div class="meals-mark rounded-xl absolute border-4 border-red-400" />
-        <img
-          class="badge-reverse"
-          src="/skiercon-akredytacja/img/szop-lis-dzik-back.png"
-          alt=""
-        />
+        <img class="badge-reverse" src="/img/szop-lis-dzik-back.png" alt="" />
       </div>
     </div>
   </div>
@@ -48,11 +44,7 @@ const ticketPrice = new Date().getDay() === 0 ? 20 : 40
 
       <div class="relative">
         <div class="phones-mark rounded-xl absolute border-6 border-red-400" />
-        <img
-          src="/skiercon-akredytacja/img/gosc-back.png"
-          class="badge-reverse"
-          alt=""
-        />
+        <img src="/img/gosc-back.png" class="badge-reverse" alt="" />
       </div>
     </div>
   </div>

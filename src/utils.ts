@@ -2,15 +2,15 @@ import type { Person } from './store'
 
 export function getBadgeRevers(personType: Person): string {
   const reversMap: Record<Person, string> = {
-    Gość: 'gosc-back.png',
-    Media: 'media-back.png',
-    'Twórca Programu': 'program-back.png',
-    Uczestnik: 'uczestnik-back.png',
-    Wolontariusz: 'szop-lis-dzik-back.png',
-    Wystawca: 'wystawca-back.png'
+    Gość: 'gosc',
+    Media: 'media',
+    'Twórca Programu': 'program',
+    Uczestnik: 'uczestnik',
+    Wolontariusz: 'szop-lis-dzik',
+    Wystawca: 'wystawca'
   }
 
-  return '/skiercon-akredytacja/img/' + reversMap[personType]
+  return `${import.meta.env.BASE_URL}/img/${reversMap[personType]}-back.png`
 }
 
 export function getPersonVariation(personType: Person): string {
