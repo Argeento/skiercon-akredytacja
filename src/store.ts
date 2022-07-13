@@ -1,6 +1,4 @@
-import { ref, watch } from 'vue'
-
-const TICKET_LS = 'ticket'
+import { ref } from 'vue'
 
 export type Person =
   | 'Uczestnik'
@@ -26,21 +24,11 @@ export type Ticket = {
   numberOfIds: number
 }
 
-export const ticket = ref<Ticket>(getTicketFromLS() ?? getDefaultTicket())
+export const ticket = ref<Ticket>(getDefaultTicket())
 
 export function resetTicket(): void {
   ticket.value = getDefaultTicket()
 }
-
-watch(
-  ticket,
-  ticket => {
-    window.localStorage.setItem(TICKET_LS, JSON.stringify(ticket))
-  },
-  {
-    deep: true
-  }
-)
 
 function getDefaultTicket(): Ticket {
   return {
@@ -49,9 +37,4 @@ function getDefaultTicket(): Ticket {
   }
 }
 
-function getTicketFromLS(): Ticket | undefined {
-  const ticketString = localStorage.getItem(TICKET_LS)
-  if (ticketString) {
-    return JSON.parse(ticketString)
-  }
-}
+export const isUserAuth = ref(false)

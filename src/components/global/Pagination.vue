@@ -44,7 +44,7 @@ async function onNextClick() {
   if (props.end) {
     await addTicket(ticket.value)
     resetTicket()
-    router.push('/')
+    router.push('/start')
   } else {
     router.push(`${route.matched[0].path}/${currentStep + 1}`)
   }
@@ -53,15 +53,12 @@ async function onNextClick() {
 
 <template>
   <div class="mt-10 flex justify-center">
-    <button
-      class="block m-2 py-2 px-5 border rounded-md shadow hover:shadow-md transition-all"
-      @click="onPrevClick"
-    >
+    <button class="button mr-3" @click="onPrevClick">
       {{ prevText }}
     </button>
 
     <button
-      class="m-2 py-2 px-5 border-2 rounded-md w-48 shadow hover:shadow-md transition-all"
+      class="button"
       :class="canMoveForward ? 'border-blue-300' : 'border-red-500 '"
       @click="onNextClick"
     >

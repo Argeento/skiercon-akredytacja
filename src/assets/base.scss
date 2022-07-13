@@ -28,3 +28,7 @@ body {
 .card {
   @apply shadow-md mb-5 py-4 px-10 rounded-xl;
 }
+
+.button {
+  @apply block my-3 py-2 px-5 border rounded-md shadow hover:shadow-md transition-all;
+}

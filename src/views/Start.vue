@@ -24,7 +24,7 @@ onBeforeRouteLeave(() => {
 <template>
   <div class="container">
     <div class="text-center mt-5 mb-7">
-      <RouterLink class="text-xl skierfont" to="/">
+      <RouterLink class="text-xl skierfont" to="/start">
         SkierCon akredytacja
       </RouterLink>
       <div>{{ $route.name }}</div>

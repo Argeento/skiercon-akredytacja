@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import type { Person } from './store'
+import { isUserAuth, type Person } from './store'
 
 import Home from './views/Home.vue'
 import Start from './views/Start.vue'
@@ -11,12 +11,18 @@ import WyszukajOsobe from './views/steps/WyszukajOsobe.vue'
 import WolontariuszUmowa from '@/views/steps/WolontariuszUmowa.vue'
 import WyszukajMedia from './views/steps/WyszukajMedia.vue'
 import WyszukajWystawce from './views/steps/WyszukajWystawce.vue'
+import LoginView from './views/Login.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
+      name: 'Login',
+      component: LoginView
+    },
+    {
+      path: '/start',
       name: 'Start',
       component: Home,
       meta: { step: 0 }
@@ -184,6 +190,16 @@ const router = createRouter({
       ]
     }
   ]
+})
+
+router.beforeEach((to, _from, next) => {
+  if (to.name === 'Login' && isUserAuth.value) {
+    next({ name: 'Start' })
+  } else if (to.name !== 'Login' && !isUserAuth.value) {
+    next({ name: 'Login' })
+  } else {
+    next()
+  }
 })
 
 export default router
