@@ -69,8 +69,15 @@ const mark = computed(() => markMap[ticket.value.sleep])
     Poinformuj <i>Wolontariusza</i>, że nocleg mają w <b>Drugiej Szkole</b>
   </div>
 
-  <div v-if="ticket.sleep && ticket.sleep !== 'nope'" class="card">
-    Wydaj do podpisu <b>Kartę Noclegową</b> <br />
+  <div
+    v-if="ticket.sleep && ticket.sleep !== 'nope' && ticket.sleep !== 'SOSW'"
+    class="card"
+  >
+    <div v-if="ticket.numberOfIds > 1">
+      Dla każdej osoby powyżej 12 roku życia, wydaj do podpisu
+      <b>Kartę Noclegową</b>
+    </div>
+    <div v-else>Wydaj do podpisu <b>Kartę Noclegową</b></div>
     <span class="text-red-600">Karta ma wrócić na akredytację!</span>
   </div>
 

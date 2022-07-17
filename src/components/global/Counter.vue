@@ -45,7 +45,7 @@ function decrease() {
         -
       </button>
       <span class="px-3">
-        {{ modelValue }}
+        {{ modelValue === 69 ? 'nice' : modelValue }}
       </span>
       <button
         class="counter-button"
