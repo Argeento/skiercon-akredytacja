@@ -1,4 +1,19 @@
 <script lang="ts" setup>
+import TicketsTable from '../components/TicketsTable.vue'
+import { ref } from 'vue'
+import { api } from '@/db'
+import { orderBy } from 'firebase/firestore/lite'
+
+const tickets = ref<Ticket[]>([])
+
+async function fetchTickets() {
+  tickets.value = await api.getCollection<Ticket>('tickets', [
+    orderBy('ticketEndTime', 'desc')
+  ])
+}
+
+fetchTickets()
+
 const links = [
   {
     name: 'Uczestnik',
@@ -31,6 +46,30 @@ const links = [
     link: '/wystawca/1'
   }
 ]
+
+// const m = [
+
+// ].map(x => {
+//   x.id = x.name.toLowerCase().replace(/ /g, '')
+//   return x
+// })
+
+// async function add() {
+//   for (let i = 0; i < m.length; i++) {
+//     const x = m[i]
+//     await api.addDoc(
+//       'media',
+//       {
+//         name: x.name,
+//         tickets: x.tickets,
+//         id: i + 1
+//       },
+//       x.id
+//     )
+//   }
+// }
+
+// add()
 </script>
 
 <template>
@@ -56,6 +95,10 @@ const links = [
       />
       <div class="px-4 py-2 text-md">{{ link.name }}</div>
     </router-link>
+  </div>
+
+  <div class="container">
+    <TicketsTable class="mt-10" :tickets="tickets" />
   </div>
 </template>
 

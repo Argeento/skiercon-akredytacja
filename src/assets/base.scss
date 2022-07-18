@@ -32,3 +32,30 @@ body {
 .button {
   @apply block my-3 py-2 px-5 border rounded-md shadow hover:shadow-md transition-all;
 }
+
+th {
+  text-align: left;
+}
+
+th,
+td {
+  padding: 12px 15px;
+}
+
+tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+th:last-of-type,
+td:last-of-type {
+  @apply pr-10;
+}
+
+th:first-of-type,
+td:first-of-type {
+  @apply pl-10;
+}

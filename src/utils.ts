@@ -1,5 +1,3 @@
-import type { Person } from './store'
-
 const badgesMap: Record<Person, string> = {
   Gość: 'gosc',
   Media: 'media',
@@ -28,4 +26,16 @@ export function getPersonVariation(personType: Person): string {
   }
 
   return variationMap[personType]
+}
+
+export function localeCompare(a: string, b: string) {
+  return a.localeCompare(b)
+}
+
+export const sleepMap: Readonly<Record<Sleep, string>> = {
+  '1': 'S',
+  B2: 'B2',
+  PN: 'N',
+  SOSW: 'SOSW',
+  nope: 'X'
 }

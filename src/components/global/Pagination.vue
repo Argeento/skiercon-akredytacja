@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useRoute, useRouter } from 'vue-router'
-import { addTicket } from '../../db'
+import { api } from '../../db'
 import { resetTicket, ticket } from '../../store'
 
 const props = defineProps({
@@ -42,7 +42,7 @@ async function onNextClick() {
     return
 
   if (props.end) {
-    await addTicket(ticket.value)
+    await api.addTicket(ticket.value)
     resetTicket()
     router.push('/start')
   } else {
@@ -59,7 +59,7 @@ async function onNextClick() {
 
     <button
       class="button"
-      :class="canMoveForward ? 'border-blue-300' : 'border-red-500 '"
+      :class="canMoveForward ? 'border-violet-300' : 'border-red-500 '"
       @click="onNextClick"
     >
       {{ nextText }}

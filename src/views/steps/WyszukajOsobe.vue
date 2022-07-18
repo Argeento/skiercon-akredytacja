@@ -1,16 +1,32 @@
 <script lang="ts" setup>
-import { ticket, type Person } from '@/store'
+import { ticket } from '@/store'
 import { onMounted, ref } from 'vue'
 import guests from '@/assets/guests.json'
+import { api } from '@/db'
+import { orderBy } from 'firebase/firestore/lite'
 
-let options: string[]
+let options = ref<any[]>([])
 
 if (ticket.value.personType === 'Gość') {
-  options = guests.sort()
+  options.value = guests.sort()
 }
 
 if (ticket.value.personType === 'Twórca Programu') {
-  options = ['Twórca 1', 'Twórca 2'].sort()
+  options.value = ['Twórca 1', 'Twórca 2'].sort()
+}
+
+if (ticket.value.personType === 'Wolontariusz') {
+  async function fetchVolunteers() {
+    const volunteers = await api.getCollection<Volunteer>('volunteers', [
+      orderBy('name', 'asc')
+    ])
+
+    options.value = volunteers.map(person => ({
+      label: `${person.name} ${person.lastname} (${person.nick})`
+    }))
+  }
+
+  fetchVolunteers()
 }
 
 const searchFor: Partial<Record<Person, string>> = {
@@ -33,13 +49,7 @@ onMounted(() => {
     <div class="mb-3">
       Wyszukaj <i>{{ searchFor[ticket.personType!] }}</i>
     </div>
-    <v-select
-      ref="vselect"
-      label="Twórca programu"
-      :options="options"
-      v-model="ticket.personName"
-      class="mb-8"
-    />
+    <v-select ref="vselect" :options="options" class="mb-8" />
   </div>
   <Pagination :can-move-forward="!!ticket.personName" />
 </template>

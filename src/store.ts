@@ -1,28 +1,4 @@
-import { ref } from 'vue'
-
-export type Person =
-  | 'Uczestnik'
-  | 'Twórca Programu'
-  | 'Wolontariusz'
-  | 'Gość'
-  | 'Media'
-  | 'Wystawca'
-
-export type Age = '13-' | '13-18' | '18+'
-export type Sleep = 'nope' | '1' | 'SOSW' | 'PN' | 'B2'
-export type Volunteer = 'Dzik' | 'Lis' | 'Szop' | 'Organizator'
-
-export type Ticket = {
-  ticketStartTime?: Date
-  ticketEndTime?: Date
-  personType?: Person
-  personName?: string
-  mediaName?: string
-  vendorName?: string
-  volunteerType?: Volunteer
-  sleep: Sleep
-  numberOfIds: number
-}
+import { ref, watch } from 'vue'
 
 export const ticket = ref<Ticket>(getDefaultTicket())
 
@@ -36,5 +12,15 @@ function getDefaultTicket(): Ticket {
     sleep: 'nope'
   }
 }
+
+watch(
+  ticket,
+  () => {
+    console.log(JSON.stringify(ticket.value, null, 2))
+  },
+  {
+    deep: true
+  }
+)
 
 export const isUserAuth = ref(false)

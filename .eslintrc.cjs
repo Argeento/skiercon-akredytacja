@@ -11,5 +11,13 @@ module.exports = {
   ],
   rules: {
     'vue/multi-word-component-names': 'off'
+  },
+  global: {
+    Person: true,
+    Age: true,
+    Sleep: true,
+    Volunteer: true,
+    Ticket: true,
+    Media: true
   }
 }

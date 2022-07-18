@@ -3,10 +3,16 @@ import { initializeApp } from 'firebase/app'
 import {
   addDoc,
   collection,
+  deleteDoc,
+  doc,
   Firestore,
-  getFirestore
+  getDocs,
+  getFirestore,
+  limit,
+  query,
+  QueryConstraint,
+  setDoc
 } from 'firebase/firestore/lite'
-import type { Ticket } from './store'
 
 export let db: Firestore
 
@@ -27,22 +33,40 @@ export function initFirebaseInstance() {
   db = getFirestore(app)
 }
 
-export async function addTicket(ticket: Ticket) {
-  for (let i = 0; i < ticket.numberOfIds; i++) {
-    const objectToSend = JSON.parse(
-      JSON.stringify({
-        type: ticket.personType,
-        personName: ticket.personName,
-        mediaName: ticket.mediaName,
-        vendorName: ticket.vendorName,
-        volunteerType: ticket.volunteerType,
-        sleepType: ticket.sleep,
-        accStart: ticket.ticketStartTime,
-        accEnd: new Date()
-      })
-    )
+export const api = {
+  async addTicket(ticket: Ticket) {
+    for (let i = 0; i < ticket.numberOfIds; i++) {
+      ticket.ticketEndTime = new Date().toISOString()
+      const objectToSend = JSON.parse(JSON.stringify(ticket))
+      await addDoc(collection(db, 'tickets'), objectToSend)
+    }
+  },
 
-    console.log(objectToSend)
-    await addDoc(collection(db, 'tickets'), objectToSend)
+  async removeTicket(docId: string) {
+    const docRef = doc(db, 'tickets', docId)
+    await deleteDoc(docRef)
+  },
+
+  async getCollection<T>(
+    collectionName: CollectionName,
+    customQuery: QueryConstraint[] = []
+  ): Promise<T[]> {
+    const col = collection(db, collectionName)
+    const q = query(col, ...customQuery)
+    const snap = await getDocs(q)
+    return snap.docs.map(doc => {
+      return {
+        docId: doc.id,
+        ...(doc.data() as T)
+      }
+    })
+  },
+
+  async addDoc(
+    collection: string,
+    data: Record<string, unknown>,
+    docId: string
+  ) {
+    await setDoc(doc(db, collection, docId), data)
   }
 }

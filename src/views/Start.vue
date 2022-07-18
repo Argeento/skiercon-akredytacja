@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { resetTicket, type Person } from '@/store'
+import { resetTicket } from '@/store'
 import { onBeforeRouteLeave, useRoute } from 'vue-router'
 import { ticket } from '@/store'
 
 const route = useRoute()
 
 ticket.value.personType = route.meta.person as Person
-ticket.value.ticketStartTime = new Date()
+ticket.value.ticketStartTime = new Date().toISOString()
 
 onBeforeRouteLeave(() => {
   if (ticket.value.personType !== undefined) {

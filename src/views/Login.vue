@@ -46,6 +46,7 @@ async function login() {
 <template>
   <div class="container">
     <form @submit.prevent="login" class="w-52 mx-auto my-20">
+      <img src="/logo.png" alt="" class="mb-12" />
       <label class="my-3 block">
         <div>Hasło:</div>
         <input
@@ -57,7 +58,7 @@ async function login() {
         <div v-if="error" class="text-red-500">{{ error }}</div>
       </label>
 
-      <button type="submit" class="button border-blue-400 w-full">
+      <button type="submit" class="button border-violet-300 w-full">
         Zaloguj
       </button>
     </form>
