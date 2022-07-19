@@ -6,6 +6,10 @@ import Pagination from './components/global/Pagination.vue'
 import Counter from './components/global/Counter.vue'
 import 'vue-select/dist/vue-select.css'
 import { initFirebaseInstance } from './db'
+import dayjs from 'dayjs'
+
+import pl from 'dayjs/locale/pl'
+dayjs.locale(pl)
 
 initFirebaseInstance()
 

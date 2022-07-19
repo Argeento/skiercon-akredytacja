@@ -1,18 +1,15 @@
 <script lang="ts" setup>
 import TicketsTable from '../components/TicketsTable.vue'
-import { ref } from 'vue'
 import { api } from '@/db'
-import { orderBy } from 'firebase/firestore/lite'
+import { orderBy, limit } from 'firebase/firestore'
+import { onUnmounted } from 'vue'
 
-const tickets = ref<Ticket[]>([])
+const { data: tickets, unsubscribe } = api.useCollection<Ticket>('tickets', [
+  orderBy('ticketEndTime', 'desc'),
+  limit(15)
+])
 
-async function fetchTickets() {
-  tickets.value = await api.getCollection<Ticket>('tickets', [
-    orderBy('ticketEndTime', 'desc')
-  ])
-}
-
-fetchTickets()
+onUnmounted(unsubscribe)
 
 const links = [
   {

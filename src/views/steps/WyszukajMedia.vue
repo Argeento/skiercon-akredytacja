@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { api } from '@/db'
 import { ticket } from '@/store'
-import { orderBy, where } from 'firebase/firestore/lite'
+import { orderBy, where } from 'firebase/firestore'
 import { computed, onMounted, ref, watch } from 'vue'
 import TicketsTable from '../../components/TicketsTable.vue'
 
@@ -29,16 +29,20 @@ const medium = ref<Media>()
 const ticketsByMedium = ref<Ticket[]>([])
 watch(medium, async () => {
   ticket.value.mediaName = medium.value?.name
-  ticket.value.mediaId = medium.value?.id
 
   if (medium.value) {
+    ticket.value.mediaName = medium.value.name
+    ticket.value.mediaDocId = medium.value.docId
+
     const tickets = await api.getCollection<Ticket>('tickets', [
       orderBy('ticketEndTime', 'desc'),
-      where('mediaId', '==', medium.value.id)
+      where('mediaDocId', '==', medium.value.docId)
     ])
 
     ticketsByMedium.value = tickets
   } else {
+    ticket.value.mediaName = undefined
+    ticket.value.mediaDocId = undefined
     ticketsByMedium.value = []
   }
 })
@@ -62,6 +66,7 @@ const isLimit = computed(() => {
   <TicketsTable
     v-if="medium && ticketsByMedium.length > 0"
     :tickets="ticketsByMedium"
+    without-remove
   >
     <span :class="{ 'text-red-600 bold': isLimit }">
       Wykorzystano już {{ ticketsByMedium.length }} z

@@ -7,12 +7,27 @@ const badgesMap: Record<Person, string> = {
   Wystawca: 'wystawca'
 }
 
+const volunteersMap: Record<VolunteerType, string> = {
+  Dzik: 'dzik',
+  Lis: 'lis',
+  Organizator: 'organizator',
+  Szop: 'szop'
+}
+
+export function getImage(fileName: string): string {
+  return `${import.meta.env.BASE_URL}img/${fileName}`
+}
+
 export function getBadgeRevers(personType: Person): string {
-  return `${import.meta.env.BASE_URL}img/${badgesMap[personType]}-back.png`
+  return getImage(`${badgesMap[personType]}-back.png`)
 }
 
 export function getBadgeImage(personType: Person): string {
-  return `${import.meta.env.BASE_URL}img/${badgesMap[personType]}-front.png`
+  return getImage(`${badgesMap[personType]}-front.png`)
+}
+
+export function getVolunteerBadgeImage(volunteerType: VolunteerType) {
+  return getImage(`${volunteersMap[volunteerType]}-front.png`)
 }
 
 export function getPersonVariation(personType: Person): string {

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { isUserAuth, type Person } from './store'
+import { isUserAuth } from './store'
 
 import Home from './views/Home.vue'
 import Start from './views/Start.vue'

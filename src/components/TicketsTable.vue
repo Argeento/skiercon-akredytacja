@@ -1,7 +1,21 @@
 <script lang="ts" setup>
+import type { PropType } from 'vue'
 import TicketRow from './TicketRow.vue'
 
-defineProps<{ tickets: Ticket[]; title?: string }>()
+defineProps({
+  tickets: {
+    type: Array as PropType<Ticket[]>,
+    required: true
+  },
+  title: {
+    type: String as PropType<string | undefined>,
+    default: undefined
+  },
+  withoutRemove: {
+    type: Boolean,
+    default: false
+  }
+})
 </script>
 
 <template>
@@ -15,9 +29,14 @@ defineProps<{ tickets: Ticket[]; title?: string }>()
         <th>Sleep</th>
         <th>Nazwa</th>
         <th>Data</th>
-        <th>Usuń</th>
+        <th v-if="!withoutRemove">Usuń</th>
       </tr>
-      <TicketRow v-for="(ticket, i) in tickets" :key="i" :ticket="ticket" />
+      <TicketRow
+        v-for="ticket in tickets"
+        :key="ticket.docId"
+        :ticket="ticket"
+        :without-remove="withoutRemove"
+      />
     </table>
   </div>
 </template>

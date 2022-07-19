@@ -25,11 +25,13 @@ import { getPersonVariation, getBadgeImage } from '@/utils'
     </div>
   </div>
 
-  <div class="card">
+  <div
+    class="card"
+    v-if="ticket.personType && ticket.personType !== 'Wolontariusz'"
+  >
     <div class="mb-4">Przygotuj odpowiedni identyfikator:</div>
 
     <img
-      v-if="ticket.personType"
       class="badge-image shadow mb-5"
       :src="getBadgeImage(ticket.personType)"
       alt=""

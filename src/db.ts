@@ -8,11 +8,12 @@ import {
   Firestore,
   getDocs,
   getFirestore,
-  limit,
   query,
   QueryConstraint,
-  setDoc
-} from 'firebase/firestore/lite'
+  setDoc,
+  onSnapshot
+} from 'firebase/firestore'
+import { ref } from 'vue'
 
 export let db: Firestore
 
@@ -60,6 +61,28 @@ export const api = {
         ...(doc.data() as T)
       }
     })
+  },
+
+  useCollection<T extends any>(
+    collectionName: CollectionName,
+    customQuery: QueryConstraint[] = []
+  ) {
+    const data = ref<T[]>([])
+    const col = collection(db, collectionName)
+    const q = query(col, ...customQuery)
+
+    const unsubscribe = onSnapshot(q, querySnapshot => {
+      data.value = []
+      querySnapshot.forEach(doc => {
+        // @ts-ignore
+        data.value.push({
+          docId: doc.id,
+          ...doc.data()
+        })
+      })
+    })
+
+    return { unsubscribe, data }
   },
 
   async addDoc(

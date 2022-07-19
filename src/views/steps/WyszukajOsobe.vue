@@ -1,11 +1,13 @@
 <script lang="ts" setup>
 import { ticket } from '@/store'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import guests from '@/assets/guests.json'
 import { api } from '@/db'
-import { orderBy } from 'firebase/firestore/lite'
+import { orderBy } from 'firebase/firestore'
+import { getVolunteerBadgeImage } from '@/utils'
 
-let options = ref<any[]>([])
+const options = ref<any[]>([])
+const selected = ref<Volunteer & { label: string }>()
 
 if (ticket.value.personType === 'Gość') {
   options.value = guests.sort()
@@ -22,11 +24,26 @@ if (ticket.value.personType === 'Wolontariusz') {
     ])
 
     options.value = volunteers.map(person => ({
-      label: `${person.name} ${person.lastname} (${person.nick})`
+      label: `${person.name} ${person.lastname} - "${person.nick}" (${person.volunteerType})`,
+      ...person
     }))
   }
 
   fetchVolunteers()
+
+  watch(selected, () => {
+    if (selected.value) {
+      ticket.value.personName = selected.value.label
+      ticket.value.personDocId = selected.value.docId
+      ticket.value.volunteerType = selected.value.volunteerType
+      ticket.value.discount = selected.value.discount
+    } else {
+      ticket.value.personName = undefined
+      ticket.value.volunteerType = undefined
+      ticket.value.personDocId = undefined
+      ticket.value.discount = undefined
+    }
+  })
 }
 
 const searchFor: Partial<Record<Person, string>> = {
@@ -36,7 +53,6 @@ const searchFor: Partial<Record<Person, string>> = {
 }
 
 const vselect = ref()
-
 onMounted(() => {
   if (!ticket.value.personName) {
     vselect.value.searchEl.focus()
@@ -49,8 +65,24 @@ onMounted(() => {
     <div class="mb-3">
       Wyszukaj <i>{{ searchFor[ticket.personType!] }}</i>
     </div>
-    <v-select ref="vselect" :options="options" class="mb-8" />
+    <v-select
+      ref="vselect"
+      :options="options"
+      v-model="selected"
+      class="mb-8"
+    />
   </div>
+
+  <div class="card" v-if="selected && ticket.volunteerType">
+    <div class="mb-4">Przygotuj odpowiedni identyfikator:</div>
+
+    <img
+      class="badge-image shadow mb-5"
+      :src="getVolunteerBadgeImage(ticket.volunteerType!)"
+      alt=""
+    />
+  </div>
+
   <Pagination :can-move-forward="!!ticket.personName" />
 </template>
 

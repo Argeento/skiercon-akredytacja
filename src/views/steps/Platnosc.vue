@@ -42,9 +42,12 @@ const totalPrice = computed(
   </template>
 
   <div v-if="ticket.personType === 'Wolontariusz'">
+    <div v-if="ticket.discount === '50%'" class="mb-3">
+      Przyjmij opłatę za konwent <b>20ł</b>
+    </div>
     <div class="card">
       Poinformuj <i>Wolontariusza</i> o tym, żeby zgłosił się do
-      "<b>Leśniczówki</b>"
+      "<b>Leśniczówki</b>" (TODO - która to sala?)
     </div>
     <div class="card">
       Poinformuj <i>Wolontariusza</i>, że przysługują mu
