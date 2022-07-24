@@ -6,7 +6,7 @@ import TicketsTable from '../../components/TicketsTable.vue'
 // v-select
 const vselect = ref()
 onMounted(() => {
-  if (!ticket.value.mediaName) {
+  if (!ticket.value.name) {
     vselect.value.searchEl.focus()
   }
 })
@@ -38,7 +38,7 @@ const isLimit = computed(() => {
     </span>
   </TicketsTable>
 
-  <Pagination :can-move-forward="!!ticket.mediaName && !isLimit" />
+  <Pagination :can-move-forward="!!ticket.name && !isLimit" />
 </template>
 
 <style lang="scss" scoped></style>

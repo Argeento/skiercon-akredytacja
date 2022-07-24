@@ -55,37 +55,4 @@ export const sleepMap: Readonly<Record<Sleep, string>> = {
   nope: 'X'
 }
 
-const gsHeadersMap: Record<string, keyof GsItem> = {
-  lp: 'id',
-  imię: 'name',
-  nazwa: 'name',
-  pseudonim: 'nick',
-  nazwisko: 'lastName',
-  zniżka: 'discount',
-  whodis: 'volunteerType',
-  ilewejściówek: 'tickets'
-}
-
-export function parseGsData(data: any): GsItem[] {
-  // @ts-ignore
-  const headers = data.values[0].map(header =>
-    header.toLowerCase().replace(/ /g, '').trim()
-  )
-  const output: GsItem[] = []
-
-  for (const item of data.values.slice(1)) {
-    // @ts-ignore
-    const gsItem = headers.reduce((acc, header, index) => {
-      if (gsHeadersMap[header]) {
-        acc[gsHeadersMap[header]] = item[index]
-      }
-      return acc
-    }, {} as GsItem)
-
-    if (gsItem.name) {
-      output.push(gsItem)
-    }
-  }
-
-  return output
-}
+export function getLabel(ticketType: TicketType) {}

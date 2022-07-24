@@ -11,23 +11,6 @@ type Sleep = 'nope' | '1' | 'SOSW' | 'PN' | 'B2'
 type VolunteerType = 'DZIK' | 'LIS' | 'SZOP' | 'ORG'
 type Discount = '50%' | '100%'
 
-type Ticket = {
-  docId?: string
-  ticketStartTime?: string
-  ticketEndTime?: string
-  ticketType?: TicketType
-  personName?: string
-  personDocId?: string
-  mediaName?: string
-  mediaDocId?: string
-  vendorName?: string
-  vendorDocId?: string
-  volunteerType?: VolunteerType
-  discount?: Discount
-  sleep: Sleep
-  numberOfIds: number
-}
-
 type GsProgram = {
   id: number
   name: string
@@ -69,11 +52,23 @@ type GsGuest = {
   giftPack: boolean
 }
 
-type GsPerson = GsProgram | GsVendor | GsVolunteer | GsMedium | GsGuest
 type GsPeople = {
   program: GsProgram[]
   vendors: GsVendor[]
   volunteers: GsVolunteer[]
   media: GsMedium[]
   guests: GsGuest[]
+}
+
+type Ticket = {
+  docId?: string
+  ticketStartTime?: string
+  ticketEndTime?: string
+  ticketType?: TicketType
+  sleep: Sleep
+  numberOfIds: number
+} & Record<string, any>
+
+type WithLabel<T extends Record<string, unknown>> = T & {
+  label: string
 }

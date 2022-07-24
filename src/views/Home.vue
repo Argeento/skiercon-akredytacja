@@ -1,8 +1,6 @@
 <script lang="ts" setup>
-import { people, tickets } from '@/store'
+import { tickets } from '@/store'
 import TicketsTable from '@/components/TicketsTable.vue'
-
-console.log(people.value)
 
 const links = [
   {

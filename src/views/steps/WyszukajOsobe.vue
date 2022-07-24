@@ -1,21 +1,38 @@
 <script lang="ts" setup>
-import { ticket } from '@/store'
-import { onMounted, ref } from 'vue'
+import { people, ticket, tickets } from '@/store'
+import { onMounted, ref, watch } from 'vue'
 import { getVolunteerBadgeImage } from '@/utils'
 
 const options = ref<any[]>([])
-const selected = ref<Volunteer & { label: string }>()
+const selected = ref<WithLabel<Ticket>>()
 
 if (ticket.value.ticketType === 'Gość') {
   options.value = []
 }
 
 if (ticket.value.ticketType === 'Twórca Programu') {
-  options.value = ['Twórca 1', 'Twórca 2'].sort()
+  options.value = people.value.program
+    .map(person => {
+      const nick = person.nick ? ` "${person.nick}" ` : ' '
+      const group = person.group ? ` - ${person.group}` : ''
+      return {
+        label: `${person.name}${nick}${person.lastName}${group}`,
+        ...person
+      }
+    })
+    .filter(person => {
+      return !tickets.value.some(ticket => ticket.id === person.id)
+    })
 }
 
 if (ticket.value.ticketType === 'Wolontariusz') {
 }
+
+watch(selected, selected => {
+  if (selected) {
+    Object.assign(ticket.value, selected)
+  }
+})
 
 const searchFor: Partial<Record<TicketType, string>> = {
   'Twórca Programu': 'Twórcę Programu',
@@ -25,7 +42,7 @@ const searchFor: Partial<Record<TicketType, string>> = {
 
 const vselect = ref()
 onMounted(() => {
-  if (!ticket.value.personName) {
+  if (!ticket.value.name) {
     vselect.value.searchEl.focus()
   }
 })
@@ -54,7 +71,7 @@ onMounted(() => {
     />
   </div>
 
-  <Pagination :can-move-forward="!!ticket.personName" />
+  <Pagination :can-move-forward="!!ticket.name" />
 </template>
 
 <style lang="scss" scoped></style>

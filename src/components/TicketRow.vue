@@ -40,7 +40,7 @@ async function deleteTicket(ticketId: string) {
       }}
     </td>
     <td>
-      {{ ticket.personName || ticket.mediaName || ticket.vendorName || '-' }}
+      {{ ticket.name || '-' }}
     </td>
     <td :title="new Date(ticket.ticketEndTime!).toLocaleString('pl')">
       {{ dayjs(ticket.ticketEndTime!).format('dd, HH:mm') }}
