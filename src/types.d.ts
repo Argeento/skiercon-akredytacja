@@ -1,4 +1,4 @@
-type Person =
+type TicketType =
   | 'Uczestnik'
   | 'Twórca Programu'
   | 'Wolontariusz'
@@ -8,14 +8,14 @@ type Person =
 
 type Age = '13-' | '13-18' | '18+'
 type Sleep = 'nope' | '1' | 'SOSW' | 'PN' | 'B2'
-type VolunteerType = 'Dzik' | 'Lis' | 'Szop' | 'Organizator'
-type Discount = '50%' | '100%'
+type VolunteerType = 'DZIK' | 'LIS' | 'SZOP' | 'ORG'
+type Discount = '50%' | ''
 
 type Ticket = {
   docId?: string
   ticketStartTime?: string
   ticketEndTime?: string
-  personType?: Person
+  ticketType?: TicketType
   personName?: string
   personDocId?: string
   mediaName?: string
@@ -28,19 +28,12 @@ type Ticket = {
   numberOfIds: number
 }
 
-type Media = {
-  docId?: string
+type GsItem = {
+  id: string
   name: string
+  nick: string
+  lastName: string
+  discount: Discount
+  volunteerType?: VolunteerType
   tickets: number
 }
-
-type Volunteer = {
-  docId?: string
-  name: string
-  lastname: string
-  nick: string
-  volunteerType: VolunteerType
-  discount: Discount
-}
-
-type CollectionName = 'guests' | 'tickets' | 'media' | 'volunteers'

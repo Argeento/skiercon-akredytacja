@@ -1,15 +1,8 @@
 <script lang="ts" setup>
-import TicketsTable from '../components/TicketsTable.vue'
-import { api } from '@/db'
-import { orderBy, limit } from 'firebase/firestore'
-import { onUnmounted } from 'vue'
+import { people, tickets } from '@/store'
+import TicketsTable from '@/components/TicketsTable.vue'
 
-const { data: tickets, unsubscribe } = api.useCollection<Ticket>('tickets', [
-  orderBy('ticketEndTime', 'desc'),
-  limit(15)
-])
-
-onUnmounted(unsubscribe)
+console.log(people.value)
 
 const links = [
   {
@@ -43,30 +36,6 @@ const links = [
     link: '/wystawca/1'
   }
 ]
-
-// const m = [
-
-// ].map(x => {
-//   x.id = x.name.toLowerCase().replace(/ /g, '')
-//   return x
-// })
-
-// async function add() {
-//   for (let i = 0; i < m.length; i++) {
-//     const x = m[i]
-//     await api.addDoc(
-//       'media',
-//       {
-//         name: x.name,
-//         tickets: x.tickets,
-//         id: i + 1
-//       },
-//       x.id
-//     )
-//   }
-// }
-
-// add()
 </script>
 
 <template>

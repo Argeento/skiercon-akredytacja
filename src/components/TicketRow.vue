@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { api } from '@/db'
+import { firestoreInstance } from '@/plugins/firestore'
 import { sleepMap } from '@/utils'
 import { ref, type PropType } from 'vue'
 import dayjs from 'dayjs'
@@ -27,16 +27,16 @@ async function deleteTicket(ticketId: string) {
   )
     return
   isLoading.value = true
-  await api.removeTicket(ticketId)
+  await firestoreInstance.removeTicket(ticketId)
 }
 </script>
 
 <template>
   <tr>
-    <td>{{ ticket.personType }}</td>
+    <td>{{ ticket.ticketType }}</td>
     <td>
       {{
-        ['Media'].includes(ticket.personType!) ? '-' : sleepMap[ticket.sleep]
+        ['Media'].includes(ticket.ticketType!) ? '-' : sleepMap[ticket.sleep]
       }}
     </td>
     <td>

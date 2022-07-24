@@ -5,7 +5,7 @@ import { getPersonVariation, getBadgeImage } from '@/utils'
 
 <template>
   <Counter
-    v-if="ticket.personType === 'Uczestnik'"
+    v-if="ticket.ticketType === 'Uczestnik'"
     :min="1"
     v-model="ticket.numberOfIds"
     label="Liczba wejściówek:"
@@ -13,27 +13,27 @@ import { getPersonVariation, getBadgeImage } from '@/utils'
 
   <div class="card">
     <div class="mb-3">
-      Zweryfikuj wiek <i>{{ getPersonVariation(ticket.personType!) }}</i>
+      Zweryfikuj wiek <i>{{ getPersonVariation(ticket.ticketType!) }}</i>
     </div>
 
     <div class="mb-3">
       Osoba w wieku <b>13-18</b> musi posiadać <b>Kartę Młodego Skierkonauty</b>
     </div>
 
-    <div v-if="ticket.personType === 'Uczestnik'">
+    <div v-if="ticket.ticketType === 'Uczestnik'">
       Osoba <b>poniżej 13</b> roku życia musi być <b>z opiekunem</b>
     </div>
   </div>
 
   <div
     class="card"
-    v-if="ticket.personType && ticket.personType !== 'Wolontariusz'"
+    v-if="ticket.ticketType && ticket.ticketType !== 'Wolontariusz'"
   >
     <div class="mb-4">Przygotuj odpowiedni identyfikator:</div>
 
     <img
       class="badge-image shadow mb-5"
-      :src="getBadgeImage(ticket.personType)"
+      :src="getBadgeImage(ticket.ticketType)"
       alt=""
     />
   </div>

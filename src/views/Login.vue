@@ -3,7 +3,7 @@ import { FirebaseError } from '@firebase/util'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
-import { isUserAuth } from '@/store'
+import { sheetId, isUserAuth } from '@/store'
 
 const auth = getAuth()
 const password = ref('')
@@ -29,6 +29,7 @@ async function login() {
   try {
     await signInWithEmailAndPassword(auth, 'akre@skiercon.pl', password.value)
     isUserAuth.value = true
+    sheetId.value = password.value
     router.replace('/start')
   } catch (err) {
     if (err instanceof FirebaseError) {

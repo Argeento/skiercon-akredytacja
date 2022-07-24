@@ -31,7 +31,7 @@ const router = createRouter({
       path: '/uczestnik',
       name: 'Uczestnik',
       component: Start,
-      meta: { person: 'Uczestnik' } as { person: Person },
+      meta: { person: 'Uczestnik' } as { person: TicketType },
       children: [
         {
           path: '1',
@@ -57,7 +57,7 @@ const router = createRouter({
       path: '/tworca-programu',
       name: 'Twórca programu',
       component: Start,
-      meta: { person: 'Twórca Programu' } as { person: Person },
+      meta: { person: 'Twórca Programu' } as { person: TicketType },
       children: [
         {
           path: '1',
@@ -89,7 +89,7 @@ const router = createRouter({
       path: '/wolontariusz',
       name: 'Wolontariusz',
       component: Start,
-      meta: { person: 'Wolontariusz' } as { person: Person },
+      meta: { person: 'Wolontariusz' } as { person: TicketType },
       children: [
         {
           path: '1',
@@ -127,7 +127,7 @@ const router = createRouter({
       path: '/gosc',
       name: 'Gość',
       component: Start,
-      meta: { person: 'Gość' } as { person: Person },
+      meta: { person: 'Gość' } as { person: TicketType },
       children: [
         {
           path: '1',
@@ -147,7 +147,7 @@ const router = createRouter({
       path: '/media',
       name: 'Media',
       component: Start,
-      meta: { person: 'Media' } as { person: Person },
+      meta: { person: 'Media' } as { person: TicketType },
       children: [
         {
           path: '1',
@@ -167,7 +167,7 @@ const router = createRouter({
       path: '/wystawca',
       name: 'Wystawca',
       component: Start,
-      meta: { person: 'Wystawca' } as { person: Person },
+      meta: { person: 'Wystawca' } as { person: TicketType },
       children: [
         {
           path: '1',

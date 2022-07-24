@@ -1,4 +1,4 @@
-const badgesMap: Record<Person, string> = {
+const badgesMap: Record<TicketType, string> = {
   Gość: 'gosc',
   Media: 'media',
   'Twórca Programu': 'program',
@@ -8,21 +8,21 @@ const badgesMap: Record<Person, string> = {
 }
 
 const volunteersMap: Record<VolunteerType, string> = {
-  Dzik: 'dzik',
-  Lis: 'lis',
-  Organizator: 'organizator',
-  Szop: 'szop'
+  DZIK: 'dzik',
+  LIS: 'lis',
+  ORG: 'organizator',
+  SZOP: 'szop'
 }
 
 export function getImage(fileName: string): string {
   return `${import.meta.env.BASE_URL}img/${fileName}`
 }
 
-export function getBadgeRevers(personType: Person): string {
+export function getBadgeRevers(personType: TicketType): string {
   return getImage(`${badgesMap[personType]}-back.png`)
 }
 
-export function getBadgeImage(personType: Person): string {
+export function getBadgeImage(personType: TicketType): string {
   return getImage(`${badgesMap[personType]}-front.png`)
 }
 
@@ -30,8 +30,8 @@ export function getVolunteerBadgeImage(volunteerType: VolunteerType) {
   return getImage(`${volunteersMap[volunteerType]}-front.png`)
 }
 
-export function getPersonVariation(personType: Person): string {
-  const variationMap: Record<Person, string> = {
+export function getPersonVariation(personType: TicketType): string {
+  const variationMap: Record<TicketType, string> = {
     Gość: 'Gościa',
     Media: 'Media',
     'Twórca Programu': 'Twórcy Programu',
@@ -53,4 +53,39 @@ export const sleepMap: Readonly<Record<Sleep, string>> = {
   PN: 'N',
   SOSW: 'SOSW',
   nope: 'X'
+}
+
+const gsHeadersMap: Record<string, keyof GsItem> = {
+  lp: 'id',
+  imię: 'name',
+  nazwa: 'name',
+  pseudonim: 'nick',
+  nazwisko: 'lastName',
+  zniżka: 'discount',
+  whodis: 'volunteerType',
+  ilewejściówek: 'tickets'
+}
+
+export function parseGsData(data: any): GsItem[] {
+  // @ts-ignore
+  const headers = data.values[0].map(header =>
+    header.toLowerCase().replace(/ /g, '').trim()
+  )
+  const output: GsItem[] = []
+
+  for (const item of data.values.slice(1)) {
+    // @ts-ignore
+    const gsItem = headers.reduce((acc, header, index) => {
+      if (gsHeadersMap[header]) {
+        acc[gsHeadersMap[header]] = item[index]
+      }
+      return acc
+    }, {} as GsItem)
+
+    if (gsItem.name) {
+      output.push(gsItem)
+    }
+  }
+
+  return output
 }

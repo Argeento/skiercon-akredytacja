@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useRoute, useRouter } from 'vue-router'
-import { api } from '../../db'
-import { resetTicket, ticket } from '../../store'
+import { firestoreInstance } from '@/plugins/firestore'
+import { resetTicket, ticket } from '@/store'
 
 const props = defineProps({
   nextText: {
@@ -42,7 +42,7 @@ async function onNextClick() {
     return
 
   if (props.end) {
-    await api.addTicket(ticket.value)
+    await firestoreInstance.addTicket(ticket.value)
     resetTicket()
     router.push('/start')
   } else {

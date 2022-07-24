@@ -6,11 +6,9 @@ import {
   deleteDoc,
   doc,
   Firestore,
-  getDocs,
   getFirestore,
   query,
   QueryConstraint,
-  setDoc,
   onSnapshot
 } from 'firebase/firestore'
 import { ref } from 'vue'
@@ -34,7 +32,7 @@ export function initFirebaseInstance() {
   db = getFirestore(app)
 }
 
-export const api = {
+export const firestoreInstance = {
   async addTicket(ticket: Ticket) {
     for (let i = 0; i < ticket.numberOfIds; i++) {
       ticket.ticketEndTime = new Date().toISOString()
@@ -48,26 +46,11 @@ export const api = {
     await deleteDoc(docRef)
   },
 
-  async getCollection<T>(
-    collectionName: CollectionName,
-    customQuery: QueryConstraint[] = []
-  ): Promise<T[]> {
-    const col = collection(db, collectionName)
-    const q = query(col, ...customQuery)
-    const snap = await getDocs(q)
-    return snap.docs.map(doc => {
-      return {
-        docId: doc.id,
-        ...(doc.data() as T)
-      }
-    })
-  },
-
   useCollection<T extends any>(
-    collectionName: CollectionName,
-    customQuery: QueryConstraint[] = []
+    collectionName: 'tickets',
+    customQuery: QueryConstraint[] = [],
+    data = ref<T[]>([])
   ) {
-    const data = ref<T[]>([])
     const col = collection(db, collectionName)
     const q = query(col, ...customQuery)
 
@@ -83,13 +66,5 @@ export const api = {
     })
 
     return { unsubscribe, data }
-  },
-
-  async addDoc(
-    collection: string,
-    data: Record<string, unknown>,
-    docId: string
-  ) {
-    await setDoc(doc(db, collection, docId), data)
   }
 }

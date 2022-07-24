@@ -5,11 +5,11 @@ import { ticket } from '@/store'
 
 const route = useRoute()
 
-ticket.value.personType = route.meta.person as Person
+ticket.value.ticketType = route.meta.person as TicketType
 ticket.value.ticketStartTime = new Date().toISOString()
 
 onBeforeRouteLeave(() => {
-  if (ticket.value.personType !== undefined) {
+  if (ticket.value.ticketType !== undefined) {
     const leave = confirm('Czy chcesz anulować aktualną akredytację?')
 
     if (leave) {

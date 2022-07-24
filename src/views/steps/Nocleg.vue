@@ -5,15 +5,15 @@ import { computed } from 'vue'
 
 let sleepValue: Sleep = '1'
 
-if (ticket.value.personType === 'Wolontariusz') {
+if (ticket.value.ticketType === 'Wolontariusz') {
   sleepValue = 'SOSW'
 }
 
-if (ticket.value.personType === 'Wystawca') {
+if (ticket.value.ticketType === 'Wystawca') {
   sleepValue = 'B2'
 }
 
-const reverseSrc = getBadgeRevers(ticket.value.personType!)
+const reverseSrc = getBadgeRevers(ticket.value.ticketType!)
 
 const mark = computed(() => sleepMap[ticket.value.sleep])
 </script>
@@ -47,7 +47,7 @@ const mark = computed(() => sleepMap[ticket.value.sleep])
       <label
         class="block cursor-pointer"
         :class="ticket.sleep === 'PN' && 'font-bold'"
-        v-if="ticket.personType !== 'Wystawca'"
+        v-if="ticket.ticketType !== 'Wystawca'"
       >
         <input type="radio" name="sleep" value="PN" v-model="ticket.sleep" />
         Pole Namiotowe
@@ -56,7 +56,7 @@ const mark = computed(() => sleepMap[ticket.value.sleep])
   </div>
 
   <div
-    v-if="ticket.personType == 'Wolontariusz' && ticket.sleep === 'SOSW'"
+    v-if="ticket.ticketType == 'Wolontariusz' && ticket.sleep === 'SOSW'"
     class="card"
   >
     Poinformuj <i>Wolontariusza</i>, że nocleg mają w <b>Drugiej Szkole</b>
@@ -85,10 +85,10 @@ const mark = computed(() => sleepMap[ticket.value.sleep])
       <div
         class="badge-mark"
         :class="{
-          'badge-mark--program': ticket.personType === 'Twórca Programu',
-          'badge-mark--volunteer': ticket.personType === 'Wolontariusz',
+          'badge-mark--program': ticket.ticketType === 'Twórca Programu',
+          'badge-mark--volunteer': ticket.ticketType === 'Wolontariusz',
           'badge-mark--small':
-            ticket.personType === 'Wolontariusz' && ticket.sleep === 'SOSW'
+            ticket.ticketType === 'Wolontariusz' && ticket.sleep === 'SOSW'
         }"
       >
         {{ mark }}
