@@ -3,7 +3,10 @@ import { FirebaseError } from '@firebase/util'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
-import { sheetId, isUserAuth } from '@/store'
+import { isUserAuth, people, tickets } from '@/store'
+import { firestoreInstance } from '@/plugins/firestore'
+import { orderBy } from '@firebase/firestore'
+import axios from 'axios'
 
 const auth = getAuth()
 const password = ref('')
@@ -27,9 +30,26 @@ async function login() {
   loading.value = true
 
   try {
+    // Login to firebase
     await signInWithEmailAndPassword(auth, 'akre@skiercon.pl', password.value)
     isUserAuth.value = true
-    sheetId.value = password.value
+
+    // subscribe for tickets
+    firestoreInstance.useCollection<Ticket>(
+      'tickets',
+      [orderBy('ticketEndTime', 'desc')],
+      tickets
+    )
+
+    // Download necessary data
+    await axios
+      .get<GsPeople>(
+        `https://us-central1-skiercon-akredytacja.cloudfunctions.net/data?key=${password.value}`
+      )
+      .then(res => {
+        people.value = res.data
+      })
+
     router.replace('/start')
   } catch (err) {
     if (err instanceof FirebaseError) {
@@ -46,24 +66,49 @@ async function login() {
 
 <template>
   <div class="container">
-    <form @submit.prevent="login" class="w-52 mx-auto my-20">
-      <img src="/logo.png" alt="" class="mb-12" />
+    <form @submit.prevent="login" class="w-52 mx-auto my-20 relative">
+      <span
+        v-if="loading"
+        class="material-symbols-outlined icon absolute animate-spin bg-white text-violet-500"
+      >
+        sync
+      </span>
+      <img src="/logo.png" alt="" height="70" width="208" class="mb-12" />
       <label class="my-3 block">
         <div>Hasło:</div>
         <input
           type="password"
           v-model="password"
-          class="border border-gray-400 rounded-md py-2 px-4 outline-none w-full"
+          :disabled="loading"
+          class="border border-gray-400 rounded-md py-2 px-4 outline-none w-full disabled:border-gray-200 disabled:text-gray-400"
           autofocus
         />
         <div v-if="error" class="text-red-500">{{ error }}</div>
       </label>
 
-      <button type="submit" class="button border-violet-300 w-full">
+      <button
+        type="submit"
+        :disabled="loading"
+        class="button border-violet-300 w-full disabled:border-gray-200 disabled:text-gray-400"
+      >
         Zaloguj
       </button>
     </form>
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.icon {
+  font-size: 76px;
+  right: 15px;
+  top: -5px;
+  animation: spin 1s linear infinite;
+  border-radius: 50%;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+</style>

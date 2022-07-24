@@ -8,7 +8,6 @@ import 'vue-select/dist/vue-select.css'
 import { initFirebaseInstance } from './plugins/firestore'
 
 import './plugins/dayjs'
-import './plugins/axios'
 
 initFirebaseInstance()
 
