@@ -9,8 +9,6 @@ import Nocleg from './views/steps/Nocleg.vue'
 import Platnosc from './views/steps/Platnosc.vue'
 import WyszukajOsobe from './views/steps/WyszukajOsobe.vue'
 import WolontariuszUmowa from '@/views/steps/WolontariuszUmowa.vue'
-import WyszukajMedia from './views/steps/WyszukajMedia.vue'
-import WyszukajWystawce from './views/steps/WyszukajWystawce.vue'
 import LoginView from './views/Login.vue'
 
 const router = createRouter({
@@ -151,9 +149,9 @@ const router = createRouter({
       children: [
         {
           path: '1',
-          name: 'Media - Wyszukaj osobę',
+          name: 'Media - Wyszukaj medium',
           meta: { step: 1 },
-          component: WyszukajMedia
+          component: WyszukajOsobe
         },
         {
           path: '2',
@@ -173,7 +171,7 @@ const router = createRouter({
           path: '1',
           name: 'Wystawca - Nazwa stoiska',
           meta: { step: 1 },
-          component: WyszukajWystawce
+          component: WyszukajOsobe
         },
         {
           path: '2',

@@ -47,7 +47,7 @@ const totalPrice = computed(
     </div>
     <div class="card">
       Poinformuj <i>Wolontariusza</i> o tym, żeby zgłosił się do
-      "<b>Leśniczówki</b>" (TODO - która to sala?)
+      "<b>Leśniczówki</b>" (sala A8)
     </div>
     <div class="card">
       Poinformuj <i>Wolontariusza</i>, że przysługują mu
@@ -61,8 +61,10 @@ const totalPrice = computed(
   </div>
 
   <div v-if="ticket.ticketType === 'Gość'">
-    <div class="card">Wydaj <b>Pakiet Gościa</b> (Kubek)</div>
-    <div class="card">
+    <div v-if="ticket.giftPack" class="card">
+      Wydaj <b>Pakiet Gościa</b> (Kubek)
+    </div>
+    <div v-if="ticket.giftPack" class="card">
       <div class="mb-3">
         Poinformuj <i>Gościa</i>, że na odwrocie identyfikatora znajdują się
         numery telefonów do&nbsp;Koordynatorów Gości

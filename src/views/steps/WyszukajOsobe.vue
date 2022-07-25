@@ -1,18 +1,22 @@
 <script lang="ts" setup>
 import { people, ticket, tickets } from '@/store'
-import { onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { getVolunteerBadgeImage } from '@/utils'
 
-const options = ref<any[]>([])
 const selected = ref<WithLabel<Ticket>>()
 
-if (ticket.value.ticketType === 'Gość') {
-  options.value = []
-}
-
-if (ticket.value.ticketType === 'Twórca Programu') {
-  options.value = people.value.program
-    .map(person => {
+const options = computed(() => {
+  let list: any[] = []
+  if (ticket.value.ticketType === 'Gość') {
+    list = people.value.guests.map(person => {
+      const info = person.info ? ` - ${person.info}` : ''
+      return {
+        label: `${person.name} ${person.lastName}${info}`,
+        ...person
+      }
+    })
+  } else if (ticket.value.ticketType === 'Twórca Programu') {
+    list = people.value.program.map(person => {
       const nick = person.nick ? ` "${person.nick}" ` : ' '
       const group = person.group ? ` - ${person.group}` : ''
       return {
@@ -20,13 +24,35 @@ if (ticket.value.ticketType === 'Twórca Programu') {
         ...person
       }
     })
-    .filter(person => {
-      return !tickets.value.some(ticket => ticket.id === person.id)
+  } else if (ticket.value.ticketType === 'Wolontariusz') {
+    list = people.value.volunteers.map(person => {
+      const nick = person.nick ? ` "${person.nick}" ` : ' '
+      const type = person.volunteerType ? ` - ${person.volunteerType}` : ''
+      return {
+        label: `${person.name}${nick}${person.lastName}${type}`,
+        ...person
+      }
     })
-}
+  } else if (ticket.value.ticketType === 'Media') {
+    list = people.value.media.map(person => {
+      return {
+        label: person.name,
+        ...person
+      }
+    })
+  } else if (ticket.value.ticketType === 'Wystawca') {
+    list = people.value.vendors.map(person => {
+      return {
+        label: person.name,
+        ...person
+      }
+    })
+  }
 
-if (ticket.value.ticketType === 'Wolontariusz') {
-}
+  return list
+    .filter(person => !tickets.value.some(ticket => ticket.id === person.id))
+    .sort((a, b) => a.label.localeCompare(b.label))
+})
 
 watch(selected, selected => {
   if (selected) {
