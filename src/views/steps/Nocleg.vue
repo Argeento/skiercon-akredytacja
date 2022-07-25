@@ -5,11 +5,11 @@ import { computed } from 'vue'
 
 let sleepValue: Sleep = '1'
 
-if (ticket.value.ticketType === 'Wolontariusz') {
+if (ticket.value.ticketType === 'volunteer') {
   sleepValue = 'SOSW'
 }
 
-if (ticket.value.ticketType === 'Wystawca') {
+if (ticket.value.ticketType === 'vendor') {
   sleepValue = 'B2'
 }
 
@@ -47,7 +47,7 @@ const mark = computed(() => sleepMap[ticket.value.sleep])
       <label
         class="block cursor-pointer"
         :class="ticket.sleep === 'PN' && 'font-bold'"
-        v-if="ticket.ticketType !== 'Wystawca'"
+        v-if="ticket.ticketType !== 'vendor'"
       >
         <input type="radio" name="sleep" value="PN" v-model="ticket.sleep" />
         Pole Namiotowe
@@ -56,7 +56,7 @@ const mark = computed(() => sleepMap[ticket.value.sleep])
   </div>
 
   <div
-    v-if="ticket.ticketType == 'Wolontariusz' && ticket.sleep === 'SOSW'"
+    v-if="ticket.ticketType == 'volunteer' && ticket.sleep === 'SOSW'"
     class="card"
   >
     Poinformuj <i>Wolontariusza</i>, że nocleg mają w <b>Drugiej Szkole</b>
@@ -85,10 +85,10 @@ const mark = computed(() => sleepMap[ticket.value.sleep])
       <div
         class="badge-mark"
         :class="{
-          'badge-mark--program': ticket.ticketType === 'Twórca Programu',
-          'badge-mark--volunteer': ticket.ticketType === 'Wolontariusz',
+          'badge-mark--program': ticket.ticketType === 'program',
+          'badge-mark--volunteer': ticket.ticketType === 'volunteer',
           'badge-mark--small':
-            ticket.ticketType === 'Wolontariusz' && ticket.sleep === 'SOSW'
+            ticket.ticketType === 'volunteer' && ticket.sleep === 'SOSW'
         }"
       >
         {{ mark }}

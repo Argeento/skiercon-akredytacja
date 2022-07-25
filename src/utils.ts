@@ -1,10 +1,10 @@
 const badgesMap: Record<TicketType, string> = {
-  Gość: 'gosc',
-  Media: 'media',
-  'Twórca Programu': 'program',
-  Uczestnik: 'uczestnik',
-  Wolontariusz: 'szop-lis-dzik',
-  Wystawca: 'wystawca'
+  guest: 'gosc',
+  medium: 'media',
+  program: 'program',
+  normal: 'uczestnik',
+  volunteer: 'szop-lis-dzik',
+  vendor: 'wystawca'
 }
 
 const volunteersMap: Record<VolunteerType, string> = {
@@ -32,12 +32,12 @@ export function getVolunteerBadgeImage(volunteerType: VolunteerType) {
 
 export function getPersonVariation(personType: TicketType): string {
   const variationMap: Record<TicketType, string> = {
-    Gość: 'Gościa',
-    Media: 'Media',
-    'Twórca Programu': 'Twórcy Programu',
-    Uczestnik: 'Uczestnika',
-    Wolontariusz: 'Wolontariusza',
-    Wystawca: 'Wystawcy'
+    guest: 'Gościa',
+    medium: 'Media',
+    program: 'Twórcy Programu',
+    normal: 'Uczestnika',
+    volunteer: 'Wolontariusza',
+    vendor: 'Wystawcy'
   }
 
   return variationMap[personType]

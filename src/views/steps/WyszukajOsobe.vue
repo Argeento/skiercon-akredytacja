@@ -7,7 +7,7 @@ const selected = ref<WithLabel<Ticket>>()
 
 const options = computed(() => {
   let list: any[] = []
-  if (ticket.value.ticketType === 'Gość') {
+  if (ticket.value.ticketType === 'guest') {
     list = people.value.guests.map(person => {
       const info = person.info ? ` - ${person.info}` : ''
       return {
@@ -15,7 +15,7 @@ const options = computed(() => {
         ...person
       }
     })
-  } else if (ticket.value.ticketType === 'Twórca Programu') {
+  } else if (ticket.value.ticketType === 'program') {
     list = people.value.program.map(person => {
       const nick = person.nick ? ` "${person.nick}" ` : ' '
       const group = person.group ? ` - ${person.group}` : ''
@@ -24,7 +24,7 @@ const options = computed(() => {
         ...person
       }
     })
-  } else if (ticket.value.ticketType === 'Wolontariusz') {
+  } else if (ticket.value.ticketType === 'volunteer') {
     list = people.value.volunteers.map(person => {
       const nick = person.nick ? ` "${person.nick}" ` : ' '
       const type = person.volunteerType ? ` - ${person.volunteerType}` : ''
@@ -33,14 +33,14 @@ const options = computed(() => {
         ...person
       }
     })
-  } else if (ticket.value.ticketType === 'Media') {
+  } else if (ticket.value.ticketType === 'medium') {
     list = people.value.media.map(person => {
       return {
         label: person.name,
         ...person
       }
     })
-  } else if (ticket.value.ticketType === 'Wystawca') {
+  } else if (ticket.value.ticketType === 'vendor') {
     list = people.value.vendors.map(person => {
       return {
         label: person.name,
@@ -61,9 +61,11 @@ watch(selected, selected => {
 })
 
 const searchFor: Partial<Record<TicketType, string>> = {
-  'Twórca Programu': 'Twórcę Programu',
-  Gość: 'Gościa',
-  Wolontariusz: 'Wolontariusza'
+  program: 'Twórcę Programu',
+  guest: 'Gościa',
+  volunteer: 'Wolontariusza',
+  medium: 'Medium',
+  vendor: 'Wystawcę'
 }
 
 const vselect = ref()

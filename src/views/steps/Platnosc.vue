@@ -10,14 +10,14 @@ const totalPrice = computed(
 
 <template>
   <Counter
-    v-if="ticket.ticketType === 'Uczestnik' && ticket.numberOfIds > 1"
+    v-if="ticket.ticketType === 'normal' && ticket.numberOfIds > 1"
     v-model="children"
     :min="0"
     :max="ticket.numberOfIds! - 1"
     label="Liczba dzieci poniżej 10 roku życia:"
   />
 
-  <template v-if="ticket.ticketType === 'Uczestnik'">
+  <template v-if="ticket.ticketType === 'normal'">
     <div v-if="ticket.numberOfIds > 1" class="card">
       <div class="mb-3">Przyjmij opłatę za konwent:</div>
       <div class="mb-3">
@@ -41,7 +41,7 @@ const totalPrice = computed(
     </div>
   </template>
 
-  <div v-if="ticket.ticketType === 'Wolontariusz'">
+  <div v-if="ticket.ticketType === 'volunteer'">
     <div v-if="ticket.discount === '50%'" class="mb-3">
       Przyjmij opłatę za konwent <b>20ł</b>
     </div>
@@ -60,7 +60,7 @@ const totalPrice = computed(
     </div>
   </div>
 
-  <div v-if="ticket.ticketType === 'Gość'">
+  <div v-if="ticket.ticketType === 'guest'">
     <div v-if="ticket.giftPack" class="card">
       Wydaj <b>Pakiet Gościa</b> (Kubek)
     </div>
@@ -82,7 +82,7 @@ const totalPrice = computed(
     </div>
   </div>
 
-  <div v-if="ticket.ticketType === 'Wystawca'">
+  <div v-if="ticket.ticketType === 'vendor'">
     <div class="card">Poinformuj <i>Wystawcę</i>, gdzie ma stoisko</div>
     <div class="card">
       Poinformuj <i>Wystawcę</i>, że do stoiska wkrótce podejdzie

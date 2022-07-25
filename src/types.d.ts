@@ -1,10 +1,10 @@
 type TicketType =
-  | 'Uczestnik'
-  | 'Twórca Programu'
-  | 'Wolontariusz'
-  | 'Gość'
-  | 'Media'
-  | 'Wystawca'
+  | 'normal'
+  | 'program'
+  | 'volunteer'
+  | 'guest'
+  | 'medium'
+  | 'vendor'
 
 type Age = '13-' | '13-18' | '18+'
 type Sleep = 'nope' | '1' | 'SOSW' | 'PN' | 'B2'
