@@ -1,16 +1,16 @@
 import { ref, watch } from 'vue'
 
-export const ticket = ref<Ticket>(getDefaultTicket())
+export const ticket = ref<TicketInput>(getDefaultTicket())
 
 export function resetTicket(): void {
   ticket.value = getDefaultTicket()
 }
 
-function getDefaultTicket(): Ticket {
+function getDefaultTicket() {
   return {
     numberOfIds: 1,
     sleep: 'nope'
-  }
+  } as TicketInput
 }
 
 watch(
@@ -24,7 +24,7 @@ watch(
 )
 
 export const isUserAuth = ref(false)
-export const tickets = ref<Ticket[]>([])
+export const tickets = ref<TicketOutput[]>([])
 export const people = ref<GsPeople>({
   program: [],
   vendors: [],

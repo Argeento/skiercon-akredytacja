@@ -4,7 +4,7 @@ import TicketRow from './TicketRow.vue'
 
 defineProps({
   tickets: {
-    type: Array as PropType<Ticket[]>,
+    type: Array as PropType<TicketInput[]>,
     required: true
   },
   title: {

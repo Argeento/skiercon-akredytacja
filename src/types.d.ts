@@ -1,3 +1,7 @@
+type WithLabel<T extends Record<string, unknown>> = T & {
+  label: string
+}
+
 type TicketType =
   | 'normal'
   | 'program'
@@ -12,6 +16,7 @@ type VolunteerType = 'DZIK' | 'LIS' | 'SZOP' | 'ORG'
 type Discount = '50%' | '100%'
 
 type GsProgram = {
+  ticketType: 'program'
   id: number
   name: string
   lastName: string
@@ -22,12 +27,14 @@ type GsProgram = {
 }
 
 type GsVendor = {
+  ticketType: 'vendor'
   id: number
   name: string
   tickets: number
 }
 
 type GsVolunteer = {
+  ticketType: 'volunteer'
   id: number
   name: string
   nick?: string
@@ -37,6 +44,7 @@ type GsVolunteer = {
 }
 
 type GsMedium = {
+  ticketType: 'medium'
   id: number
   name: string
   tickets: number
@@ -44,12 +52,19 @@ type GsMedium = {
 }
 
 type GsGuest = {
+  ticketType: 'guest'
   id: number
   name: string
   lastName: string
   tickets: number
   info?: string
   giftPack: boolean
+}
+
+type Normal = {
+  ticketType: 'normal'
+  name: never
+  id: never
 }
 
 type GsPeople = {
@@ -60,15 +75,14 @@ type GsPeople = {
   guests: GsGuest[]
 }
 
-type Ticket = {
-  docId?: string
+type GsPerson = GsVolunteer | GsMedium | GsGuest | GsVendor | GsProgram
+
+type BaseTicket = {
   ticketStartTime?: string
   ticketEndTime?: string
-  ticketType?: TicketType
   sleep: Sleep
   numberOfIds: number
-} & Record<string, any>
-
-type WithLabel<T extends Record<string, unknown>> = T & {
-  label: string
 }
+
+type TicketInput = (GsPerson | Normal) & BaseTicket
+type TicketOutput = Required<BaseTicket> & GsPerson & { docId: string }

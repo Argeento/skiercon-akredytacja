@@ -13,7 +13,7 @@ if (ticket.value.ticketType === 'vendor') {
   sleepValue = 'B2'
 }
 
-const reverseSrc = getBadgeRevers(ticket.value.ticketType!)
+const reverseSrc = getBadgeRevers(ticket.value.ticketType)
 
 const mark = computed(() => sleepMap[ticket.value.sleep])
 </script>

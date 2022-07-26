@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { firestoreInstance } from '@/plugins/firestore'
-import { sleepMap } from '@/utils'
+import { getTicketLabel, sleepMap } from '@/utils'
 import { ref, type PropType } from 'vue'
 import dayjs from 'dayjs'
 
 const props = defineProps({
   ticket: {
-    type: Object as PropType<Ticket>,
+    type: Object as PropType<TicketOutput>,
     required: true
   },
   withoutRemove: {
@@ -40,14 +40,14 @@ async function deleteTicket(ticketId: string) {
       }}
     </td>
     <td>
-      {{ ticket.name || '-' }}
+      {{ getTicketLabel(ticket, { extended: true }) }}
     </td>
     <td :title="new Date(ticket.ticketEndTime!).toLocaleString('pl')">
       {{ dayjs(ticket.ticketEndTime!).format('dd, HH:mm') }}
     </td>
     <td v-if="!withoutRemove" class="text-center">
       <div v-if="isLoading">Usuwanie...</div>
-      <button v-else class="px-2" @click="deleteTicket(ticket.docId!)">
+      <button v-else class="px-2" @click="deleteTicket(ticket.docId)">
         <span class="material-symbols-outlined remove-icon"> delete </span>
       </button>
     </td>

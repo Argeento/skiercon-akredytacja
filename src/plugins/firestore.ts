@@ -33,7 +33,7 @@ export function initFirebaseInstance() {
 }
 
 export const firestoreInstance = {
-  async addTicket(ticket: Ticket) {
+  async addTicket(ticket: TicketInput) {
     for (let i = 0; i < ticket.numberOfIds; i++) {
       ticket.ticketEndTime = new Date().toISOString()
       const objectToSend = JSON.parse(JSON.stringify(ticket))

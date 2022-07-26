@@ -35,7 +35,7 @@ async function login() {
     isUserAuth.value = true
 
     // subscribe for tickets
-    firestoreInstance.useCollection<Ticket>(
+    firestoreInstance.useCollection<TicketInput>(
       'tickets',
       [orderBy('ticketEndTime', 'desc')],
       tickets

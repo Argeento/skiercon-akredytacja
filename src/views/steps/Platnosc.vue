@@ -13,7 +13,7 @@ const totalPrice = computed(
     v-if="ticket.ticketType === 'normal' && ticket.numberOfIds > 1"
     v-model="children"
     :min="0"
-    :max="ticket.numberOfIds! - 1"
+    :max="ticket.numberOfIds - 1"
     label="Liczba dzieci poniżej 10 roku życia:"
   />
 

@@ -13,7 +13,7 @@ import { getPersonVariation, getBadgeImage } from '@/utils'
 
   <div class="card">
     <div class="mb-3">
-      Zweryfikuj wiek <i>{{ getPersonVariation(ticket.ticketType!) }}</i>
+      Zweryfikuj wiek <i>{{ getPersonVariation(ticket.ticketType) }}</i>
     </div>
 
     <div class="mb-3">
