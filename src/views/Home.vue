@@ -61,7 +61,7 @@ const links = [
     </router-link>
   </div>
 
-  <div class="container">
+  <div class="wrap">
     <TicketsTable class="mt-10" :tickets="tickets" />
   </div>
 </template>

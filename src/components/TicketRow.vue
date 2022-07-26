@@ -40,12 +40,12 @@ async function deleteTicket(ticketId: string) {
       }}
     </td>
     <td>
-      {{ getTicketLabel(ticket, { extended: true }) }}
+      {{ getTicketLabel(ticket) }}
     </td>
     <td :title="new Date(ticket.ticketEndTime!).toLocaleString('pl')">
       {{ dayjs(ticket.ticketEndTime!).format('dd, HH:mm') }}
     </td>
-    <td v-if="!withoutRemove" class="text-center">
+    <td v-if="!withoutRemove">
       <div v-if="isLoading">Usuwanie...</div>
       <button v-else class="px-2" @click="deleteTicket(ticket.docId)">
         <span class="material-symbols-outlined remove-icon"> delete </span>
