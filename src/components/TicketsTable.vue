@@ -83,9 +83,9 @@ function onPageHandler(page: number) {
       class="w-full shadow rounded-xl overflow-hidden"
     >
       <tr>
-        <th width="150">Typ biletu</th>
-        <th width="100">Sleep</th>
-        <th>Nazwa</th>
+        <th width="180">Typ</th>
+        <th>Osoba / Nazwa</th>
+        <th width="150">Nocleg</th>
         <th width="100">Data</th>
         <th v-if="!withoutRemove" width="1">Usuń</th>
       </tr>

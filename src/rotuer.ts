@@ -103,20 +103,14 @@ const router = createRouter({
         },
         {
           path: '3',
-          name: 'Wolontariusz - Umowa',
-          meta: { step: 3 },
-          component: WolontariuszUmowa
-        },
-        {
-          path: '4',
           name: 'Wolontariusz - Nocleg',
-          meta: { step: 4 },
+          meta: { step: 3 },
           component: Nocleg
         },
         {
-          path: '5',
+          path: '4',
           name: 'Wolontariusz - Zakończ akredytację',
-          meta: { step: 5 },
+          meta: { step: 4 },
           component: Platnosc
         }
       ]

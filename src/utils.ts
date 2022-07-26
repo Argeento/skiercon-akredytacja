@@ -55,15 +55,12 @@ export const sleepMap: Readonly<Record<Sleep, string>> = {
   nope: 'X'
 }
 
-export function getTicketLabel(
-  person: GsPerson,
-  options = { extended: false }
-) {
+export function getTicketLabel(person: GsPerson | Normal) {
   let label = ''
 
   if (person.ticketType === 'guest') {
     const info = person.info ? ` - ${person.info}` : ''
-    const skiercon = person.giftPack ? ' - Skiercon' : ''
+    const skiercon = person.giftPack ? ' - Gość Skierconu' : ''
     label += `${person.name} ${person.lastName}${skiercon}${info}`
   }
 
@@ -87,17 +84,8 @@ export function getTicketLabel(
     label += person.name
   }
 
-  if (options.extended) {
-    const ticketTypeMap: Record<TicketType, string> = {
-      guest: ' - Gość',
-      medium: ' - Media',
-      normal: '-',
-      program: ' - Twórca programu',
-      vendor: ' - Wystawca',
-      volunteer: ' - Wolontariusz'
-    }
-
-    label += ticketTypeMap[person.ticketType]
+  if (person.ticketType === 'normal') {
+    label += '-'
   }
 
   return label

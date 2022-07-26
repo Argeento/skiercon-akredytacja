@@ -20,7 +20,7 @@ const mark = computed(() => sleepMap[ticket.value.sleep])
 
 <template>
   <div class="card">
-    <div class="mb-3">Zapytaj o nocleg</div>
+    <div class="mb-3">Zapytaj o nocleg i zaznacz odpowiednią opcję</div>
 
     <div class="mb-3">
       <label

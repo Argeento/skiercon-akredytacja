@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { firestoreInstance } from '@/plugins/firestore'
-import { getTicketLabel, sleepMap } from '@/utils'
+import { getTicketLabel } from '@/utils'
 import { ref, type PropType } from 'vue'
 import dayjs from 'dayjs'
 
@@ -29,25 +29,39 @@ async function deleteTicket(ticketId: string) {
   isLoading.value = true
   await firestoreInstance.removeTicket(ticketId)
 }
+
+const ticketTypeMap: Record<TicketType, string> = {
+  guest: 'Gość',
+  medium: 'Media',
+  normal: 'Uczestnik',
+  program: 'Program',
+  vendor: 'Wystawca',
+  volunteer: 'Wolontariusz'
+}
+
+const sleepTypeMap: Record<Sleep, string> = {
+  '1': 'Sleep Room',
+  B2: 'B2',
+  PN: 'Pole namiotowe',
+  SOSW: 'SOSW',
+  nope: '-'
+}
 </script>
 
 <template>
   <tr>
-    <td>{{ ticket.ticketType }}</td>
-    <td>
-      {{
-        ['Media'].includes(ticket.ticketType!) ? '-' : sleepMap[ticket.sleep]
-      }}
-    </td>
+    <td>{{ ticketTypeMap[ticket.ticketType] }}</td>
     <td>
       {{ getTicketLabel(ticket) }}
+    </td>
+    <td>
+      {{ sleepTypeMap[ticket.sleep] }}
     </td>
     <td :title="new Date(ticket.ticketEndTime!).toLocaleString('pl')">
       {{ dayjs(ticket.ticketEndTime!).format('dd, HH:mm') }}
     </td>
     <td v-if="!withoutRemove">
-      <div v-if="isLoading">Usuwanie...</div>
-      <button v-else class="px-2" @click="deleteTicket(ticket.docId)">
+      <button class="px-2" @click="deleteTicket(ticket.docId)">
         <span class="material-symbols-outlined remove-icon"> delete </span>
       </button>
     </td>
