@@ -53,7 +53,7 @@ onMounted(() => {
 <template>
   <div class="card">
     <div class="mb-3">
-      Wyszukaj <i>{{ searchFor[ticket.ticketType!] }}</i>
+      Wyszukaj <i>{{ searchFor[ticket.ticketType] }}</i>
     </div>
     <v-select
       ref="vselect"

@@ -9,14 +9,16 @@ import Nocleg from './views/steps/Nocleg.vue'
 import Platnosc from './views/steps/Platnosc.vue'
 import WyszukajOsobe from './views/steps/WyszukajOsobe.vue'
 
-import LoginView from './views/Login.vue'
+import LoginVue from './views/Login.vue'
 import LesniczowkaVue from './views/Lesniczowka.vue'
 import ListaVue from './views/Lista.vue'
+import StatystykiVue from './views/Statystyki.vue'
 
 export enum RouteName {
   Login = 'login',
   Lesniczowka = 'lesniczowka',
   Lista = 'lista',
+  Statystyki = 'statystyki',
   Akredytacja = 'akredytacja',
   AkredytacjaUczestnik = 'akredytacja - uczestnik',
   AkredytacjaProgram = 'akredytacja - program',
@@ -32,7 +34,7 @@ const router = createRouter({
     {
       path: '/',
       name: RouteName.Login,
-      component: LoginView
+      component: LoginVue
     },
     {
       path: '/lesniczowka',
@@ -41,8 +43,13 @@ const router = createRouter({
     },
     {
       path: '/lista',
-      name: 'lista',
+      name: RouteName.Lista,
       component: ListaVue
+    },
+    {
+      path: '/statystyki',
+      name: RouteName.Statystyki,
+      component: StatystykiVue
     },
     {
       path: '/akredytacja',

@@ -91,8 +91,12 @@ const totalPrice = computed(
   </div>
 
   <div class="card">
-    <b>Wydaj identyfikator</b> (zapytaj, czy potrzebna jest smycz lub folia do
-    identyfikatora)
+    <b
+      >Wydaj
+      <template v-if="'tickets' in ticket">{{ ticket.tickets }}x</template>
+      identyfikator</b
+    >
+    (zapytaj, czy potrzebna jest smycz lub folia do identyfikatora)
   </div>
 
   <Pagination next-text="Zakończ akredytację" end />

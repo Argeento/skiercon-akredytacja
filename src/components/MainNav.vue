@@ -27,6 +27,9 @@ import { tickets } from '@/store'
       <router-link :to="{ name: RouteName.Lista }" class="link"
         >Lista</router-link
       >
+      <router-link :to="{ name: RouteName.Statystyki }" class="link"
+        >Statystyki</router-link
+      >
       <router-link :to="{ name: RouteName.Lesniczowka }" class="link"
         >Leśniczówka</router-link
       >
