@@ -14,6 +14,10 @@ const gsMap: Record<Exclude<TicketType, 'normal'>, keyof GsPeople> = {
 const selected = ref<WithLabel<GsPerson>>()
 
 const options = computed<Array<WithLabel<GsPerson>>>(() => {
+  if (!ticket.value.ticketType) {
+    return []
+  }
+
   if (ticket.value.ticketType === 'normal') {
     throw new Error('There is no options for normal tickets')
   }

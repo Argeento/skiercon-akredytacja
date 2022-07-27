@@ -1,48 +1,46 @@
 <script lang="ts" setup>
-import { tickets } from '@/store'
-import TicketsTable from '@/components/TicketsTable.vue'
+import type { RouteName } from '@/rotuer'
 
-const links = [
+type Link = {
+  name: string
+  img: string
+  link: string
+}
+const links: Link[] = [
   {
     name: 'Uczestnik',
     img: '/img/uczestnik-front.png',
-    link: '/uczestnik/1'
+    link: '/akredytacja/uczestnik/1'
   },
   {
     name: 'Twórca programu',
     img: '/img/program-front.png',
-    link: '/tworca-programu/1'
+    link: '/akredytacja/tworca-programu/1'
   },
   {
     name: 'Organizator, Szop, Lis, Dzik',
     img: '/img/szop-front.png',
-    link: '/wolontariusz/1'
+    link: '/akredytacja/wolontariusz/1'
   },
   {
     name: 'Gość',
     img: '/img/gosc-front.png',
-    link: '/gosc/1'
+    link: '/akredytacja/gosc/1'
   },
   {
     name: 'Media',
     img: '/img/media-front.png',
-    link: '/media/1'
+    link: '/akredytacja/media/1'
   },
   {
     name: 'Wystawca',
     img: '/img/wystawca-front.png',
-    link: '/wystawca/1'
+    link: '/akredytacja/wystawca/1'
   }
 ]
 </script>
 
 <template>
-  <div class="text-center mt-5 mb-3">
-    <RouterLink class="text-xl skierfont" to="/">
-      SkierCon akredytacja
-    </RouterLink>
-    <div>Start</div>
-  </div>
   <div class="flex flex-wrap justify-center wrap">
     <router-link
       v-for="link in links"
@@ -59,10 +57,6 @@ const links = [
       />
       <div class="px-4 py-2 text-md">{{ link.name }}</div>
     </router-link>
-  </div>
-
-  <div class="wrap">
-    <TicketsTable class="mt-10" :tickets="tickets" />
   </div>
 </template>
 

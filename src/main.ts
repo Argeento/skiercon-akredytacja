@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './rotuer'
 import vSelect from 'vue-select'
 import Pagination from './components/global/Pagination.vue'
+import MainTitleVue from './components/global/MainTitle.vue'
 import Counter from './components/global/Counter.vue'
 import VueAwesomePaginate from 'vue-awesome-paginate'
 
@@ -20,4 +21,5 @@ app.use(VueAwesomePaginate)
 app.component('v-select', vSelect)
 app.component('Pagination', Pagination)
 app.component('Counter', Counter)
+app.component('MainTitle', MainTitleVue)
 app.mount('#app')

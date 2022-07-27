@@ -57,8 +57,8 @@ const sleepTypeMap: Record<Sleep, string> = {
     <td>
       {{ sleepTypeMap[ticket.sleep] }}
     </td>
-    <td :title="new Date(ticket.ticketEndTime!).toLocaleString('pl')">
-      {{ dayjs(ticket.ticketEndTime!).format('dd, HH:mm') }}
+    <td :title="new Date(ticket.ticketEndTime).toLocaleString('pl')">
+      {{ dayjs(ticket.ticketEndTime).format('dd, HH:mm') }}
     </td>
     <td v-if="!withoutRemove">
       <button class="px-2" @click="deleteTicket(ticket.docId)">

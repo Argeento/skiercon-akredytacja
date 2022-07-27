@@ -7,6 +7,7 @@ import { isUserAuth, people, tickets } from '@/store'
 import { firestoreInstance } from '@/plugins/firestore'
 import { orderBy } from '@firebase/firestore'
 import axios from 'axios'
+import { RouteName } from '@/rotuer'
 
 const auth = getAuth()
 const password = ref('')
@@ -32,7 +33,6 @@ async function login() {
   try {
     // Login to firebase
     await signInWithEmailAndPassword(auth, 'akre@skiercon.pl', password.value)
-    isUserAuth.value = true
 
     // subscribe for tickets
     firestoreInstance.useCollection<TicketInput>(
@@ -50,7 +50,8 @@ async function login() {
         people.value = res.data
       })
 
-    router.replace('/start')
+    router.replace({ name: RouteName.Akredytacja })
+    isUserAuth.value = true
   } catch (err) {
     if (err instanceof FirebaseError) {
       error.value = errorMap[err.code] ?? 'Wystąpił nieznany błąd!'

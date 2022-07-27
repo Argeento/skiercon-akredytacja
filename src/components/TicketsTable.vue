@@ -107,7 +107,7 @@ function onPageHandler(page: number) {
     <vue-awesome-paginate
       v-if="filteredTickets.length > itemsPerPage"
       :key="currentPage"
-      class="m-10"
+      class="m-10 justify-center"
       :total-items="filteredTickets.length"
       :items-per-page="itemsPerPage"
       :max-pages-shown="5"
