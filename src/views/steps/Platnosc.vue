@@ -49,15 +49,6 @@ const totalPrice = computed(
       Poinformuj <i>Wolontariusza</i> o tym, żeby zgłosił się do
       "<b>Leśniczówki</b>" (sala A8)
     </div>
-    <div class="card">
-      Poinformuj <i>Wolontariusza</i>, że przysługują mu
-      <b>2 ciepłe posiłki</b> odhaczane na tyle identyfikatora
-
-      <div class="relative">
-        <div class="meals-mark rounded-xl absolute border-4 border-red-400" />
-        <img class="badge-image" src="/img/szop-lis-dzik-back.png" alt="" />
-      </div>
-    </div>
   </div>
 
   <div v-if="ticket.ticketType === 'guest'">

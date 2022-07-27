@@ -17,7 +17,11 @@ import { getPersonVariation, getBadgeImage } from '@/utils'
     </div>
 
     <div class="mb-3">
-      Osoba w wieku <b>13-18</b> musi posiadać <b>Kartę Młodego Skierkonauty</b>
+      Osoba w wieku <b>13-18</b> musi posiadać
+      <b v-if="ticket.ticketType === 'volunteer'"
+        >Kartę Młodego Wolontariusza</b
+      >
+      <b v-else>Kartę Młodego Skierconauty</b>
     </div>
 
     <div v-if="ticket.ticketType === 'normal'">
