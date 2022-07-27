@@ -29,10 +29,7 @@ import { getPersonVariation, getBadgeImage } from '@/utils'
     </div>
   </div>
 
-  <div
-    class="card"
-    v-if="ticket.ticketType && ticket.ticketType !== 'volunteer'"
-  >
+  <div class="card" v-if="ticket.ticketType && ticket.ticketType === 'normal'">
     <div class="mb-4">Przygotuj odpowiedni identyfikator:</div>
 
     <img

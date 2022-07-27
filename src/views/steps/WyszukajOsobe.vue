@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { people, ticket, tickets } from '@/store'
 import { computed, onMounted, ref, watch } from 'vue'
-import { getTicketLabel, getVolunteerBadgeImage } from '@/utils'
+import { getTicketLabel, getVolunteerBadgeImage, getBadgeImage } from '@/utils'
 
 const gsMap: Record<Exclude<TicketType, 'normal'>, keyof GsPeople> = {
   guest: 'guests',
@@ -69,6 +69,16 @@ onMounted(() => {
     <img
       class="badge-image shadow mb-5"
       :src="getVolunteerBadgeImage(ticket.volunteerType)"
+      alt=""
+    />
+  </div>
+
+  <div class="card" v-else-if="selected">
+    <div class="mb-4">Przygotuj odpowiedni identyfikator:</div>
+
+    <img
+      class="badge-image shadow mb-5"
+      :src="getBadgeImage(ticket.ticketType)"
       alt=""
     />
   </div>
