@@ -1,19 +1,29 @@
 <script lang="ts" setup>
-import { ticket } from '@/store'
+import { ticket, ticketsToSell } from '@/store'
 import { computed, ref } from 'vue'
 const ticketPrice = new Date().getDay() === 0 ? 20 : 40
 const children = ref(0)
+
 const totalPrice = computed(
-  () => ticketPrice * (ticket.value.numberOfIds - children.value)
+  () =>
+    ticketsToSell.value.reduce((acc, ticket) => {
+      let price = ticketPrice
+      if ('discount' in ticket) {
+        if (ticket.discount === '100%') price = 0
+        if (ticket.discount === '50%') price = ticketPrice / 2
+      }
+      return acc + price
+    }, 0) -
+    children.value * ticketPrice
 )
 </script>
 
 <template>
   <Counter
-    v-if="ticket.ticketType === 'normal' && ticket.numberOfIds > 1"
+    v-if="ticket.ticketType === 'normal' && ticketsToSell.length > 1"
     v-model="children"
     :min="0"
-    :max="ticket.numberOfIds - 1"
+    :max="ticketsToSell.length"
     label="Liczba dzieci poniżej 10 roku życia:"
   />
 
@@ -80,11 +90,8 @@ const totalPrice = computed(
   </div>
 
   <div class="card">
-    <b
-      >Wydaj
-      <template v-if="'tickets' in ticket">{{ ticket.tickets }}x</template>
-      identyfikator</b
-    >
+    <b>Wydaj identyfikator</b> <TicketsToSellCounter />
+
     (zapytaj, czy potrzebna jest smycz lub folia do identyfikatora)
   </div>
 

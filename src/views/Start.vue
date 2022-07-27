@@ -1,12 +1,21 @@
 <script lang="ts" setup>
-import { resetTicket } from '@/store'
 import { onBeforeRouteLeave, useRoute } from 'vue-router'
-import { ticket } from '@/store'
+import {
+  ticket,
+  addTicketToSell,
+  resetTicket,
+  resetTicketsToSell
+} from '@/store'
 
 const route = useRoute()
 
 ticket.value.ticketType = route.meta.person as TicketType
 ticket.value.ticketStartTime = new Date().toISOString()
+
+addTicketToSell({
+  ticketType: route.meta.person as TicketType,
+  ticketStartTime: new Date().toISOString()
+})
 
 onBeforeRouteLeave(() => {
   if (ticket.value.ticketType !== undefined) {
@@ -14,6 +23,7 @@ onBeforeRouteLeave(() => {
 
     if (leave) {
       resetTicket()
+      resetTicketsToSell()
     }
 
     return leave

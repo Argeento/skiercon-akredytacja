@@ -13,10 +13,43 @@ function getDefaultTicket() {
   } as TicketInput
 }
 
+export const ticketsToSell = ref<TicketInput[]>([])
+export function addTicketToSell(newValues: Partial<TicketInput>) {
+  // @ts-ignore
+  ticketsToSell.value.push({
+    ...getDefaultTicket(),
+    ...newValues
+  })
+}
+
+export function updateAllTicketsToSell(newValues: Partial<TicketInput>) {
+  // @ts-ignore
+  ticketsToSell.value = ticketsToSell.value.map(ticketToSell => {
+    return {
+      ...ticketToSell,
+      ...newValues
+    }
+  })
+}
+
+export function resetTicketsToSell() {
+  ticketsToSell.value = []
+}
+
+export function removeLastTicketToSell() {
+  return ticketsToSell.value.pop()
+}
+
+export function copyLastTicketToSell() {
+  return JSON.parse(
+    JSON.stringify(ticketsToSell.value[ticketsToSell.value.length - 1])
+  )
+}
+
 watch(
-  ticket,
+  ticketsToSell,
   () => {
-    console.log(JSON.stringify(ticket.value, null, 2))
+    console.log(JSON.stringify(ticketsToSell.value, null, 2))
   },
   {
     deep: true

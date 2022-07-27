@@ -17,7 +17,7 @@ type Discount = '50%' | '100%'
 
 type GsProgram = {
   ticketType: 'program'
-  id: number
+  id: string
   name: string
   lastName: string
   info?: string
@@ -28,14 +28,14 @@ type GsProgram = {
 
 type GsVendor = {
   ticketType: 'vendor'
-  id: number
+  id: string
   name: string
   tickets: number
 }
 
 type GsVolunteer = {
   ticketType: 'volunteer'
-  id: number
+  id: string
   name: string
   nick?: string
   lastName: string
@@ -45,7 +45,7 @@ type GsVolunteer = {
 
 type GsMedium = {
   ticketType: 'medium'
-  id: number
+  id: string
   name: string
   tickets: number
   info?: string
@@ -53,7 +53,7 @@ type GsMedium = {
 
 type GsGuest = {
   ticketType: 'guest'
-  id: number
+  id: string
   name: string
   lastName: string
   tickets: number

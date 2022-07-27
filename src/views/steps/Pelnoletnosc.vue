@@ -1,19 +1,39 @@
 <script setup lang="ts">
-import { ticket } from '@/store'
+import {
+  ticket,
+  addTicketToSell,
+  copyLastTicketToSell,
+  removeLastTicketToSell,
+  ticketsToSell
+} from '@/store'
 import { getPersonVariation, getBadgeImage } from '@/utils'
+import { ref, watch } from 'vue'
+
+const count = ref(ticketsToSell.value.length)
+
+watch(count, (newCount, oldCount) => {
+  if (newCount > oldCount) {
+    addTicketToSell(copyLastTicketToSell())
+  } else {
+    removeLastTicketToSell()
+  }
+})
 </script>
 
 <template>
   <Counter
     v-if="ticket.ticketType === 'normal'"
     :min="1"
-    v-model="ticket.numberOfIds"
+    v-model="count"
     label="Liczba wejściówek:"
   />
 
   <div class="card">
     <div class="mb-3">
-      Zweryfikuj wiek <i>{{ getPersonVariation(ticket.ticketType) }}</i>
+      Zweryfikuj wiek
+      <i>{{
+        getPersonVariation(ticket.ticketType, ticketsToSell.length > 1)
+      }}</i>
     </div>
 
     <div class="mb-3">
@@ -30,7 +50,9 @@ import { getPersonVariation, getBadgeImage } from '@/utils'
   </div>
 
   <div class="card" v-if="ticket.ticketType && ticket.ticketType === 'normal'">
-    <div class="mb-4">Przygotuj odpowiedni identyfikator:</div>
+    <div class="mb-4">
+      Przygotuj odpowiedni identyfikator <TicketsToSellCounter />
+    </div>
 
     <img
       class="badge-image shadow mb-5"
