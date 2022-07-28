@@ -12,23 +12,15 @@ import {
   updateTicketToSellByIndex
 } from '@/store'
 import { computed, onMounted, ref, watch } from 'vue'
-import { getTicketLabel, getVolunteerBadgeImage, getBadgeImage } from '@/utils'
+import { getTicketLabel, getBadgeImage } from '@/utils'
 import TicketsToSellCounter from '../../components/global/TicketsToSellCounter.vue'
 
-const gsMap: Record<Exclude<TicketType, 'normal'>, keyof GsPeople> = {
-  guest: 'guests',
-  medium: 'media',
-  program: 'program',
-  vendor: 'vendors',
-  volunteer: 'volunteers'
-}
-
-const selected = ref<WithLabel<GsPerson> | TicketInput | undefined>(
-  ticketsToSell.value[0].name ? ticketsToSell.value[0] : undefined
-)
+const selected = ref<WithLabel<GsProgram>>()
 
 const groupName = ref<string | undefined>(
-  'group' in ticketsToSell.value[0] ? ticketsToSell.value[0].group : undefined
+  ticketsToSell.value[0]
+    ? (ticketsToSell.value[0] as GsProgram).group
+    : undefined
 )
 const group = computed(() => {
   if (!groupName.value) return []
@@ -40,7 +32,7 @@ const group = computed(() => {
     .sort((a, b) => a.name.localeCompare(b.name))
 })
 
-function checkPerson(e: any, person: typeof group.value[number]) {
+function checkPersonInGroup(e: any, person: typeof group.value[number]) {
   if (e.currentTarget.checked) {
     addTicketToSell({
       ...copyLastTicketToSell(),
@@ -51,24 +43,20 @@ function checkPerson(e: any, person: typeof group.value[number]) {
   }
 }
 
-const options = computed<Array<WithLabel<GsPerson>>>(() => {
+const options = computed<Array<WithLabel<GsProgram>>>(() => {
   if (!ticket.value.ticketType) {
     return []
   }
 
-  if (ticket.value.ticketType === 'normal') {
-    throw new Error('There is no options for normal tickets')
-  }
-
-  return people.value[gsMap[ticket.value.ticketType]]
-    .map(person => ({ label: getTicketLabel(person), ...person }))
+  return people.value.program
     .filter(person => !tickets.value.some(ticket => ticket.id === person.id))
+    .map(person => ({ label: getTicketLabel(person), ...person }))
     .sort((a, b) => a.label.localeCompare(b.label))
 })
 
 watch(selected, selected => {
   if (selected) {
-    if ('group' in selected && selected.group) {
+    if (selected.group) {
       groupName.value = selected.group
     } else {
       groupName.value = undefined
@@ -78,20 +66,9 @@ watch(selected, selected => {
   } else {
     groupName.value = undefined
     resetTicketsToSell()
-    addTicketToSell({
-      ...getDefaultTicket(),
-      ticketType: 'program'
-    })
+    addTicketToSell(getDefaultTicket('program'))
   }
 })
-
-const searchFor: Partial<Record<TicketType, string>> = {
-  program: 'Twórcę Programu',
-  guest: 'Gościa',
-  volunteer: 'Wolontariusza',
-  medium: 'Medium',
-  vendor: 'Wystawcę'
-}
 
 const vselect = ref()
 onMounted(() => {
@@ -103,9 +80,7 @@ onMounted(() => {
 
 <template>
   <div class="card">
-    <div class="mb-3">
-      Wyszukaj <i>{{ searchFor[ticket.ticketType] }}</i>
-    </div>
+    <div class="mb-3">Wyszukaj <i>Twórcę Programu</i></div>
     <v-select
       ref="vselect"
       :options="options"
@@ -130,7 +105,7 @@ onMounted(() => {
           <input
             type="checkbox"
             :key="selected.id + '.' + person.id"
-            @input="e => checkPerson(e, person)"
+            @input="e => checkPersonInGroup(e, person)"
           />
           {{ person.name }} {{ person.nick ? `"${person.nick}" ` : ''
           }}{{ person.lastName }}
@@ -139,17 +114,7 @@ onMounted(() => {
     </div>
   </div>
 
-  <div class="card" v-if="selected && ticket.ticketType === 'volunteer'">
-    <div class="mb-4">Przygotuj odpowiedni identyfikator:</div>
-
-    <img
-      class="badge-image shadow mb-5"
-      :src="getVolunteerBadgeImage(ticket.volunteerType)"
-      alt=""
-    />
-  </div>
-
-  <div class="card" v-else-if="selected && ticket.ticketType">
+  <div class="card" v-if="selected && ticket.ticketType">
     <div class="mb-4">
       Przygotuj odpowiedni identyfikator<TicketsToSellCounter />:
     </div>

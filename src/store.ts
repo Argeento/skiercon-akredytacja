@@ -1,10 +1,13 @@
 import { ref, watch, computed } from 'vue'
 
-export function getDefaultTicket() {
+export const currentTicketType = ref<TicketType>('normal')
+
+export function getDefaultTicket(ticketType?: TicketType) {
   return {
     sleep: 'nope',
     id: undefined,
-    name: undefined
+    name: undefined,
+    ticketType: ticketType
   } as TicketInput
 }
 

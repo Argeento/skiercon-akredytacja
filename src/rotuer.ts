@@ -7,12 +7,16 @@ import Start from './views/Start.vue'
 import Pelnoletnosc from './views/steps/Pelnoletnosc.vue'
 import Nocleg from './views/steps/Nocleg.vue'
 import Platnosc from './views/steps/Platnosc.vue'
-import WyszukajOsobe from './views/steps/WyszukajOsobe.vue'
 
 import LoginVue from './views/Login.vue'
 import LesniczowkaVue from './views/Lesniczowka.vue'
 import ListaVue from './views/Lista.vue'
 import StatystykiVue from './views/Statystyki.vue'
+import SearchProgramVue from './views/steps/SearchProgram.vue'
+import SearchVolunteersVue from './views/steps/SearchVolunteers.vue'
+import SearchGuestsVue from './views/steps/SearchGuests.vue'
+import SearchMediaVue from './views/steps/SearchMedia.vue'
+import SearchVendorsVue from './views/steps/SearchVendors.vue'
 
 export enum RouteName {
   Login = 'login',
@@ -97,7 +101,7 @@ const router = createRouter({
               path: '1',
               name: 'Twórca programu - Wyszukaj osobę',
               meta: { step: 1 },
-              component: WyszukajOsobe
+              component: SearchProgramVue
             },
             {
               path: '2',
@@ -129,7 +133,7 @@ const router = createRouter({
               path: '1',
               name: 'Wolontariusz - Wyszukaj osobę',
               meta: { step: 1 },
-              component: WyszukajOsobe
+              component: SearchVolunteersVue
             },
             {
               path: '2',
@@ -161,7 +165,7 @@ const router = createRouter({
               path: '1',
               name: 'Gość - Wyszukaj osobę',
               meta: { step: 1 },
-              component: WyszukajOsobe
+              component: SearchGuestsVue
             },
             {
               path: '2',
@@ -181,7 +185,7 @@ const router = createRouter({
               path: '1',
               name: 'Media - Wyszukaj medium',
               meta: { step: 1 },
-              component: WyszukajOsobe
+              component: SearchMediaVue
             },
             {
               path: '2',
@@ -201,7 +205,7 @@ const router = createRouter({
               path: '1',
               name: 'Wystawca - Nazwa stoiska',
               meta: { step: 1 },
-              component: WyszukajOsobe
+              component: SearchVendorsVue
             },
             {
               path: '2',

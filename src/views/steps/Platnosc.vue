@@ -10,7 +10,7 @@ const totalPrice = computed(
       let price = ticketPrice
       if ('discount' in ticket) {
         if (ticket.discount === '100%') price = 0
-        if (ticket.discount === '50%') price = ticketPrice / 2
+        if (ticket.discount === '50%') price = ticketPrice === 20 ? 0 : 20
       }
       return acc + price
     }, 0) -
@@ -90,9 +90,11 @@ const totalPrice = computed(
   </div>
 
   <div class="card">
-    <b>Wydaj identyfikator</b> <TicketsToSellCounter />
+    <div class="my-5">
+      <b>Wydaj identyfikator</b> <TicketsToSellCounter />
 
-    (zapytaj, czy potrzebna jest smycz lub folia do identyfikatora)
+      (zapytaj, czy potrzebna jest smycz lub folia do identyfikatora)
+    </div>
   </div>
 
   <Pagination next-text="Zakończ akredytację" end />

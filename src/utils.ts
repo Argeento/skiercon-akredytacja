@@ -11,7 +11,8 @@ const volunteersMap: Record<VolunteerType, string> = {
   DZIK: 'dzik',
   LIS: 'lis',
   ORG: 'organizator',
-  SZOP: 'szop'
+  SZOP: 'szop',
+  OGR: ''
 }
 
 export function getImage(fileName: string): string {

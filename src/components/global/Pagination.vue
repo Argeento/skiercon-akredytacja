@@ -55,7 +55,7 @@ async function onNextClick() {
 </script>
 
 <template>
-  <div class="mt-10 flex justify-center">
+  <div class="my-10 flex justify-center">
     <button class="button mr-3" @click="onPrevClick">
       {{ prevText }}
     </button>
