@@ -9,7 +9,7 @@ export function getDefaultTicket() {
 }
 
 export const ticketsToSell = ref<TicketInput[]>([])
-export const ticket = computed(() => ticketsToSell.value[0])
+export const ticket = computed(() => ticketsToSell.value[0] ?? {})
 
 export function addTicketToSell(newValues: Partial<TicketInput>) {
   // @ts-ignore
