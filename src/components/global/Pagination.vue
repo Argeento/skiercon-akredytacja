@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import { useRoute, useRouter } from 'vue-router'
 import { firestoreInstance } from '@/plugins/firestore'
-import { resetTicket, ticket } from '@/store'
+import { resetTicketsToSell, ticketsToSell } from '@/store'
 import { RouteName } from '@/rotuer'
+import { nextTick } from 'vue'
 
 const props = defineProps({
   nextText: {
@@ -43,9 +44,10 @@ async function onNextClick() {
     return
 
   if (props.end) {
-    await firestoreInstance.addTicket(ticket.value)
-    resetTicket()
-    router.push({ name: RouteName.Akredytacja })
+    await firestoreInstance.addTickets(ticketsToSell.value)
+    await router.push({ name: RouteName.Akredytacja })
+    await nextTick()
+    resetTicketsToSell()
   } else {
     router.push(`${route.matched[1].path}/${currentStep + 1}`)
   }

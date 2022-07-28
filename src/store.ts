@@ -1,19 +1,16 @@
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 
-export const ticket = ref<TicketInput>(getDefaultTicket())
-
-export function resetTicket(): void {
-  ticket.value = getDefaultTicket()
-}
-
-function getDefaultTicket() {
+export function getDefaultTicket() {
   return {
-    numberOfIds: 1,
-    sleep: 'nope'
+    sleep: 'nope',
+    id: undefined,
+    name: undefined
   } as TicketInput
 }
 
 export const ticketsToSell = ref<TicketInput[]>([])
+export const ticket = computed(() => ticketsToSell.value[0])
+
 export function addTicketToSell(newValues: Partial<TicketInput>) {
   // @ts-ignore
   ticketsToSell.value.push({
@@ -32,12 +29,43 @@ export function updateAllTicketsToSell(newValues: Partial<TicketInput>) {
   })
 }
 
+export function updateTicketToSellByIndex(
+  index: number,
+  newValues: Partial<TicketInput>
+) {
+  if (ticketsToSell.value[index]) {
+    // @ts-ignore
+    ticketsToSell.value[index] = {
+      ...ticketsToSell.value[index],
+      ...newValues
+    }
+
+    return ticketsToSell.value[index]
+  }
+}
+
+export function updateTicketToSellByTicketId(
+  id: string,
+  newValues: Partial<TicketInput>
+) {
+  const ticketId = ticketsToSell.value.findIndex(ticket => ticket.id === id)
+  if (ticketId > -1) {
+    updateTicketToSellByIndex(ticketId, newValues)
+  } else {
+    addTicketToSell(newValues)
+  }
+}
+
 export function resetTicketsToSell() {
   ticketsToSell.value = []
 }
 
 export function removeLastTicketToSell() {
   return ticketsToSell.value.pop()
+}
+
+export function removeTicketToSellById(id: string) {
+  ticketsToSell.value = ticketsToSell.value.filter(ticket => ticket.id !== id)
 }
 
 export function copyLastTicketToSell() {
