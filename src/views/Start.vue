@@ -1,19 +1,27 @@
 <script lang="ts" setup>
-import { resetTicket } from '@/store'
 import { onBeforeRouteLeave, useRoute } from 'vue-router'
-import { ticket } from '@/store'
+import {
+  addTicketToSell,
+  currentTicketType,
+  resetTicketsToSell,
+  ticketsToSell
+} from '@/store'
 
 const route = useRoute()
 
-ticket.value.ticketType = route.meta.person as TicketType
-ticket.value.ticketStartTime = new Date().toISOString()
+currentTicketType.value = route.meta.person as TicketType
+
+addTicketToSell({
+  ticketType: route.meta.person as TicketType,
+  ticketStartTime: new Date().toISOString()
+})
 
 onBeforeRouteLeave(() => {
-  if (ticket.value.ticketType !== undefined) {
+  if (!ticketsToSell.value[0]?.ticketEndTime) {
     const leave = confirm('Czy chcesz anulować aktualną akredytację?')
 
     if (leave) {
-      resetTicket()
+      resetTicketsToSell()
     }
 
     return leave
@@ -23,7 +31,7 @@ onBeforeRouteLeave(() => {
 
 <template>
   <div class="container">
-    <div class="text-center mt-5 mb-7">
+    <div class="text-center pt-3 pb-6 text-lg font-bold uppercase">
       <div>{{ $route.name }}</div>
     </div>
 

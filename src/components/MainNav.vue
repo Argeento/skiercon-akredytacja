@@ -5,7 +5,7 @@ import { tickets } from '@/store'
 
 <template>
   <header
-    class="w-full shadow bg-white fixed top-0 left-0 py-2 px-10 h-14 flex items-center justify-between"
+    class="w-full shadow bg-white fixed top-0 left-0 py-2 px-10 h-14 flex items-center justify-between z-20"
   >
     <div class="flex">
       <router-link

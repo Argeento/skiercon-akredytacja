@@ -11,7 +11,8 @@ const volunteersMap: Record<VolunteerType, string> = {
   DZIK: 'dzik',
   LIS: 'lis',
   ORG: 'organizator',
-  SZOP: 'szop'
+  SZOP: 'szop',
+  OGR: ''
 }
 
 export function getImage(fileName: string): string {
@@ -30,7 +31,10 @@ export function getVolunteerBadgeImage(volunteerType: VolunteerType) {
   return getImage(`${volunteersMap[volunteerType]}-front.png`)
 }
 
-export function getPersonVariation(personType: TicketType): string {
+export function getPersonVariation(
+  personType: TicketType,
+  multi = false
+): string {
   const variationMap: Record<TicketType, string> = {
     guest: 'Gościa',
     medium: 'Media',
@@ -40,7 +44,16 @@ export function getPersonVariation(personType: TicketType): string {
     vendor: 'Wystawcy'
   }
 
-  return variationMap[personType]
+  const multiVariationMap: Record<TicketType, string> = {
+    guest: 'Gości',
+    medium: 'Medii',
+    program: 'Twórców Programu',
+    normal: 'Uczestników',
+    volunteer: 'Wolontariuszów',
+    vendor: 'Wystawców'
+  }
+
+  return multi ? multiVariationMap[personType] : variationMap[personType]
 }
 
 export function localeCompare(a: string, b: string) {

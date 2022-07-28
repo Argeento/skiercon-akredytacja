@@ -12,12 +12,12 @@ type TicketType =
 
 type Age = '13-' | '13-18' | '18+'
 type Sleep = 'nope' | '1' | 'SOSW' | 'PN' | 'B2'
-type VolunteerType = 'DZIK' | 'LIS' | 'SZOP' | 'ORG'
+type VolunteerType = 'DZIK' | 'LIS' | 'SZOP' | 'ORG' | 'OGR'
 type Discount = '50%' | '100%'
 
 type GsProgram = {
   ticketType: 'program'
-  id: number
+  id: string
   name: string
   lastName: string
   info?: string
@@ -28,14 +28,14 @@ type GsProgram = {
 
 type GsVendor = {
   ticketType: 'vendor'
-  id: number
+  id: string
   name: string
   tickets: number
 }
 
 type GsVolunteer = {
   ticketType: 'volunteer'
-  id: number
+  id: string
   name: string
   nick?: string
   lastName: string
@@ -45,7 +45,7 @@ type GsVolunteer = {
 
 type GsMedium = {
   ticketType: 'medium'
-  id: number
+  id: string
   name: string
   tickets: number
   info?: string
@@ -53,7 +53,7 @@ type GsMedium = {
 
 type GsGuest = {
   ticketType: 'guest'
-  id: number
+  id: string
   name: string
   lastName: string
   tickets: number

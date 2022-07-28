@@ -41,6 +41,14 @@ export const firestoreInstance = {
     }
   },
 
+  async addTickets(tickets: TicketInput[]) {
+    for (const ticket of tickets) {
+      ticket.ticketEndTime = new Date().toISOString()
+      const objectToSend = JSON.parse(JSON.stringify(ticket))
+      await addDoc(collection(db, 'tickets'), objectToSend)
+    }
+  },
+
   async removeTicket(docId: string) {
     const docRef = doc(db, 'tickets', docId)
     await deleteDoc(docRef)
