@@ -12,12 +12,12 @@ const volunteers = computed(() =>
 
 <template>
   <div class="p-10">
-    <table class="w-full shadow rounded-xl overflow-hidden">
+    <table class="shadow rounded-xl overflow-hidden m-auto">
       <tr>
-        <th>Imię i Nazwisko</th>
-        <th>Nick</th>
-        <th>Typ</th>
-        <th>Akredytacja</th>
+        <th width="350">Imię i Nazwisko</th>
+        <th width="200">Nick</th>
+        <th width="100">Typ</th>
+        <th width="150">Akredytacja</th>
       </tr>
       <tr v-for="volunteer in volunteers" :key="volunteer.id">
         <template v-if="volunteer.ticketType === 'volunteer'">
