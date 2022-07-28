@@ -1,4 +1,5 @@
 // Import the functions you need from the SDKs you need
+import { ticketStartTime } from '@/store'
 import { initializeApp } from 'firebase/app'
 import {
   addDoc,
@@ -35,6 +36,7 @@ export function initFirebaseInstance() {
 export const firestoreInstance = {
   async addTicket(ticket: TicketInput) {
     for (let i = 0; i < ticket.numberOfIds; i++) {
+      ticket.ticketStartTime = ticketStartTime.value
       ticket.ticketEndTime = new Date().toISOString()
       const objectToSend = JSON.parse(JSON.stringify(ticket))
       await addDoc(collection(db, 'tickets'), objectToSend)
@@ -43,6 +45,7 @@ export const firestoreInstance = {
 
   async addTickets(tickets: TicketInput[]) {
     for (const ticket of tickets) {
+      ticket.ticketStartTime = ticketStartTime.value
       ticket.ticketEndTime = new Date().toISOString()
       const objectToSend = JSON.parse(JSON.stringify(ticket))
       await addDoc(collection(db, 'tickets'), objectToSend)

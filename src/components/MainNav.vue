@@ -33,14 +33,14 @@ import { faqLink, tickets } from '@/store'
       <router-link :to="{ name: RouteName.Lesniczowka }" class="link"
         >Leśniczówka</router-link
       >
-      <a v-if="faqLink" :href="faqLink" class="link" target="_blank">FAQ</a>
+      <a v-if="faqLink" :href="faqLink" class="link" target="_blank">FAQ 🡭</a>
     </nav>
   </header>
 </template>
 
 <style lang="scss" scoped>
 .link {
-  @apply p-2;
+  @apply py-2 px-2.5;
 
   &.router-link-active {
     @apply text-violet-500 underline;

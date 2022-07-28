@@ -55,13 +55,13 @@ async function onNextClick() {
 </script>
 
 <template>
-  <div class="my-10 flex justify-center">
+  <div class="my-5 flex justify-center">
     <button class="button mr-3" @click="onPrevClick">
       {{ prevText }}
     </button>
 
     <button
-      class="button"
+      class="button w-52"
       :class="canMoveForward ? 'border-violet-300' : 'border-red-500 '"
       @click="onNextClick"
     >

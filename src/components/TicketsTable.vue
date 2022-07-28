@@ -85,9 +85,9 @@ function onPageHandler(page: number) {
       <tr>
         <th width="180">Typ</th>
         <th>Osoba / Nazwa</th>
-        <th width="150">Nocleg</th>
-        <th width="100">Data</th>
-        <th v-if="!withoutRemove" width="1">Usuń</th>
+        <th width="180">Nocleg</th>
+        <th width="150">Data</th>
+        <th v-if="!withoutRemove" width="50">Usuń</th>
       </tr>
       <TicketRow
         v-for="ticket in currentTickets"

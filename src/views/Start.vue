@@ -4,16 +4,17 @@ import {
   addTicketToSell,
   currentTicketType,
   resetTicketsToSell,
+  ticketStartTime,
   ticketsToSell
 } from '@/store'
 
 const route = useRoute()
 
 currentTicketType.value = route.meta.person as TicketType
+ticketStartTime.value = new Date().toISOString()
 
 addTicketToSell({
-  ticketType: route.meta.person as TicketType,
-  ticketStartTime: new Date().toISOString()
+  ticketType: route.meta.person as TicketType
 })
 
 onBeforeRouteLeave(() => {

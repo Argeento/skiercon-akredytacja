@@ -2,6 +2,7 @@ import { ref, watch, computed } from 'vue'
 
 export const currentTicketType = ref<TicketType>('normal')
 export const faqLink = ref('')
+export const ticketStartTime = ref(new Date().toISOString())
 
 export function getDefaultTicket(ticketType?: TicketType) {
   return {

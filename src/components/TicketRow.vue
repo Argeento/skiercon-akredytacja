@@ -72,5 +72,6 @@ const sleepTypeMap: Record<Sleep, string> = {
 .remove-icon {
   position: relative;
   top: 3px;
+  font-size: 18px;
 }
 </style>
