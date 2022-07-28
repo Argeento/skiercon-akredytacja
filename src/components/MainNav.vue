@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { RouteName } from '@/rotuer'
-import { tickets } from '@/store'
+import { faqLink, tickets } from '@/store'
 </script>
 
 <template>
@@ -33,6 +33,7 @@ import { tickets } from '@/store'
       <router-link :to="{ name: RouteName.Lesniczowka }" class="link"
         >Leśniczówka</router-link
       >
+      <a v-if="faqLink" :href="faqLink" class="link" target="_blank">FAQ</a>
     </nav>
   </header>
 </template>

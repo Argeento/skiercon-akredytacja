@@ -1,6 +1,7 @@
 import { ref, watch, computed } from 'vue'
 
 export const currentTicketType = ref<TicketType>('normal')
+export const faqLink = ref('')
 
 export function getDefaultTicket(ticketType?: TicketType) {
   return {

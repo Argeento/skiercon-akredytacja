@@ -3,7 +3,7 @@ import { FirebaseError } from '@firebase/util'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
-import { isUserAuth, people, tickets } from '@/store'
+import { faqLink, isUserAuth, people, tickets } from '@/store'
 import { firestoreInstance } from '@/plugins/firestore'
 import { orderBy } from '@firebase/firestore'
 import axios from 'axios'
@@ -48,6 +48,14 @@ async function login() {
       )
       .then(res => {
         people.value = res.data
+      })
+
+    await axios
+      .get<string>(
+        `https://us-central1-skiercon-akredytacja.cloudfunctions.net/faq?key=${password.value}`
+      )
+      .then(res => {
+        faqLink.value = res.data
       })
 
     router.replace({ name: RouteName.Akredytacja })
