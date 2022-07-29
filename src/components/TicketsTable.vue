@@ -20,6 +20,7 @@ const props = defineProps({
 
 const itemsPerPage = ref(10)
 const currentPage = ref(1)
+const searchString = ref()
 
 watch(itemsPerPage, number => {
   if (number < 1) itemsPerPage.value = 1
@@ -27,10 +28,21 @@ watch(itemsPerPage, number => {
 })
 
 const filteredTickets = computed(() => {
-  return props.tickets.filter(ticket => {
-    if (ticketTypeFilter.value === 'all') return true
-    return ticket.ticketType === ticketTypeFilter.value
-  })
+  return props.tickets
+    .filter(ticket => {
+      if (ticketTypeFilter.value === 'all') return true
+      return ticket.ticketType === ticketTypeFilter.value
+    })
+    .filter(ticket => {
+      if (searchString.value) {
+        // @ts-ignore
+        return ('' + ticket.name + ticket.nick ?? '' + ticket.lastName ?? '')
+          .toLocaleLowerCase()
+          .includes(searchString.value.toLocaleLowerCase())
+      } else {
+        return true
+      }
+    })
 })
 
 const pages = computed(() => chunk(filteredTickets.value, itemsPerPage.value))
@@ -76,6 +88,16 @@ function onPageHandler(page: number) {
       <label class="w-52 mr-5">
         Liczba biletów na stronę
         <input type="number" v-model="itemsPerPage" class="input" />
+      </label>
+
+      <label class="w-72 mr-5">
+        Szukaj
+        <input
+          type="search"
+          v-model="searchString"
+          class="input"
+          placeholder="Imię / Nazwisko / Nick / Nazwa"
+        />
       </label>
     </header>
     <table

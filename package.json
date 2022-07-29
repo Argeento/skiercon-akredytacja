@@ -13,6 +13,10 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "chart.js": "^3.8.2",
+    "chartjs-adapter-date-fns": "^2.0.0",
+    "chartjs-plugin-colorschemes": "github:zsu/chartjs-plugin-colorschemes",
+    "date-fns": "^2.29.1",
     "dayjs": "^1.11.4",
     "firebase": "^9.9.1",
     "lodash-es": "^4.17.21",
