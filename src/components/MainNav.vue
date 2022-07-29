@@ -16,7 +16,7 @@ import { faqLink, tickets } from '@/store'
       </router-link>
 
       <div class="ml-4">
-        Liczba uczestników: <b>{{ tickets.length }}</b>
+        Wydane identyfikatory: <b>{{ tickets.length }}</b>
       </div>
     </div>
 

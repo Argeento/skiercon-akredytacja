@@ -15,6 +15,15 @@ const volunteersMap: Record<VolunteerType, string> = {
   OGR: ''
 }
 
+export enum Color {
+  Normal = 'gold',
+  Guests = 'orange',
+  Media = 'tomato',
+  Volunteers = 'grey',
+  Vendors = '#87CEFA',
+  Program = '#9ACD32'
+}
+
 export function getImage(fileName: string): string {
   return `${import.meta.env.BASE_URL}img/${fileName}`
 }

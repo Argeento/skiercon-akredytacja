@@ -9,6 +9,7 @@ import TicketsToSellCounter from './components/global/TicketsToSellCounter.vue'
 import VueAwesomePaginate from 'vue-awesome-paginate'
 
 import './plugins/dayjs'
+import './plugins/chart'
 
 import { initFirebaseInstance } from './plugins/firestore'
 import 'vue-awesome-paginate/dist/style.css'
