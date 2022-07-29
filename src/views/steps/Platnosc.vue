@@ -89,6 +89,17 @@ const totalPrice = computed(
     </div>
   </div>
 
+  <div
+    v-if="
+      ticket.ticketType === 'program' &&
+      ticket.discount === '50%' &&
+      ticketPrice !== 20
+    "
+    class="mb-3 card"
+  >
+    Przyjmij opłatę za konwent <b>20zł</b>
+  </div>
+
   <div class="card">
     <div class="my-5">
       <b>Wydaj identyfikator</b> <TicketsToSellCounter />
