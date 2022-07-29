@@ -191,7 +191,7 @@ onUnmounted(() => {
 
 <style lang="scss" scoped>
 .max-container {
-  max-width: 1266px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 20px;
 }
