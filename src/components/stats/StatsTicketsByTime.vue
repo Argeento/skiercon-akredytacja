@@ -143,7 +143,7 @@ onUnmounted(() => {
   <div class="max-container">
     <h1 class="text-2xl font-bold text-center mb-12">Identyfikatory</h1>
     <div class="mb-16 flex justify-around">
-      <table>
+      <table :key="tickets.length">
         <tr>
           <th>Typ</th>
           <th class="text-right">Liczba osób</th>

@@ -2,7 +2,7 @@
 import { tickets } from '@/store'
 import { Color } from '@/utils'
 import { Chart } from 'chart.js'
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 
 const ticketsChartRef = ref<HTMLCanvasElement>()
 
@@ -11,8 +11,28 @@ function getTicketsByType(ticketType: TicketType | 'normal') {
   return tickets.value.filter(ticket => ticket.ticketType === ticketType).length
 }
 
+let chart: Chart<'pie', number[], string>
+
+function getData() {
+  return [
+    getTicketsByType('normal'),
+    getTicketsByType('program'),
+    getTicketsByType('volunteer'),
+    getTicketsByType('vendor'),
+    getTicketsByType('guest'),
+    getTicketsByType('medium')
+  ]
+}
+
+watch(tickets, () => {
+  if (chart) {
+    chart.data.datasets[0].data = getData()
+    chart.update('resize')
+  }
+})
+
 onMounted(() => {
-  new Chart(ticketsChartRef.value!, {
+  chart = new Chart(ticketsChartRef.value!, {
     type: 'pie',
     options: {
       plugins: {
@@ -33,14 +53,7 @@ onMounted(() => {
       ],
       datasets: [
         {
-          data: [
-            getTicketsByType('normal'),
-            getTicketsByType('program'),
-            getTicketsByType('volunteer'),
-            getTicketsByType('vendor'),
-            getTicketsByType('guest'),
-            getTicketsByType('medium')
-          ],
+          data: getData(),
           backgroundColor: [
             Color.Normal,
             Color.Program,
@@ -53,6 +66,10 @@ onMounted(() => {
       ]
     }
   })
+})
+
+onUnmounted(() => {
+  chart.destroy()
 })
 </script>
 
