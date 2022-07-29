@@ -36,7 +36,7 @@ const filteredTickets = computed(() => {
     .filter(ticket => {
       if (searchString.value) {
         // @ts-ignore
-        return ('' + ticket.name + ticket.nick ?? '' + ticket.lastName ?? '')
+        return `${ticket.name}${ticket.nick ?? ''}${ticket.lastName ?? ''}`
           .toLocaleLowerCase()
           .includes(searchString.value.toLocaleLowerCase())
       } else {
