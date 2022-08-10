@@ -3,20 +3,18 @@ import { tickets } from '@/store'
 import { Chart } from 'chart.js'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { pl } from 'date-fns/locale'
-import StatsTicketsDistribution from './StatsTicketsDistribution.vue'
 import { Color } from '@/utils'
+import StatsSleepByDistribution from './StatsSleepByDistribution.vue'
 
-const ticketsByTimeChartRef = ref<HTMLCanvasElement>()
+const sleepsByTimeChartRef = ref<HTMLCanvasElement>()
 
-function getTicketsByType(ticketType: TicketType | 'normal') {
+function getTicketsByType(sleepType: Sleep) {
   // @ts-ignore
-  return tickets.value.filter(ticket => ticket.ticketType === ticketType).length
+  return tickets.value.filter(ticket => ticket.sleep === sleepType).length
 }
 
-function getDataByTicketType(ticketType?: TicketType | 'normal') {
-  const x = tickets.value.filter(ticket =>
-    ticketType ? ticket.ticketType === ticketType : true
-  )
+function getDataBySleepType(sleepType: Sleep) {
+  const x = tickets.value.filter(ticket => ticket.sleep === sleepType)
   return [
     {
       x: '2022-07-29T10:00:00.000Z',
@@ -37,42 +35,24 @@ function getData() {
   return {
     datasets: [
       {
-        label: 'Wszyscy',
+        label: 'Sleep room',
         borderColor: 'rgb(139, 92, 246)',
-        data: getDataByTicketType()
+        data: getDataBySleepType('1')
       },
       {
-        label: 'Uczestnicy',
+        label: 'B2 Wystawcy',
         borderColor: Color.Normal,
-        data: getDataByTicketType('normal')
+        data: getDataBySleepType('B2')
       },
       {
-        label: 'Program',
+        label: 'SOSW',
         borderColor: Color.Program,
-        data: getDataByTicketType('program')
+        data: getDataBySleepType('SOSW')
       },
       {
-        label: 'Wolontariusze',
-        borderColor: Color.Volunteers,
-        data: getDataByTicketType('volunteer'),
-        hidden: true
-      },
-      {
-        label: 'Goście',
-        borderColor: Color.Guests,
-        data: getDataByTicketType('guest')
-      },
-      {
-        label: 'Media',
-        borderColor: Color.Media,
-        data: getDataByTicketType('medium'),
-        hidden: true
-      },
-      {
-        label: 'Wystawcy',
+        label: 'Pole namiotowe',
         borderColor: Color.Vendors,
-        data: getDataByTicketType('vendor'),
-        hidden: true
+        data: getDataBySleepType('PN')
       }
     ]
   }
@@ -95,7 +75,7 @@ watch(tickets, () => {
 })
 
 onMounted(() => {
-  chart = new Chart(ticketsByTimeChartRef.value!, {
+  chart = new Chart(sleepsByTimeChartRef.value!, {
     type: 'line',
     data: getData(),
     options: {
@@ -109,7 +89,7 @@ onMounted(() => {
         y: {
           title: {
             display: true,
-            text: 'Identyfikatory',
+            text: 'Sleep',
             padding: 10
           }
         },
@@ -142,7 +122,7 @@ onUnmounted(() => {
 
 <template>
   <div class="max-container">
-    <h1 class="text-2xl font-bold text-center mb-12">Identyfikatory</h1>
+    <h1 class="text-2xl font-bold text-center mb-12">Sleep</h1>
     <div class="mb-16 flex justify-around">
       <table :key="tickets.length">
         <tr>
@@ -150,42 +130,34 @@ onUnmounted(() => {
           <th class="text-right">Liczba osób</th>
         </tr>
         <tr>
-          <td>Uczestnicy</td>
-          <td class="text-right">{{ getTicketsByType('normal') }}</td>
+          <td>Sleep room</td>
+          <td class="text-right">{{ getTicketsByType('1') }}</td>
         </tr>
         <tr>
-          <td>Program</td>
-          <td class="text-right">{{ getTicketsByType('program') }}</td>
+          <td>B2 Wystawcy</td>
+          <td class="text-right">{{ getTicketsByType('B2') }}</td>
         </tr>
         <tr>
-          <td>Wolontariusze</td>
-          <td class="text-right">{{ getTicketsByType('volunteer') }}</td>
+          <td>SOSW</td>
+          <td class="text-right">{{ getTicketsByType('SOSW') }}</td>
         </tr>
         <tr>
-          <td>Goście</td>
-          <td class="text-right">{{ getTicketsByType('guest') }}</td>
-        </tr>
-        <tr>
-          <td>Media</td>
-          <td class="text-right">{{ getTicketsByType('medium') }}</td>
-        </tr>
-        <tr>
-          <td>Wystawcy</td>
-          <td class="text-right">{{ getTicketsByType('vendor') }}</td>
+          <td>Pole namiotowe</td>
+          <td class="text-right">{{ getTicketsByType('PN') }}</td>
         </tr>
         <tr>
           <td><b>Razem</b></td>
           <td class="text-right">
-            <b>{{ tickets.length }}</b>
+            <b>{{ tickets.length - getTicketsByType('nope') }}</b>
           </td>
         </tr>
       </table>
       <div class="ml-10 distribution-wrap">
-        <StatsTicketsDistribution />
+        <StatsSleepByDistribution />
       </div>
     </div>
     <div class="ml-2 mr-8">
-      <canvas ref="ticketsByTimeChartRef" width="100" height="60"></canvas>
+      <canvas ref="sleepsByTimeChartRef" width="100" height="60"></canvas>
     </div>
   </div>
 </template>
