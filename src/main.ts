@@ -26,3 +26,7 @@ app.component('Counter', Counter)
 app.component('MainTitle', MainTitleVue)
 app.component('TicketsToSellCounter', TicketsToSellCounter)
 app.mount('#app')
+
+window.onbeforeunload = function () {
+  return true
+}
