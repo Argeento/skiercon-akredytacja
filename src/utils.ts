@@ -69,14 +69,6 @@ export function localeCompare(a: string, b: string) {
   return a.localeCompare(b)
 }
 
-export const sleepMap: Readonly<Record<Sleep, string>> = {
-  '1': 'S',
-  B2: 'B2',
-  PN: 'N',
-  SOSW: 'SOSW',
-  nope: 'X'
-}
-
 export function getTicketLabel(person: GsPerson | Normal) {
   let label = ''
 

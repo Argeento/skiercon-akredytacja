@@ -38,14 +38,6 @@ const ticketTypeMap: Record<TicketType, string> = {
   vendor: 'Wystawca',
   volunteer: 'Wolontariusz'
 }
-
-const sleepTypeMap: Record<Sleep, string> = {
-  '1': 'Sleep Room',
-  B2: 'B2',
-  PN: 'Pole namiotowe',
-  SOSW: 'SOSW',
-  nope: '-'
-}
 </script>
 
 <template>
@@ -55,7 +47,7 @@ const sleepTypeMap: Record<Sleep, string> = {
       {{ getTicketLabel(ticket) }}
     </td>
     <td>
-      {{ sleepTypeMap[ticket.sleep] }}
+      {{ ticket.sleep ? 'Tak' : 'Nie' }}
     </td>
     <td :title="new Date(ticket.ticketEndTime).toLocaleString('pl')">
       {{ dayjs(ticket.ticketEndTime).format('dd, HH:mm') }}
