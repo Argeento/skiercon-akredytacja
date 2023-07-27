@@ -1,21 +1,30 @@
 <script lang="ts" setup>
 import { ticket, ticketsToSell } from '@/store'
 import { computed, ref } from 'vue'
-const ticketPrice = new Date().getDay() === 0 ? 20 : 40
+const TICKET_PRICE = new Date().getDay() === 0 ? 20 : 50
+const SLEEP_PRICE = 5
 const children = ref(0)
 
 const totalPrice = computed(
   () =>
     ticketsToSell.value.reduce((acc, ticket) => {
-      let price = ticketPrice
+      let price = TICKET_PRICE
       if ('discount' in ticket) {
         if (ticket.discount === '100%') price = 0
-        if (ticket.discount === '50%') price = ticketPrice === 20 ? 0 : 20
+        if (ticket.discount === '50%') price = TICKET_PRICE === 20 ? 0 : 25
+        if (ticket.discount === '75%') price = TICKET_PRICE === 20 ? 0 : 37.5
+      }
+      if (ticket.sleep) {
+        // @ts-ignore
+        price += ticket.discount === '100%' ? 0 : SLEEP_PRICE
       }
       return acc + price
     }, 0) -
-    children.value * ticketPrice
+    children.value * TICKET_PRICE -
+    children.value * SLEEP_PRICE
 )
+
+const sleeps = computed(() => ticketsToSell.value.filter(t => t.sleep).length)
 </script>
 
 <template>
@@ -23,8 +32,8 @@ const totalPrice = computed(
     v-if="ticket.ticketType === 'normal' && ticketsToSell.length > 1"
     v-model="children"
     :min="0"
-    :max="ticketsToSell.length"
-    label="Liczba dzieci poniżej 10 roku życia:"
+    :max="ticketsToSell.length - 1"
+    label="Liczba dzieci poniżej 8 roku życia:"
   />
 
   <template v-if="ticket.ticketType === 'normal'">
@@ -33,31 +42,30 @@ const totalPrice = computed(
       <div class="mb-3">
         <div>
           <b>{{ ticket.numberOfIds - children }}x</b>
-          Wejściówka normalna ({{ ticketPrice }}zł) - {{ totalPrice }}zł
+          Wejściówka normalna ({{ TICKET_PRICE }}zł) - {{ totalPrice }}zł
         </div>
         <div v-if="children > 0">
           <b>{{ children }}x</b> Dziecko poniżej 10 roku życia (0zł) - 0zł
         </div>
       </div>
-      <div>
-        Razem do zapłaty: <b>{{ totalPrice }}zł</b>
-      </div>
-    </div>
-
-    <div v-else class="card">
-      <div class="mb-3">
-        Przyjmij opłatę za konwent <b>{{ totalPrice }}zł</b>
-      </div>
     </div>
   </template>
 
-  <div v-if="ticket.ticketType === 'volunteer'">
-    <div v-if="ticket.discount === '50%'" class="mb-3">
-      Przyjmij opłatę za konwent <b>20ł</b>
+  <div class="card">
+    <div class="mb-3" v-if="totalPrice > 0">
+      Przyjmij opłatę za konwent <b>{{ totalPrice }}zł</b>
     </div>
+    <div class="mb-3" v-else>Bezpłatne wejście na konwent</div>
+  </div>
+
+  <div v-if="ticket.ticketType === 'volunteer'">
     <div class="card">
       Poinformuj <i>Wolontariusza</i> o tym, żeby zgłosił się do
-      "<b>Leśniczówki</b>" (sala A8)
+      "<b>Leśniczówki</b>" (korytarz na lewo i&nbsp;do samego końca)
+    </div>
+
+    <div v-if="ticket.sleep" class="card">
+      Poinformuj <i>Wolontariusza</i>, że nocleg mają w <b>Mechaniku</b>
     </div>
   </div>
 
@@ -89,22 +97,15 @@ const totalPrice = computed(
     </div>
   </div>
 
-  <div
-    v-if="
-      ticket.ticketType === 'program' &&
-      ticket.discount === '50%' &&
-      ticketPrice !== 20
-    "
-    class="mb-3 card"
-  >
-    Przyjmij opłatę za konwent <b>20zł</b>
-  </div>
-
   <div class="card">
-    <div class="my-5">
+    <div class="my-2">
       <b>Wydaj identyfikator</b> <TicketsToSellCounter />
 
       (zapytaj, czy potrzebna jest smycz lub folia do identyfikatora)
+    </div>
+    <div class="my-2">
+      <b>Wydaj {{ sleeps > 1 ? 'opaski' : 'opaskę' }} na rękę</b>
+      <b v-if="sleeps > 1"> ({{ sleeps }}x)</b>
     </div>
   </div>
 

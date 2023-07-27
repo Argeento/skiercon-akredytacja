@@ -31,12 +31,12 @@ const links: Link[] = [
     name: 'Media',
     img: '/img/media-front.png',
     link: '/akredytacja/media/1'
-  },
-  {
-    name: 'Wystawca',
-    img: '/img/wystawca-front.png',
-    link: '/akredytacja/wystawca/1'
   }
+  // {
+  //   name: 'Wystawca',
+  //   img: '/img/wystawca-front.png',
+  //   link: '/akredytacja/wystawca/1'
+  // }
 ]
 </script>
 

@@ -6,7 +6,7 @@ export const ticketStartTime = ref(new Date().toISOString())
 
 export function getDefaultTicket(ticketType?: TicketType) {
   return {
-    sleep: 'nope',
+    sleep: false,
     id: undefined,
     name: undefined,
     ticketType: ticketType
@@ -15,6 +15,7 @@ export function getDefaultTicket(ticketType?: TicketType) {
 
 export const ticketsToSell = ref<TicketInput[]>([])
 export const ticket = computed(() => ticketsToSell.value[0] ?? {})
+export const sleepCounter = ref(0)
 
 export function addTicketToSell(newValues: Partial<TicketInput>) {
   // @ts-ignore

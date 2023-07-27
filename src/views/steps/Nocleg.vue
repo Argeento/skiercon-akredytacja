@@ -1,101 +1,41 @@
 <script lang="ts" setup>
-import { ticket, ticketsToSell, updateAllTicketsToSell } from '@/store'
-import { getBadgeRevers, sleepMap } from '@/utils'
-import { computed, ref, watch } from 'vue'
+import {
+  ticket,
+  updateAllTicketsToSell,
+  updateTicketToSellByIndex
+} from '@/store'
+import { ticketsToSell } from '@/store'
+import { ref, watch } from 'vue'
 
-let sleepValue: Sleep = '1'
+const sleepCounter = ref(ticketsToSell.value.filter(t => t.sleep).length)
 
-if (ticket.value.ticketType === 'volunteer') {
-  sleepValue = 'SOSW'
-}
-
-if (ticket.value.ticketType === 'vendor') {
-  sleepValue = 'B2'
-}
-
-const reverseSrc = getBadgeRevers(ticket.value.ticketType)
-const mark = computed(() => sleepMap[ticket.value.sleep])
-const select = ref<Sleep>('nope')
-
-watch(select, select => {
-  updateAllTicketsToSell({
-    sleep: select
-  })
+watch(sleepCounter, counter => {
+  updateAllTicketsToSell({ sleep: false })
+  for (let i = 0; i < counter; i++) {
+    updateTicketToSellByIndex(i, { sleep: true })
+  }
 })
 </script>
 
 <template>
   <div class="card">
-    <div class="mb-3">Zapytaj o nocleg i zaznacz odpowiednią opcję</div>
-
-    <div class="mb-3">
-      <label
-        class="block cursor-pointer"
-        :class="select === 'nope' && 'font-bold'"
-      >
-        <input type="radio" name="sleep" value="nope" v-model="select" />
-        Brak noclegu
-      </label>
-
-      <label
-        class="block cursor-pointer"
-        :class="select === sleepValue && 'font-bold'"
-      >
-        <input type="radio" name="sleep" :value="sleepValue" v-model="select" />
-        Sleep Room
-      </label>
-
-      <label
-        class="block cursor-pointer"
-        :class="select === 'PN' && 'font-bold'"
-        v-if="ticket.ticketType !== 'vendor'"
-      >
-        <input type="radio" name="sleep" value="PN" v-model="select" />
-        Pole Namiotowe
-      </label>
-    </div>
+    <div class="">Zapytaj o nocleg</div>
   </div>
 
-  <div
-    v-if="ticket.ticketType == 'volunteer' && select === 'SOSW'"
-    class="card"
-  >
-    Poinformuj <i>Wolontariusza</i>, że nocleg mają w <b>Drugiej Szkole</b>
-  </div>
+  <Counter
+    v-model="sleepCounter"
+    :min="0"
+    :max="ticketsToSell.length"
+    label="Liczba sleepów:"
+  />
 
-  <div v-if="select && select !== 'nope' && select !== 'SOSW'" class="card">
+  <div v-if="sleepCounter" class="card">
     <div>
-      Dla każdej osoby powyżej 12 roku życia, wydaj do podpisu
-      <b>Kartę Noclegową</b>
-    </div>
-
-    <span class="text-red-600">Karta ma wrócić na akredytację!</span>
-  </div>
-
-  <div v-if="select" class="card">
-    <div>
-      Na identyfikatorze w polu <b>MIEJSCE NA SLEEP ROOMIE</b> wpisz "<b>
-        {{ mark }} </b
-      >"
-    </div>
-
-    <div class="badge-wrap">
-      <div
-        class="badge-mark"
-        :class="{
-          'badge-mark--program': ticket.ticketType === 'program',
-          'badge-mark--volunteer': ticket.ticketType === 'volunteer',
-          'badge-mark--small':
-            ticket.ticketType === 'volunteer' && select === 'SOSW'
-        }"
-      >
-        {{ mark }}
-      </div>
-      <img class="badge-img" :src="reverseSrc" alt="" />
+      Przygotuj opaskę na rękę <b>x{{ sleepCounter }}</b>
     </div>
   </div>
 
-  <Pagination :can-move-forward="!!select" />
+  <Pagination />
 </template>
 
 <style lang="scss" scoped>

@@ -11,9 +11,9 @@ type TicketType =
   | 'vendor'
 
 type Age = '13-' | '13-18' | '18+'
-type Sleep = 'nope' | '1' | 'SOSW' | 'PN' | 'B2'
+type Sleep = boolean
 type VolunteerType = 'DZIK' | 'LIS' | 'SZOP' | 'ORG' | 'OGR'
-type Discount = '50%' | '100%'
+type Discount = '50%' | '100%' | '75%'
 
 type GsProgram = {
   ticketType: 'program'
