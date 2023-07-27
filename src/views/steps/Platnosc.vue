@@ -103,7 +103,7 @@ const sleeps = computed(() => ticketsToSell.value.filter(t => t.sleep).length)
 
       (zapytaj, czy potrzebna jest smycz lub folia do identyfikatora)
     </div>
-    <div class="my-2">
+    <div v-if="sleeps > 0" class="my-2">
       <b>Wydaj {{ sleeps > 1 ? 'opaski' : 'opaskę' }} na rękę</b>
       <b v-if="sleeps > 1"> ({{ sleeps }}x)</b>
     </div>
