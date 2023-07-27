@@ -36,7 +36,7 @@ async function login() {
 
     // subscribe for tickets
     firestoreInstance.useCollection<TicketInput>(
-      'tickets',
+      'tickets2023',
       [orderBy('ticketEndTime', 'desc')],
       tickets
     )

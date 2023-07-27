@@ -16,6 +16,8 @@ import { ref } from 'vue'
 
 export let db: Firestore
 
+const COLLECTION_NAME = 'tickets2023'
+
 export function initFirebaseInstance() {
   const firebaseConfig = {
     authDomain: 'skiercon-akredytacja.firebaseapp.com',
@@ -39,7 +41,7 @@ export const firestoreInstance = {
       ticket.ticketStartTime = ticketStartTime.value
       ticket.ticketEndTime = new Date().toISOString()
       const objectToSend = JSON.parse(JSON.stringify(ticket))
-      await addDoc(collection(db, 'tickets'), objectToSend)
+      await addDoc(collection(db, COLLECTION_NAME), objectToSend)
     }
   },
 
@@ -48,17 +50,17 @@ export const firestoreInstance = {
       ticket.ticketStartTime = ticketStartTime.value
       ticket.ticketEndTime = new Date().toISOString()
       const objectToSend = JSON.parse(JSON.stringify(ticket))
-      await addDoc(collection(db, 'tickets'), objectToSend)
+      await addDoc(collection(db, COLLECTION_NAME), objectToSend)
     }
   },
 
   async removeTicket(docId: string) {
-    const docRef = doc(db, 'tickets', docId)
+    const docRef = doc(db, COLLECTION_NAME, docId)
     await deleteDoc(docRef)
   },
 
   useCollection<T extends any>(
-    collectionName: 'tickets',
+    collectionName: typeof COLLECTION_NAME,
     customQuery: QueryConstraint[] = [],
     data = ref<T[]>([])
   ) {
