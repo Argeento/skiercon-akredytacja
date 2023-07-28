@@ -43,9 +43,7 @@ async function login() {
 
     // Download necessary data
     await axios
-      .get<GsPeople>(
-        `https://us-central1-skiercon-akredytacja.cloudfunctions.net/data?key=${password.value}`
-      )
+      .get<GsPeople>(`https://api.skiercon.pl/settings/${password.value}`)
       .then(res => {
         people.value = res.data
       })
