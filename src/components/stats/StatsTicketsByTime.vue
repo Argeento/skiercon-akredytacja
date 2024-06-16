@@ -19,7 +19,7 @@ function getDataByTicketType(ticketType?: TicketType | 'normal') {
   )
   return [
     {
-      x: '2023-07-28T12:00:00.000Z',
+      x: '2024-07-28T12:00:00.000Z',
       y: 0
     },
     ...x
@@ -115,8 +115,8 @@ onMounted(() => {
         },
         x: {
           type: 'time',
-          min: '2023-07-28T12:00:00.000Z',
-          max: '2023-07-30T16:00:00.000Z',
+          min: '2024-07-28T12:00:00.000Z',
+          max: '2024-07-30T16:00:00.000Z',
           adapters: {
             date: {
               locale: pl

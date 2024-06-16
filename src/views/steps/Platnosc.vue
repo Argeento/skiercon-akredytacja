@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ticket, ticketsToSell } from '@/store'
 import { computed, ref } from 'vue'
-const TICKET_PRICE = new Date().getDay() === 0 ? 20 : 50
+const TICKET_PRICE = new Date().getDay() === 0 ? 30 : 69
 const SLEEP_PRICE = 5
 const children = ref(0)
 
@@ -11,8 +11,8 @@ const totalPrice = computed(
       let price = TICKET_PRICE
       if ('discount' in ticket) {
         if (ticket.discount === '100%') price = 0
-        if (ticket.discount === '50%') price = TICKET_PRICE === 20 ? 0 : 25
-        if (ticket.discount === '75%') price = TICKET_PRICE === 20 ? 0 : 37.5
+        if (ticket.discount === '50%') price = TICKET_PRICE === 30 ? 0 : 35
+        if (ticket.discount === '75%') price = TICKET_PRICE === 30 ? 0 : 20
       }
       if (ticket.sleep) {
         // @ts-ignore
