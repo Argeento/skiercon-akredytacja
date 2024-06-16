@@ -16,7 +16,7 @@ import { ref } from 'vue'
 
 export let db: Firestore
 
-const COLLECTION_NAME = 'tickets2023'
+const COLLECTION_NAME = 'tickets2024'
 
 export function initFirebaseInstance() {
   const firebaseConfig = {

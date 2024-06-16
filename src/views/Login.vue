@@ -36,14 +36,16 @@ async function login() {
 
     // subscribe for tickets
     firestoreInstance.useCollection<TicketInput>(
-      'tickets2023',
+      'tickets2024',
       [orderBy('ticketEndTime', 'desc')],
       tickets
     )
 
     // Download necessary data
     await axios
-      .get<GsPeople>(`https://api.skiercon.pl/settings/${password.value}`)
+      .get<GsPeople>(
+        `https://us-central1-skiercon-akredytacja.cloudfunctions.net/data?key=${password.value}`
+      )
       .then(res => {
         people.value = res.data
       })
