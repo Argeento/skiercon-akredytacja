@@ -91,7 +91,9 @@ export function getTicketLabel(person: GsPerson | Normal) {
   }
 
   if (person.ticketType === 'medium') {
-    label += person.name
+    label += `${person.name} ${person.lastName} ${
+      person.mediaName ? ` - ${person.mediaName}` : ''
+    }`
   }
 
   if (person.ticketType === 'vendor') {

@@ -27,7 +27,7 @@ export function initFirebaseInstance() {
     storageBucket: 'skiercon-akredytacja.appspot.com',
     messagingSenderId: '757533505285',
     appId: '1:757533505285:web:7c08726c8e0e3bc2fea96c',
-    apiKey: 'AIzaSyA0SHRl9hg0zEWEp0byy8-ftv6xQg2lQF4'
+    apiKey: 'AIzaSyBFFRkL6yPo8ARSIX3xWmdfcGy9d_7VNT0'
   }
 
   // Initialize Firebase

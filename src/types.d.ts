@@ -13,7 +13,7 @@ type TicketType =
 type Age = '13-' | '13-18' | '18+'
 type Sleep = boolean
 type VolunteerType = 'DZIK' | 'LIS' | 'SZOP' | 'ORG' | 'OGR'
-type Discount = '50%' | '100%' | '75%'
+type Discount = '50%' | '100%' | '75%' | '25%'
 
 type GsProgram = {
   ticketType: 'program'
@@ -49,6 +49,8 @@ type GsMedium = {
   name: string
   tickets: number
   info?: string
+  lastName: string
+  mediaName: string
 }
 
 type GsGuest = {

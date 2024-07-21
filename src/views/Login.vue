@@ -32,7 +32,11 @@ async function login() {
 
   try {
     // Login to firebase
-    await signInWithEmailAndPassword(auth, 'akre@skiercon.pl', password.value)
+    await signInWithEmailAndPassword(
+      auth,
+      'argeento@skiercon.pl',
+      password.value
+    )
 
     // subscribe for tickets
     firestoreInstance.useCollection<TicketInput>(
@@ -44,19 +48,19 @@ async function login() {
     // Download necessary data
     await axios
       .get<GsPeople>(
-        `https://us-central1-skiercon-akredytacja.cloudfunctions.net/data?key=${password.value}`
+        `https://api.skiercon.pl/google-sheets/static?token=${password.value}`
       )
       .then(res => {
         people.value = res.data
       })
 
-    await axios
-      .get<string>(
-        `https://us-central1-skiercon-akredytacja.cloudfunctions.net/faq?key=${password.value}`
-      )
-      .then(res => {
-        faqLink.value = res.data
-      })
+    // await axios
+    //   .get<string>(
+    //     `https://us-central1-skiercon-akredytacja.cloudfunctions.net/faq?key=${password.value}`
+    //   )
+    //   .then(res => {
+    //     faqLink.value = res.data
+    //   })
 
     router.replace({ name: RouteName.Akredytacja })
     isUserAuth.value = true

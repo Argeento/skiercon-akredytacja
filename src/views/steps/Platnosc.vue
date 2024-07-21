@@ -11,8 +11,9 @@ const totalPrice = computed(
       let price = TICKET_PRICE
       if ('discount' in ticket) {
         if (ticket.discount === '100%') price = 0
-        if (ticket.discount === '50%') price = TICKET_PRICE === 30 ? 0 : 35
-        if (ticket.discount === '75%') price = TICKET_PRICE === 30 ? 0 : 20
+        if (ticket.discount === '75%') price = TICKET_PRICE === 30 ? 7 : 17
+        if (ticket.discount === '50%') price = TICKET_PRICE === 30 ? 15 : 34
+        if (ticket.discount === '25%') price = TICKET_PRICE === 30 ? 22 : 51
       }
       if (ticket.sleep) {
         // @ts-ignore
