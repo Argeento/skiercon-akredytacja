@@ -61,7 +61,14 @@ const sleeps = computed(() => ticketsToSell.value.filter(t => t.sleep).length)
   <div v-if="ticket.ticketType === 'volunteer'">
     <div class="card">
       Poinformuj <i>Wolontariusza</i> o tym, żeby zgłosił się do
-      <b>Leśniczówki</b> (korytarz na lewo i&nbsp;do samego końca)
+      <span
+        v-if="ticket.volunteerType === 'LIS' || ticket.volunteerType === 'SZOP'"
+      >
+        <b>Leśniczówki</b> (korytarz na lewo i&nbsp;do samego końca)
+      </span>
+      <span v-else>
+        <b>Org-Roomu</b> (korytarz na prawo i&nbsp;od razu po lewej)
+      </span>
     </div>
 
     <div v-if="ticket.sleep" class="card">
