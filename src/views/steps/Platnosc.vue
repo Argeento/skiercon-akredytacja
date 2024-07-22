@@ -21,8 +21,7 @@ const totalPrice = computed(
       }
       return acc + price
     }, 0) -
-    children.value * TICKET_PRICE -
-    children.value * SLEEP_PRICE
+    children.value * TICKET_PRICE
 )
 
 const sleeps = computed(() => ticketsToSell.value.filter(t => t.sleep).length)
