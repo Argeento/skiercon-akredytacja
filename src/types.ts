@@ -9,8 +9,8 @@ export type TicketType =
   | 'guest'
   | 'medium'
   | 'vendor'
-  | 'worker'
-  | 'other'
+  | 'workers'
+  | 'others'
   | 'vip'
 
 export type Age = '13-' | '13-18' | '18+'
@@ -41,6 +41,7 @@ export type GsVendor = {
   id: string
   name: string
   tickets: number
+  place: string
 }
 
 export type GsVolunteer = {
@@ -68,13 +69,14 @@ export type GsGuest = {
   id: string
   name: string
   lastName: string
+  nick?: string
   tickets: number
   info?: string
   giftPack: boolean
 }
 
 export type GsWorker = {
-  ticketType: 'worker'
+  ticketType: 'workers'
   id: string
   name: string
   lastName: string
@@ -83,7 +85,7 @@ export type GsWorker = {
 }
 
 export type GsOther = {
-  ticketType: 'other'
+  ticketType: 'others'
   id: string
   name: string
   lastName: string
@@ -114,7 +116,7 @@ export type GsPeople = {
   guests: GsGuest[]
   workers: GsWorker[]
   others: GsOther[]
-  vips: GsVip[]
+  vip: GsVip[]
 }
 
 export type GsPerson =

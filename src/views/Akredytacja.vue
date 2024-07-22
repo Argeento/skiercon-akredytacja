@@ -55,6 +55,7 @@ const links: Link[] = [
       />
       <div class="px-4 py-2 text-md">{{ link.name }}</div>
     </router-link>
+    <router-link to="/akredytacja/szukaj/1"> szukaj </router-link>
   </div>
 </template>
 

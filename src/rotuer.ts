@@ -13,6 +13,7 @@ import LesniczowkaVue from './views/Lesniczowka.vue'
 import ListaVue from './views/Lista.vue'
 import LoginVue from './views/Login.vue'
 import StatystykiVue from './views/Statystyki.vue'
+import SearchVue from './views/steps/Search.vue'
 import SearchGuestsVue from './views/steps/SearchGuests.vue'
 import SearchMediaVue from './views/steps/SearchMedia.vue'
 import SearchProgramVue from './views/steps/SearchProgram.vue'
@@ -30,7 +31,8 @@ export enum RouteName {
   AkredytacjaWolontariusz = 'akredytacja - wolontariusz',
   AkredytacjaGosc = 'akredytacja - gość',
   AkredytacjaMedia = 'akredytacja - media',
-  AkredytacjaWystawca = 'akredytacja - wystawca'
+  AkredytacjaWystawca = 'akredytacja - wystawca',
+  Szukaj = 'szukaj'
 }
 
 const router = createRouter({
@@ -65,6 +67,37 @@ const router = createRouter({
           path: 'start',
           name: RouteName.Akredytacja,
           component: Akredytacja
+        },
+        {
+          path: 'szukaj',
+          name: RouteName.Szukaj,
+          component: Start,
+          children: [
+            {
+              path: '1',
+              name: 'Szukaj - Wyszukaj osobę',
+              meta: { step: 1 },
+              component: SearchVue
+            },
+            {
+              path: '2',
+              name: 'Pełnoletność',
+              meta: { step: 2 },
+              component: Pelnoletnosc
+            },
+            {
+              path: '3',
+              name: 'Nocleg',
+              meta: { step: 3 },
+              component: Nocleg
+            },
+            {
+              path: '4',
+              name: 'Płatność',
+              meta: { step: 4 },
+              component: Platnosc
+            }
+          ]
         },
         {
           path: 'uczestnik',

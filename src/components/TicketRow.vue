@@ -38,9 +38,9 @@ const ticketTypeMap: Record<TicketType, string> = {
   program: 'Program',
   vendor: 'Wystawca',
   volunteer: 'Wolontariusz',
-  other: 'Inny',
+  others: 'Inny',
   vip: 'VIP',
-  worker: 'Pracownik'
+  workers: 'Pracownik'
 }
 </script>
 

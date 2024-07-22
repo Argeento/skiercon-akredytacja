@@ -7,9 +7,9 @@ const badgesMap: Record<TicketType, string> = {
   normal: 'uczestnik',
   volunteer: 'szop-lis-los-rys',
   vendor: 'wystawca',
-  other: 'inny',
-  vip: 'vip',
-  worker: 'pracownik'
+  others: 'uczestnik',
+  vip: 'uczestnik',
+  workers: 'uczestnik'
 }
 
 const volunteersMap: Record<VolunteerType, string> = {
@@ -58,8 +58,8 @@ export function getPersonVariation(
     normal: 'Uczestnika',
     volunteer: 'Wolontariusza',
     vendor: 'Wystawcy',
-    other: 'Innego',
-    worker: 'Pracownika',
+    others: 'Innego',
+    workers: 'Pracownika',
     vip: 'VIP'
   }
 
@@ -70,9 +70,9 @@ export function getPersonVariation(
     normal: 'Uczestników',
     volunteer: 'Wolontariuszy',
     vendor: 'Wystawców',
-    other: 'Innych',
+    others: 'Innych',
     vip: 'VIPów',
-    worker: 'Pracowników'
+    workers: 'Pracowników'
   }
 
   return multi ? multiVariationMap[personType] : variationMap[personType]
@@ -118,4 +118,62 @@ export function getTicketLabel(person: GsPerson | Normal) {
   }
 
   return label
+}
+
+export function getTicketFirstLineLabel(person: GsPerson) {
+  switch (person.ticketType) {
+    case 'guest':
+      return person.nick
+        ? `${person.name} "${person.nick}" ${person.lastName}`
+        : `${person.name} ${person.lastName}`
+    case 'program':
+      return person.nick
+        ? `${person.name} "${person.nick}" ${person.lastName}`
+        : `${person.name} ${person.lastName}`
+    case 'volunteer':
+      return person.nick
+        ? `${person.name} "${person.nick}" ${person.lastName}`
+        : `${person.name} ${person.lastName}`
+    case 'medium':
+      return `${person.name} ${person.lastName}`
+    case 'vendor':
+      return person.name
+    case 'vip':
+      return `${person.name} ${person.lastName}`
+    case 'workers':
+      return `${person.name} ${person.lastName}`
+    case 'others':
+      return `${person.name} ${person.lastName}`
+    default:
+      assertUnreachable(person)
+  }
+}
+
+export function getTicketSecondLineLabel(person: GsPerson) {
+  switch (person.ticketType) {
+    case 'guest':
+      return 'Gość specjalny'
+    case 'program':
+      return person.group ? `Program - Grupa: ${person.group}` : 'Program'
+    case 'volunteer':
+      return person.volunteerType
+        ? `Wolontariusz - ${person.volunteerType}`
+        : 'Wolontariusz'
+    case 'medium':
+      return person.mediaName ? `Media: ${person.mediaName}` : 'Media'
+    case 'vendor':
+      return person.place ? `Wystawca - Miejsce: ${person.place}` : 'Wystawca'
+    case 'vip':
+      return person.info ? `Zaproszenie - ${person.info}` : 'VIP'
+    case 'workers':
+      return person.info ? `Pracownik - ${person.info}` : 'Pracownik'
+    case 'others':
+      return person.info ? `Inne - ${person.info.slice(0, 50)}` : 'Inne'
+    default:
+      assertUnreachable(person)
+  }
+}
+
+function assertUnreachable(_x: never): never {
+  throw new Error("Didn't expect to get here")
 }

@@ -100,6 +100,6 @@ export const people = ref<GsPeople>({
   media: [],
   guests: [],
   others: [],
-  vips: [],
+  vip: [],
   workers: []
 })

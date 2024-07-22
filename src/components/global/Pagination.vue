@@ -39,6 +39,7 @@ function onPrevClick() {
 }
 
 async function onNextClick() {
+  console.log('asd')
   if (
     !props.canMoveForward &&
     !confirm('Czy na pewno chcesz pominąć ten krok?')
