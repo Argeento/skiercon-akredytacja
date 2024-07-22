@@ -54,7 +54,7 @@ const sleeps = computed(() => ticketsToSell.value.filter(t => t.sleep).length)
 
   <div class="card">
     <div class="mb-3" v-if="totalPrice > 0">
-      Przyjmij opłatę za konwent <b>{{ totalPrice }}zł</b>
+      Przyjmij opłatę za konwent: <b>{{ totalPrice }}zł</b>
     </div>
     <div class="mb-3" v-else>Bezpłatne wejście na konwent</div>
   </div>
@@ -62,7 +62,7 @@ const sleeps = computed(() => ticketsToSell.value.filter(t => t.sleep).length)
   <div v-if="ticket.ticketType === 'volunteer'">
     <div class="card">
       Poinformuj <i>Wolontariusza</i> o tym, żeby zgłosił się do
-      "<b>Leśniczówki</b>" (korytarz na lewo i&nbsp;do samego końca)
+      <b>Leśniczówki</b> (korytarz na lewo i&nbsp;do samego końca)
     </div>
 
     <div v-if="ticket.sleep" class="card">
@@ -85,7 +85,7 @@ const sleeps = computed(() => ticketsToSell.value.filter(t => t.sleep).length)
 
       <div class="relative">
         <div class="phones-mark rounded-xl absolute border-6 border-red-400" />
-        <img src="/img/gosc-back.png" class="badge-image" alt="" />
+        <img src="/img/gosc-back.jpg" class="badge-image" alt="" />
       </div>
     </div>
   </div>

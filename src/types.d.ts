@@ -12,7 +12,7 @@ type TicketType =
 
 type Age = '13-' | '13-18' | '18+'
 type Sleep = boolean
-type VolunteerType = 'DZIK' | 'LIS' | 'SZOP' | 'ORG' | 'OGR'
+type VolunteerType = 'LIS' | 'SZOP' | 'ŁOŚ' | 'RYŚ' | 'MIŚ'
 type Discount = '50%' | '100%' | '75%' | '25%'
 
 type GsProgram = {

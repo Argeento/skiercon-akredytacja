@@ -9,32 +9,32 @@ type Link = {
 const links: Link[] = [
   {
     name: 'Uczestnik',
-    img: '/img/uczestnik-front.png',
+    img: '/img/uczestnik-front.jpg',
     link: '/akredytacja/uczestnik/1'
   },
   {
     name: 'Twórca programu',
-    img: '/img/program-front.png',
+    img: '/img/program-front.jpg',
     link: '/akredytacja/tworca-programu/1'
   },
   {
-    name: 'Organizator, Szop, Lis, Dzik',
-    img: '/img/szop-front.png',
+    name: 'Wolontariusz',
+    img: '/img/wolontariusz-front.jpg',
     link: '/akredytacja/wolontariusz/1'
   },
   {
     name: 'Gość',
-    img: '/img/gosc-front.png',
+    img: '/img/gosc-front.jpg',
     link: '/akredytacja/gosc/1'
   },
   {
     name: 'Media',
-    img: '/img/media-front.png',
+    img: '/img/media-front.jpg',
     link: '/akredytacja/media/1'
   }
   // {
   //   name: 'Wystawca',
-  //   img: '/img/wystawca-front.png',
+  //   img: '/img/wystawca-front.jpg',
   //   link: '/akredytacja/wystawca/1'
   // }
 ]

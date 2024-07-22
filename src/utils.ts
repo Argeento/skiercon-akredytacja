@@ -3,16 +3,16 @@ const badgesMap: Record<TicketType, string> = {
   medium: 'media',
   program: 'program',
   normal: 'uczestnik',
-  volunteer: 'szop-lis-dzik',
+  volunteer: 'szop-lis-los-rys',
   vendor: 'wystawca'
 }
 
 const volunteersMap: Record<VolunteerType, string> = {
-  DZIK: 'dzik',
   LIS: 'lis',
-  ORG: 'organizator',
   SZOP: 'szop',
-  OGR: ''
+  MIŚ: 'mis',
+  ŁOŚ: 'los',
+  RYŚ: 'rys'
 }
 
 export enum Color {
@@ -29,15 +29,15 @@ export function getImage(fileName: string): string {
 }
 
 export function getBadgeRevers(personType: TicketType): string {
-  return getImage(`${badgesMap[personType]}-back.png`)
+  return getImage(`${badgesMap[personType]}-back.jpg`)
 }
 
 export function getBadgeImage(personType: TicketType): string {
-  return getImage(`${badgesMap[personType]}-front.png`)
+  return getImage(`${badgesMap[personType]}-front.jpg`)
 }
 
 export function getVolunteerBadgeImage(volunteerType: VolunteerType) {
-  return getImage(`${volunteersMap[volunteerType]}-front.png`)
+  return getImage(`${volunteersMap[volunteerType]}-front.jpg`)
 }
 
 export function getPersonVariation(
@@ -55,10 +55,10 @@ export function getPersonVariation(
 
   const multiVariationMap: Record<TicketType, string> = {
     guest: 'Gości',
-    medium: 'Medii',
+    medium: 'Mediów',
     program: 'Twórców Programu',
     normal: 'Uczestników',
-    volunteer: 'Wolontariuszów',
+    volunteer: 'Wolontariuszy',
     vendor: 'Wystawców'
   }
 
@@ -74,7 +74,7 @@ export function getTicketLabel(person: GsPerson | Normal) {
 
   if (person.ticketType === 'guest') {
     const info = person.info ? ` - ${person.info}` : ''
-    const skiercon = person.giftPack ? ' - Gość Skierconu' : ''
+    const skiercon = person.giftPack ? ' - Gość SkierConu' : ''
     label += `${person.name} ${person.lastName}${skiercon}${info}`
   }
 
