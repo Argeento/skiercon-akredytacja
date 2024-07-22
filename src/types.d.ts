@@ -1,3 +1,5 @@
+import { info } from 'sass'
+
 type WithLabel<T extends Record<string, unknown>> = T & {
   label: string
 }
@@ -9,6 +11,9 @@ type TicketType =
   | 'guest'
   | 'medium'
   | 'vendor'
+  | 'worker'
+  | 'other'
+  | 'vip'
 
 type Age = '13-' | '13-18' | '18+'
 type Sleep = boolean
@@ -63,6 +68,33 @@ type GsGuest = {
   giftPack: boolean
 }
 
+type GsWorker = {
+  ticketType: 'worker'
+  id: string
+  name: string
+  lastName: string
+  tickets: number
+  info?: string
+}
+
+type GsOther = {
+  ticketType: 'other'
+  id: string
+  name: string
+  lastName: string
+  tickets: number
+  info?: string
+}
+
+type GsVip = {
+  ticketType: 'vip'
+  id: string
+  name: string
+  lastName: string
+  tickets: number
+  info?: string
+}
+
 type Normal = {
   ticketType: 'normal'
   name: never
@@ -75,9 +107,20 @@ type GsPeople = {
   volunteers: GsVolunteer[]
   media: GsMedium[]
   guests: GsGuest[]
+  workers: GsWorker[]
+  others: GsOther[]
+  vips: GsVip[]
 }
 
-type GsPerson = GsVolunteer | GsMedium | GsGuest | GsVendor | GsProgram
+type GsPerson =
+  | GsVolunteer
+  | GsMedium
+  | GsGuest
+  | GsVendor
+  | GsProgram
+  | GsWorker
+  | GsOther
+  | GsVip
 
 type BaseTicket = {
   ticketStartTime?: string
