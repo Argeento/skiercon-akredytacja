@@ -34,7 +34,7 @@ const sleeps = computed(() => ticketsToSell.value.filter(t => t.sleep).length)
     v-model="children"
     :min="0"
     :max="ticketsToSell.length - 1"
-    label="Liczba dzieci poniżej 8 roku życia:"
+    label="Liczba dzieci poniżej 7 roku życia:"
   />
 
   <template v-if="ticket.ticketType === 'normal'">
@@ -46,7 +46,7 @@ const sleeps = computed(() => ticketsToSell.value.filter(t => t.sleep).length)
           Wejściówka normalna ({{ TICKET_PRICE }}zł) - {{ totalPrice }}zł
         </div>
         <div v-if="children > 0">
-          <b>{{ children }}x</b> Dziecko poniżej 10 roku życia (0zł) - 0zł
+          <b>{{ children }}x</b> Dziecko poniżej 7 roku życia (0zł) - 0zł
         </div>
       </div>
     </div>
@@ -66,7 +66,7 @@ const sleeps = computed(() => ticketsToSell.value.filter(t => t.sleep).length)
     </div>
 
     <div v-if="ticket.sleep" class="card">
-      Poinformuj <i>Wolontariusza</i>, że nocleg mają w <b>Mechaniku</b>
+      Poinformuj <i>Wolontariusza</i>, że nocleg ma w <b>Mechaniku</b>
     </div>
   </div>
 
@@ -105,8 +105,8 @@ const sleeps = computed(() => ticketsToSell.value.filter(t => t.sleep).length)
       (zapytaj, czy potrzebna jest smycz lub folia do identyfikatora)
     </div>
     <div v-if="sleeps > 0" class="my-2">
-      <b>Wydaj {{ sleeps > 1 ? 'opaski' : 'opaskę' }} na rękę</b>
-      <b v-if="sleeps > 1"> ({{ sleeps }}x)</b>
+      <b>Załóż {{ sleeps > 1 ? 'opaski' : 'opaskę' }} na rękę</b>
+      <b v-if="sleeps > 1"> (x{{ sleeps }})</b>
     </div>
   </div>
 
