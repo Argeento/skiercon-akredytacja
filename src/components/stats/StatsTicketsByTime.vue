@@ -5,6 +5,7 @@ import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { pl } from 'date-fns/locale'
 import StatsTicketsDistribution from './StatsTicketsDistribution.vue'
 import { Color } from '@/utils'
+import type { TicketType } from '@/types'
 
 const ticketsByTimeChartRef = ref<HTMLCanvasElement>()
 

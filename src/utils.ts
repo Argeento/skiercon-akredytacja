@@ -1,10 +1,15 @@
+import type { TicketType, VolunteerType, GsPerson, Normal } from './types'
+
 const badgesMap: Record<TicketType, string> = {
   guest: 'gosc',
   medium: 'media',
   program: 'program',
   normal: 'uczestnik',
   volunteer: 'szop-lis-los-rys',
-  vendor: 'wystawca'
+  vendor: 'wystawca',
+  other: 'inny',
+  vip: 'vip',
+  worker: 'pracownik'
 }
 
 const volunteersMap: Record<VolunteerType, string> = {
@@ -12,7 +17,9 @@ const volunteersMap: Record<VolunteerType, string> = {
   SZOP: 'szop',
   MIŚ: 'mis',
   ŁOŚ: 'los',
-  RYŚ: 'rys'
+  RYŚ: 'rys',
+  OGR: 'ogr',
+  ORG: 'organizator'
 }
 
 export enum Color {
@@ -50,7 +57,10 @@ export function getPersonVariation(
     program: 'Twórcy Programu',
     normal: 'Uczestnika',
     volunteer: 'Wolontariusza',
-    vendor: 'Wystawcy'
+    vendor: 'Wystawcy',
+    other: 'Innego',
+    worker: 'Pracownika',
+    vip: 'VIP'
   }
 
   const multiVariationMap: Record<TicketType, string> = {
@@ -59,7 +69,10 @@ export function getPersonVariation(
     program: 'Twórców Programu',
     normal: 'Uczestników',
     volunteer: 'Wolontariuszy',
-    vendor: 'Wystawców'
+    vendor: 'Wystawców',
+    other: 'Innych',
+    vip: 'VIPów',
+    worker: 'Pracowników'
   }
 
   return multi ? multiVariationMap[personType] : variationMap[personType]

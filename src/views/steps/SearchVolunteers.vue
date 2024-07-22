@@ -11,6 +11,7 @@ import {
 } from '@/store'
 import { computed, onMounted, ref, watch } from 'vue'
 import { getTicketLabel, getVolunteerBadgeImage } from '@/utils'
+import type { WithLabel, GsVolunteer } from '@/types'
 
 const selected = ref<WithLabel<GsVolunteer>>()
 

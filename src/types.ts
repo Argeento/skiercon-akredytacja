@@ -1,10 +1,10 @@
 import { info } from 'sass'
 
-type WithLabel<T extends Record<string, unknown>> = T & {
+export type WithLabel<T extends Record<string, unknown>> = T & {
   label: string
 }
 
-type TicketType =
+export type TicketType =
   | 'normal'
   | 'program'
   | 'volunteer'
@@ -15,12 +15,19 @@ type TicketType =
   | 'other'
   | 'vip'
 
-type Age = '13-' | '13-18' | '18+'
-type Sleep = boolean
-type VolunteerType = 'LIS' | 'SZOP' | 'ŁOŚ' | 'RYŚ' | 'MIŚ'
-type Discount = '50%' | '100%' | '75%' | '25%'
+export type Age = '13-' | '13-18' | '18+'
+export type Sleep = boolean
+export type VolunteerType =
+  | 'LIS'
+  | 'SZOP'
+  | 'ŁOŚ'
+  | 'RYŚ'
+  | 'MIŚ'
+  | 'ORG'
+  | 'OGR'
+export type Discount = '50%' | '100%' | '75%' | '25%'
 
-type GsProgram = {
+export type GsProgram = {
   ticketType: 'program'
   id: string
   name: string
@@ -31,14 +38,14 @@ type GsProgram = {
   group: string
 }
 
-type GsVendor = {
+export type GsVendor = {
   ticketType: 'vendor'
   id: string
   name: string
   tickets: number
 }
 
-type GsVolunteer = {
+export type GsVolunteer = {
   ticketType: 'volunteer'
   id: string
   name: string
@@ -48,7 +55,7 @@ type GsVolunteer = {
   volunteerType: VolunteerType
 }
 
-type GsMedium = {
+export type GsMedium = {
   ticketType: 'medium'
   id: string
   name: string
@@ -58,7 +65,7 @@ type GsMedium = {
   mediaName: string
 }
 
-type GsGuest = {
+export type GsGuest = {
   ticketType: 'guest'
   id: string
   name: string
@@ -68,7 +75,7 @@ type GsGuest = {
   giftPack: boolean
 }
 
-type GsWorker = {
+export type GsWorker = {
   ticketType: 'worker'
   id: string
   name: string
@@ -77,7 +84,7 @@ type GsWorker = {
   info?: string
 }
 
-type GsOther = {
+export type GsOther = {
   ticketType: 'other'
   id: string
   name: string
@@ -86,7 +93,7 @@ type GsOther = {
   info?: string
 }
 
-type GsVip = {
+export type GsVip = {
   ticketType: 'vip'
   id: string
   name: string
@@ -95,13 +102,13 @@ type GsVip = {
   info?: string
 }
 
-type Normal = {
+export type Normal = {
   ticketType: 'normal'
   name: never
   id: never
 }
 
-type GsPeople = {
+export type GsPeople = {
   program: GsProgram[]
   vendors: GsVendor[]
   volunteers: GsVolunteer[]
@@ -112,7 +119,7 @@ type GsPeople = {
   vips: GsVip[]
 }
 
-type GsPerson =
+export type GsPerson =
   | GsVolunteer
   | GsMedium
   | GsGuest
@@ -122,12 +129,12 @@ type GsPerson =
   | GsOther
   | GsVip
 
-type BaseTicket = {
+export type BaseTicket = {
   ticketStartTime?: string
   ticketEndTime?: string
   sleep: Sleep
   numberOfIds: number
 }
 
-type TicketInput = (GsPerson | Normal) & BaseTicket
-type TicketOutput = Required<BaseTicket> & GsPerson & { docId: string }
+export type TicketInput = (GsPerson | Normal) & BaseTicket
+export type TicketOutput = Required<BaseTicket> & GsPerson & { docId: string }

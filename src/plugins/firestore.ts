@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { ticketStartTime } from '@/store'
+import type { TicketInput } from '@/types'
 import { initializeApp } from 'firebase/app'
 import {
   addDoc,

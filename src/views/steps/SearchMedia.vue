@@ -14,6 +14,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 import { getTicketLabel, getBadgeImage } from '@/utils'
 import TicketsToSellCounter from '../../components/global/TicketsToSellCounter.vue'
 import Counter from '../../components/global/Counter.vue'
+import type { WithLabel, GsMedium, TicketInput } from '@/types'
 
 const selected = ref<WithLabel<GsMedium> | TicketInput | undefined>(
   ticketsToSell.value[0].name ? ticketsToSell.value[0] : undefined

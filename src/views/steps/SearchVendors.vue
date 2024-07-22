@@ -13,6 +13,7 @@ import {
 import { computed, onMounted, ref, watch } from 'vue'
 import { getTicketLabel, getBadgeImage } from '@/utils'
 import TicketsToSellCounter from '../../components/global/TicketsToSellCounter.vue'
+import type { WithLabel, GsVendor, TicketInput } from '@/types'
 
 const selected = ref<WithLabel<GsVendor> | TicketInput | undefined>(
   ticketsToSell.value[0].name ? ticketsToSell.value[0] : undefined

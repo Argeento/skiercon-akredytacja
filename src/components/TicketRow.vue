@@ -3,6 +3,7 @@ import { firestoreInstance } from '@/plugins/firestore'
 import { getTicketLabel } from '@/utils'
 import { ref, type PropType } from 'vue'
 import dayjs from 'dayjs'
+import type { TicketOutput, TicketType } from '@/types'
 
 const props = defineProps({
   ticket: {
@@ -36,7 +37,10 @@ const ticketTypeMap: Record<TicketType, string> = {
   normal: 'Uczestnik',
   program: 'Program',
   vendor: 'Wystawca',
-  volunteer: 'Wolontariusz'
+  volunteer: 'Wolontariusz',
+  other: 'Inny',
+  vip: 'VIP',
+  worker: 'Pracownik'
 }
 </script>
 

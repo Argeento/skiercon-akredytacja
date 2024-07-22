@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { tickets } from '@/store'
+import type { TicketType } from '@/types'
 import { Color } from '@/utils'
 import { Chart } from 'chart.js'
 import { onMounted, onUnmounted, ref, watch } from 'vue'

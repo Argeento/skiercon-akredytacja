@@ -7,6 +7,7 @@ import {
   ticketStartTime,
   ticketsToSell
 } from '@/store'
+import type { TicketType } from '@/types'
 
 const route = useRoute()
 

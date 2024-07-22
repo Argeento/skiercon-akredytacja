@@ -17,6 +17,7 @@ import SearchVolunteersVue from './views/steps/SearchVolunteers.vue'
 import SearchGuestsVue from './views/steps/SearchGuests.vue'
 import SearchMediaVue from './views/steps/SearchMedia.vue'
 import SearchVendorsVue from './views/steps/SearchVendors.vue'
+import type { TicketType } from './types'
 
 export enum RouteName {
   Login = 'login',

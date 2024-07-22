@@ -1,4 +1,5 @@
 import { ref, watch, computed } from 'vue'
+import type { TicketType, TicketInput, TicketOutput, GsPeople } from './types'
 
 export const currentTicketType = ref<TicketType>('normal')
 export const faqLink = ref('')
@@ -97,5 +98,8 @@ export const people = ref<GsPeople>({
   vendors: [],
   volunteers: [],
   media: [],
-  guests: []
+  guests: [],
+  others: [],
+  vips: [],
+  workers: []
 })

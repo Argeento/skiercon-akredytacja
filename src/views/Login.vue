@@ -8,6 +8,7 @@ import { firestoreInstance } from '@/plugins/firestore'
 import { orderBy } from '@firebase/firestore'
 import axios from 'axios'
 import { RouteName } from '@/rotuer'
+import type { GsPeople, TicketInput } from '@/types'
 
 const auth = getAuth()
 const password = ref('')

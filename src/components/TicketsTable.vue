@@ -2,6 +2,7 @@
 import { computed, ref, watch, type PropType } from 'vue'
 import TicketRow from './TicketRow.vue'
 import { chunk } from 'lodash-es'
+import type { TicketOutput, TicketType } from '@/types'
 
 const props = defineProps({
   tickets: {
