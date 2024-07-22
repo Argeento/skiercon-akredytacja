@@ -9,9 +9,9 @@ import {
   doc,
   Firestore,
   getFirestore,
+  onSnapshot,
   query,
-  QueryConstraint,
-  onSnapshot
+  QueryConstraint
 } from 'firebase/firestore'
 import { ref } from 'vue'
 

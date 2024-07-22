@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { tickets } from '@/store'
-import { Chart } from 'chart.js'
-import { onMounted, onUnmounted, ref, watch } from 'vue'
-import { pl } from 'date-fns/locale'
-import StatsTicketsDistribution from './StatsTicketsDistribution.vue'
-import { Color } from '@/utils'
 import type { TicketType } from '@/types'
+import { Color } from '@/utils'
+import { Chart } from 'chart.js'
+import { pl } from 'date-fns/locale'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
+import StatsTicketsDistribution from './StatsTicketsDistribution.vue'
 
 const ticketsByTimeChartRef = ref<HTMLCanvasElement>()
 

@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import type { RouteName } from '@/rotuer'
-
 type Link = {
   name: string
   img: string

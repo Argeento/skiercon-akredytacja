@@ -4,20 +4,20 @@ import { isUserAuth } from './store'
 import Akredytacja from './views/Akredytacja.vue'
 import Start from './views/Start.vue'
 
-import Pelnoletnosc from './views/steps/Pelnoletnosc.vue'
 import Nocleg from './views/steps/Nocleg.vue'
+import Pelnoletnosc from './views/steps/Pelnoletnosc.vue'
 import Platnosc from './views/steps/Platnosc.vue'
 
-import LoginVue from './views/Login.vue'
+import type { TicketType } from './types'
 import LesniczowkaVue from './views/Lesniczowka.vue'
 import ListaVue from './views/Lista.vue'
+import LoginVue from './views/Login.vue'
 import StatystykiVue from './views/Statystyki.vue'
-import SearchProgramVue from './views/steps/SearchProgram.vue'
-import SearchVolunteersVue from './views/steps/SearchVolunteers.vue'
 import SearchGuestsVue from './views/steps/SearchGuests.vue'
 import SearchMediaVue from './views/steps/SearchMedia.vue'
+import SearchProgramVue from './views/steps/SearchProgram.vue'
 import SearchVendorsVue from './views/steps/SearchVendors.vue'
-import type { TicketType } from './types'
+import SearchVolunteersVue from './views/steps/SearchVolunteers.vue'
 
 export enum RouteName {
   Login = 'login',

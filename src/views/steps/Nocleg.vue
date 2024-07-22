@@ -1,10 +1,9 @@
 <script lang="ts" setup>
 import {
-  ticket,
+  ticketsToSell,
   updateAllTicketsToSell,
   updateTicketToSellByIndex
 } from '@/store'
-import { ticketsToSell } from '@/store'
 import { ref, watch } from 'vue'
 
 const sleepCounter = ref(ticketsToSell.value.filter(t => t.sleep).length)

@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { useRoute, useRouter } from 'vue-router'
 import { firestoreInstance } from '@/plugins/firestore'
-import { resetTicketsToSell, ticketsToSell } from '@/store'
 import { RouteName } from '@/rotuer'
+import { resetTicketsToSell, ticketsToSell } from '@/store'
 import { nextTick, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 const props = defineProps({
   nextText: {

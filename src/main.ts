@@ -1,19 +1,19 @@
 import { createApp } from 'vue'
-import App from './App.vue'
-import router from './rotuer'
-import vSelect from 'vue-select'
-import Pagination from './components/global/Pagination.vue'
-import MainTitleVue from './components/global/MainTitle.vue'
-import Counter from './components/global/Counter.vue'
-import TicketsToSellCounter from './components/global/TicketsToSellCounter.vue'
 import VueAwesomePaginate from 'vue-awesome-paginate'
+import vSelect from 'vue-select'
+import App from './App.vue'
+import Counter from './components/global/Counter.vue'
+import MainTitleVue from './components/global/MainTitle.vue'
+import Pagination from './components/global/Pagination.vue'
+import TicketsToSellCounter from './components/global/TicketsToSellCounter.vue'
+import router from './rotuer'
 
-import './plugins/dayjs'
 import './plugins/chart'
+import './plugins/dayjs'
 
-import { initFirebaseInstance } from './plugins/firestore'
 import 'vue-awesome-paginate/dist/style.css'
 import 'vue-select/dist/vue-select.css'
+import { initFirebaseInstance } from './plugins/firestore'
 
 initFirebaseInstance()
 

@@ -1,14 +1,14 @@
 <script lang="ts" setup>
-import { FirebaseError } from '@firebase/util'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-import { useRouter } from 'vue-router'
-import { ref } from 'vue'
-import { faqLink, isUserAuth, people, tickets } from '@/store'
 import { firestoreInstance } from '@/plugins/firestore'
-import { orderBy } from '@firebase/firestore'
-import axios from 'axios'
 import { RouteName } from '@/rotuer'
+import { isUserAuth, people, tickets } from '@/store'
 import type { GsPeople, TicketInput } from '@/types'
+import { orderBy } from '@firebase/firestore'
+import { FirebaseError } from '@firebase/util'
+import axios from 'axios'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const auth = getAuth()
 const password = ref('')

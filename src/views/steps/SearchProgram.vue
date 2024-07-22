@@ -11,10 +11,10 @@ import {
   ticketsToSell,
   updateTicketToSellByIndex
 } from '@/store'
-import { computed, onMounted, ref, watch } from 'vue'
-import { getTicketLabel, getBadgeImage } from '@/utils'
-import TicketsToSellCounter from '../../components/global/TicketsToSellCounter.vue'
 import type { GsProgram, WithLabel } from '@/types'
+import { getBadgeImage, getTicketLabel } from '@/utils'
+import { computed, onMounted, ref, watch } from 'vue'
+import TicketsToSellCounter from '../../components/global/TicketsToSellCounter.vue'
 
 const selected = ref<WithLabel<GsProgram>>()
 

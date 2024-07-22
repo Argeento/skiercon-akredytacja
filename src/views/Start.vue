@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { onBeforeRouteLeave, useRoute } from 'vue-router'
 import {
   addTicketToSell,
   currentTicketType,
@@ -8,6 +7,7 @@ import {
   ticketsToSell
 } from '@/store'
 import type { TicketType } from '@/types'
+import { onBeforeRouteLeave, useRoute } from 'vue-router'
 
 const route = useRoute()
 

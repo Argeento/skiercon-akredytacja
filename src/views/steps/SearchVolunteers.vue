@@ -9,9 +9,9 @@ import {
   ticketsToSell,
   updateTicketToSellByIndex
 } from '@/store'
-import { computed, onMounted, ref, watch } from 'vue'
+import type { GsVolunteer, WithLabel } from '@/types'
 import { getTicketLabel, getVolunteerBadgeImage } from '@/utils'
-import type { WithLabel, GsVolunteer } from '@/types'
+import { computed, onMounted, ref, watch } from 'vue'
 
 const selected = ref<WithLabel<GsVolunteer>>()
 

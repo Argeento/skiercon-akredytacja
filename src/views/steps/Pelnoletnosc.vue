@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import {
-  ticket,
   addTicketToSell,
   copyLastTicketToSell,
   removeLastTicketToSell,
+  ticket,
   ticketsToSell
 } from '@/store'
-import { getPersonVariation, getBadgeImage } from '@/utils'
+import { getBadgeImage, getPersonVariation } from '@/utils'
 import { ref, watch } from 'vue'
 
 const count = ref(ticketsToSell.value.length)

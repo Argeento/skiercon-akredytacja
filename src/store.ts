@@ -1,5 +1,5 @@
-import { ref, watch, computed } from 'vue'
-import type { TicketType, TicketInput, TicketOutput, GsPeople } from './types'
+import { computed, ref, watch } from 'vue'
+import type { GsPeople, TicketInput, TicketOutput, TicketType } from './types'
 
 export const currentTicketType = ref<TicketType>('normal')
 export const faqLink = ref('')

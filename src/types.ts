@@ -1,5 +1,3 @@
-import { info } from 'sass'
-
 export type WithLabel<T extends Record<string, unknown>> = T & {
   label: string
 }

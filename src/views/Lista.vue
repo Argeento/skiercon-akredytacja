@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { onMounted, onUnmounted, ref } from 'vue'
 import { tickets } from '@/store'
+import { onMounted, onUnmounted, ref } from 'vue'
 import TicketsTable from '../components/TicketsTable.vue'
 
 const showRemove = ref(false)

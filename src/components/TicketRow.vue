@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { firestoreInstance } from '@/plugins/firestore'
-import { getTicketLabel } from '@/utils'
-import { ref, type PropType } from 'vue'
-import dayjs from 'dayjs'
 import type { TicketOutput, TicketType } from '@/types'
+import { getTicketLabel } from '@/utils'
+import dayjs from 'dayjs'
+import { ref, type PropType } from 'vue'
 
 const props = defineProps({
   ticket: {

@@ -1,4 +1,4 @@
-import type { TicketType, VolunteerType, GsPerson, Normal } from './types'
+import type { GsPerson, Normal, TicketType, VolunteerType } from './types'
 
 const badgesMap: Record<TicketType, string> = {
   guest: 'gosc',

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { isUserAuth } from './store'
 import MainNav from './components/MainNav.vue'
+import { isUserAuth } from './store'
 </script>
 
 <template>
