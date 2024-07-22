@@ -81,11 +81,6 @@ const sleeps = computed(() => ticketsToSell.value.filter(t => t.sleep).length)
         W kwestii noclegu lub ewentualnego rozliczenia dojazdu należy
         skontaktować się&nbsp;z&nbsp;odpowiednim <i>Koordynatorem</i>
       </div>
-
-      <div class="relative">
-        <div class="phones-mark rounded-xl absolute border-6 border-red-400" />
-        <img src="/img/gosc-back.jpg" class="badge-image" alt="" />
-      </div>
     </div>
   </div>
 
