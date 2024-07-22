@@ -4,6 +4,7 @@ import { computed, ref } from 'vue'
 const TICKET_PRICE = new Date().getDay() === 0 ? 30 : 69
 const SLEEP_PRICE = 5
 const children = ref(0)
+const guardians = ref(0)
 
 const totalPrice = computed(
   () =>
@@ -21,7 +22,8 @@ const totalPrice = computed(
       }
       return acc + price
     }, 0) -
-    children.value * TICKET_PRICE
+    children.value * TICKET_PRICE -
+    guardians.value * TICKET_PRICE
 )
 
 const sleeps = computed(() => ticketsToSell.value.filter(t => t.sleep).length)
@@ -34,6 +36,13 @@ const sleeps = computed(() => ticketsToSell.value.filter(t => t.sleep).length)
     :min="0"
     :max="ticketsToSell.length - 1"
     label="Liczba dzieci poniżej 7 roku życia:"
+  />
+  <Counter
+    v-if="ticket.ticketType === 'normal' && ticketsToSell.length > 1"
+    v-model="guardians"
+    :min="0"
+    :max="ticketsToSell.length - 1"
+    label="Liczba opiekunów osoby niepełnosprawnej:"
   />
 
   <template v-if="ticket.ticketType === 'normal'">
