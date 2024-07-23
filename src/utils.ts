@@ -58,7 +58,7 @@ export function getPersonVariation(
     normal: 'Uczestnika',
     volunteer: 'Wolontariusza',
     vendor: 'Wystawcy',
-    others: 'Innego',
+    others: 'Osoby',
     workers: 'Pracownika',
     vip: 'VIP'
   }

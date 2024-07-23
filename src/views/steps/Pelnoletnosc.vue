@@ -45,7 +45,7 @@ const router = useRouter()
       <b v-if="ticket.ticketType === 'volunteer'"
         >Kartę Młodego Wolontariusza</b
       >
-      <b v-else>Kartę Młodego Skierconauty</b>
+      <b v-else>Kartę Młodego SkierConauty</b>
     </div>
 
     <div v-if="ticket.ticketType === 'normal'">
