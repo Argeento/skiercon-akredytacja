@@ -125,7 +125,9 @@ function search(opts: typeof options.value, query: string) {
           <div>
             {{ option.labelFirstLine }}
           </div>
-          <div class="text-sm text-gray-700">{{ option.labelSecondLine }}</div>
+          <div class="text-sm text-gray-700 trim">
+            {{ option.labelSecondLine.slice(0, 90) }}
+          </div>
         </div>
       </template>
     </v-select>
