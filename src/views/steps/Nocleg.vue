@@ -1,10 +1,12 @@
 <script lang="ts" setup>
+import { RouteName } from '@/rotuer'
 import {
   ticketsToSell,
   updateAllTicketsToSell,
   updateTicketToSellByIndex
 } from '@/store'
 import { ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
 
 const sleepCounter = ref(ticketsToSell.value.filter(t => t.sleep).length)
 
@@ -14,6 +16,8 @@ watch(sleepCounter, counter => {
     updateTicketToSellByIndex(i, { sleep: true })
   }
 })
+
+const router = useRouter()
 </script>
 
 <template>
@@ -34,7 +38,23 @@ watch(sleepCounter, counter => {
     </div>
   </div>
 
-  <Pagination />
+  <Pagination
+    @next="router.push({ name: RouteName.Platnosc })"
+    @prev="
+      () => {
+        switch (ticketsToSell[0].ticketType) {
+          case 'normal':
+          case 'program':
+          case 'volunteer':
+          case 'others':
+            router.push({ name: RouteName.Wiek })
+            break
+          default:
+            router.push({ name: RouteName.Akredytacja })
+        }
+      }
+    "
+  />
 </template>
 
 <style lang="scss" scoped>

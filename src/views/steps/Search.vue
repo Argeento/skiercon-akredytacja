@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import Pagination from '@/components/global/Pagination.vue'
 import { RouteName } from '@/rotuer'
 import {
   addTicketToSell,
@@ -156,45 +157,29 @@ const router = useRouter()
     />
   </div>
 
-  <div class="my-5 flex justify-center">
-    <button
-      class="button mr-3"
-      @click="router.push({ name: RouteName.Akredytacja })"
-    >
-      Anuluj
-    </button>
-
-    <button
-      class="button w-52"
-      :class="selected ? 'border-violet-300' : 'border-red-500 '"
-      @click="
-        () => {
-          switch (selected?.ticketType) {
-            case 'program':
-              router.push('/akredytacja/szukaj/2')
-              break
-            case 'volunteer':
-              router.push('/akredytacja/szukaj/3')
-              break
-            case 'medium':
-              router.push('/akredytacja/szukaj/4')
-              break
-
-            default:
-              router.push({ name: RouteName.Akredytacja })
-          }
+  <Pagination
+    :can-move-forward="!!selected"
+    @next="
+      () => {
+        if (!selected) return
+        switch (selected?.ticketType) {
+          case 'program':
+          case 'volunteer':
+          case 'others':
+            router.push({ name: RouteName.Wiek })
+            break
+          default:
+            router.push({ name: RouteName.Platnosc })
         }
-      "
-    >
-      Dalej
-    </button>
-  </div>
+      }
+    "
+    @prev="router.push({ name: RouteName.Akredytacja })"
+  />
 </template>
 
 <style scoped>
 :deep() {
   --vs-search-input-color: #505050;
-
   --vs-dropdown-option--active-bg: #e6e6e6;
   --vs-dropdown-option--active-color: black;
 }

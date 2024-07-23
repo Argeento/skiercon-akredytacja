@@ -6,16 +6,15 @@ import {
   ticketStartTime,
   ticketsToSell
 } from '@/store'
-import type { TicketType } from '@/types'
 import { onBeforeRouteLeave, useRoute } from 'vue-router'
 
 const route = useRoute()
 
-currentTicketType.value = route.meta.person as TicketType
+currentTicketType.value = 'normal'
 ticketStartTime.value = new Date().toISOString()
 
 addTicketToSell({
-  ticketType: route.meta.person as TicketType
+  ticketType: 'normal'
 })
 
 onBeforeRouteLeave(() => {

@@ -1,61 +1,26 @@
-<script lang="ts" setup>
-type Link = {
-  name: string
-  img: string
-  link: string
-}
-const links: Link[] = [
-  {
-    name: 'Uczestnik',
-    img: '/img/uczestnik-front.jpg',
-    link: '/akredytacja/uczestnik/1'
-  },
-  {
-    name: 'Twórca programu',
-    img: '/img/program-front.jpg',
-    link: '/akredytacja/tworca-programu/1'
-  },
-  {
-    name: 'Wolontariusz',
-    img: '/img/wolontariusz-front.jpg',
-    link: '/akredytacja/wolontariusz/1'
-  },
-  {
-    name: 'Gość',
-    img: '/img/gosc-front.jpg',
-    link: '/akredytacja/gosc/1'
-  },
-  {
-    name: 'Media',
-    img: '/img/media-front.jpg',
-    link: '/akredytacja/media/1'
-  }
-  // {
-  //   name: 'Wystawca',
-  //   img: '/img/wystawca-front.jpg',
-  //   link: '/akredytacja/wystawca/1'
-  // }
-]
-</script>
+<script lang="ts" setup></script>
 
 <template>
   <div class="flex flex-wrap justify-center wrap">
     <router-link
-      v-for="link in links"
-      :key="link.name"
       class="person block m-3 shadow hover:shadow-xl transition-all"
-      :to="link.link"
+      to="/akredytacja/szukaj/2"
     >
       <img
         class="person__img"
-        :src="'/skiercon-akredytacja' + link.img"
+        src="/skiercon-akredytacja/img/uczestnik-front.jpg"
         alt=""
         width="300"
         height="173"
       />
-      <div class="px-4 py-2 text-md">{{ link.name }}</div>
+      <div class="px-4 py-2 text-md">Uczestnik</div>
     </router-link>
-    <router-link to="/akredytacja/szukaj/1"> szukaj </router-link>
+    <router-link
+      class="person block m-3 shadow hover:shadow-xl transition-all p-4 text-center text-xl"
+      to="/akredytacja/szukaj/1"
+    >
+      Szukaj
+    </router-link>
   </div>
 </template>
 

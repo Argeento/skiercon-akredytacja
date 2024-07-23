@@ -1,6 +1,10 @@
 <script lang="ts" setup>
-import { ticket, ticketsToSell } from '@/store'
-import { computed, ref } from 'vue'
+import { firestoreInstance } from '@/plugins/firestore'
+import { RouteName } from '@/rotuer'
+import { resetTicketsToSell, ticket, ticketsToSell } from '@/store'
+import { computed, nextTick, ref } from 'vue'
+import { useRouter } from 'vue-router'
+
 const TICKET_PRICE = new Date().getDay() === 0 ? 30 : 69
 const SLEEP_PRICE = 5
 const children = ref(0)
@@ -27,6 +31,18 @@ const totalPrice = computed(
 )
 
 const sleeps = computed(() => ticketsToSell.value.filter(t => t.sleep).length)
+const router = useRouter()
+
+const isLoading = ref(false)
+async function endAkre() {
+  if (isLoading.value === true) return
+  isLoading.value = true
+  await firestoreInstance.addTickets(ticketsToSell.value)
+  await router.push({ name: RouteName.Akredytacja })
+  await nextTick()
+  resetTicketsToSell()
+  isLoading.value = false
+}
 </script>
 
 <template>
@@ -120,7 +136,24 @@ const sleeps = computed(() => ticketsToSell.value.filter(t => t.sleep).length)
     </div>
   </div>
 
-  <Pagination next-text="Zakończ akredytację" end />
+  <Pagination
+    :next-text="isLoading ? 'Dodawanie...' : 'Zakończ akredytację'"
+    @next="endAkre"
+    @prev="
+      () => {
+        switch (ticketsToSell[0].ticketType) {
+          case 'program':
+          case 'volunteer':
+          case 'others':
+          case 'normal':
+            router.push({ name: RouteName.Nocleg })
+            break
+          default:
+            router.push({ name: RouteName.Szukaj })
+        }
+      }
+    "
+  />
 </template>
 
 <style lang="scss" scoped>

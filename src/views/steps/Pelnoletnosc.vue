@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { RouteName } from '@/rotuer'
 import {
   addTicketToSell,
   copyLastTicketToSell,
@@ -8,6 +9,7 @@ import {
 } from '@/store'
 import { getBadgeImage, getPersonVariation } from '@/utils'
 import { ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
 
 const count = ref(ticketsToSell.value.length)
 
@@ -18,6 +20,8 @@ watch(count, (newCount, oldCount) => {
     removeLastTicketToSell()
   }
 })
+
+const router = useRouter()
 </script>
 
 <template>
@@ -61,5 +65,17 @@ watch(count, (newCount, oldCount) => {
     />
   </div>
 
-  <Pagination />
+  <Pagination
+    @next="router.push({ name: RouteName.Nocleg })"
+    @prev="
+      () => {
+        switch (ticket.ticketType) {
+          case 'normal':
+            return router.push({ name: RouteName.Akredytacja })
+          default:
+            return router.push({ name: RouteName.Szukaj })
+        }
+      }
+    "
+  />
 </template>
