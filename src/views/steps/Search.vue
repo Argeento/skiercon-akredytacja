@@ -118,7 +118,6 @@ function search(opts: typeof options.value, query: string) {
       ref="vselect"
       :options="options"
       v-model="selected"
-      class="mb-8"
       :filter="search"
     >
       <template v-slot:option="option">
@@ -130,9 +129,14 @@ function search(opts: typeof options.value, query: string) {
         </div>
       </template>
     </v-select>
+    <div class="h-10">
+      <div v-if="selected" class="mt-1 ml-2 text-grey-500 text-sm">
+        {{ getTicketSecondLineLabel(selected) }}
+      </div>
+    </div>
   </div>
 
-  <div class="card" v-if="groupName && selected">
+  <div class="card" v-if="groupName && selected && group.length > 0">
     <div>
       Wybrano grupę: <b>{{ groupName }}</b> - Kto jeszcze przyszedł?
     </div>
