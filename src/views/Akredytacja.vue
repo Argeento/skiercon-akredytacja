@@ -8,7 +8,7 @@
     >
       <img
         class="person__img"
-        src="/skiercon-akredytacja/img/uczestnik-front.jpg"
+        :src="'/skiercon-akredytacja/img/uczestnik-front.jpg'"
         alt=""
         width="300"
         height="173"
