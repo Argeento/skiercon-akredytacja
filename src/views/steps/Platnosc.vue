@@ -134,7 +134,7 @@ async function endAkre() {
       <b v-if="sleeps > 1"> (x{{ sleeps }})</b>
 
       <div v-if="ticket.ticketType === 'normal'" class="mt-2">
-        Poinformuj uczestnika, że sleep jest w <b>Mechaniku</b>
+        Poinformuj uczestnika, że sleep jest w <b>Prusie</b>
       </div>
     </div>
   </div>
