@@ -74,17 +74,18 @@ const options = computed(() => {
 })
 
 watch(selected, selected => {
+  resetTicketsToSell()
   if (selected) {
     if (selected.ticketType === 'program' && selected.group) {
       groupName.value = selected.group
     } else {
       groupName.value = undefined
     }
+    addTicketToSell(getDefaultTicket(selected.ticketType))
     updateTicketToSellByIndex(0, selected)
     ticketsToSell.value.length = 1
   } else {
     groupName.value = undefined
-    resetTicketsToSell()
     addTicketToSell(getDefaultTicket('normal'))
   }
 })
