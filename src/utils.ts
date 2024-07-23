@@ -177,3 +177,16 @@ export function getTicketSecondLineLabel(person: GsPerson) {
 function assertUnreachable(_x: never): never {
   throw new Error("Didn't expect to get here")
 }
+
+export function replacePolishChars(str: string) {
+  return str
+    .replace(/ą/g, 'a')
+    .replace(/ć/g, 'c')
+    .replace(/ę/g, 'e')
+    .replace(/ł/g, 'l')
+    .replace(/ń/g, 'n')
+    .replace(/ó/g, 'o')
+    .replace(/ś/g, 's')
+    .replace(/ż/g, 'z')
+    .replace(/ź/g, 'z')
+}

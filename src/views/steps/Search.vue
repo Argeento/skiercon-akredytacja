@@ -18,7 +18,8 @@ import {
   getBadgeImage,
   getTicketFirstLineLabel,
   getTicketSecondLineLabel,
-  getVolunteerBadgeImage
+  getVolunteerBadgeImage,
+  replacePolishChars
 } from '@/utils'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
@@ -98,6 +99,14 @@ onMounted(() => {
 })
 
 const router = useRouter()
+
+function search(opts: typeof options.value, query: string) {
+  return opts.filter(option =>
+    replacePolishChars(
+      (option.labelFirstLine + option.labelSecondLine).toLowerCase()
+    ).includes(replacePolishChars(query.toLowerCase()))
+  )
+}
 </script>
 
 <template>
@@ -105,7 +114,13 @@ const router = useRouter()
     <div class="mb-3">
       Wyszukaj: Imię / Nazwisko / Pseudonim / Firma / Nazwa
     </div>
-    <v-select ref="vselect" :options="options" v-model="selected" class="mb-8">
+    <v-select
+      ref="vselect"
+      :options="options"
+      v-model="selected"
+      class="mb-8"
+      :filter="search"
+    >
       <template v-slot:option="option">
         <div class="pb-2">
           <div>
