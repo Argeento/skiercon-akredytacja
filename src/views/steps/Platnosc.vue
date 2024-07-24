@@ -86,12 +86,12 @@ async function endAkre() {
     <div class="mb-3" v-if="totalPrice > 0">
       Przyjmij opłatę za konwent: <b>{{ totalPrice }}zł</b>
     </div>
-    <div class="mb-3" v-else>Bezpłatne wejście na konwent</div>
+    <div class="mb-3" v-else><b>Bezpłatne wejście</b> na konwent</div>
   </div>
 
   <div v-if="ticket.ticketType === 'volunteer'">
     <div class="card">
-      Poinformuj <i>Wolontariusza</i> o tym, żeby zgłosił się do
+      Poinformuj <i>Wolontariusza</i> o tym, żeby po akredytacji zgłosił się do
       <span
         v-if="ticket.volunteerType === 'LIS' || ticket.volunteerType === 'SZOP'"
       >
@@ -100,10 +100,6 @@ async function endAkre() {
       <span v-else>
         <b>Org-Roomu</b> (korytarz na prawo i&nbsp;od razu po lewej)
       </span>
-    </div>
-
-    <div v-if="ticket.sleep" class="card">
-      Poinformuj <i>Wolontariusza</i>, że nocleg ma w <b>Mechaniku</b>
     </div>
   </div>
 
@@ -130,13 +126,8 @@ async function endAkre() {
     </div>
   </div>
 
-  <div class="card">
+  <div v-if="sleeps > 0" class="card">
     <div class="my-2">
-      <b>Wydaj identyfikator</b> <TicketsToSellCounter />
-
-      (zapytaj, czy potrzebna jest smycz lub folia do identyfikatora)
-    </div>
-    <div v-if="sleeps > 0" class="my-2">
       <b>Załóż {{ sleeps > 1 ? 'opaski' : 'opaskę' }} na rękę</b>
       <b v-if="sleeps > 1"> (x{{ sleeps }})</b>
 
@@ -150,6 +141,18 @@ async function endAkre() {
       >
         Poinformuj uczestnika, że sleep jest w <b>Prusie</b>
       </div>
+
+      <div v-if="ticket.ticketType === 'volunteer'">
+        Poinformuj wolontariusza, że sleep jest w <b>Mechaniku</b>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="my-2">
+      <b>Wydaj identyfikator</b> <TicketsToSellCounter />
+
+      (zapytaj, czy potrzebna jest smycz lub folia do identyfikatora)
     </div>
   </div>
 
