@@ -21,7 +21,14 @@ const totalPrice = computed(
         if (ticket.discount === '25%') price = TICKET_PRICE === 30 ? 22 : 51
       }
       if (ticket.sleep) {
-        price += ticket.ticketType === 'volunteer' ? 0 : SLEEP_PRICE
+        if (
+          ticket.ticketType === 'volunteer' ||
+          (ticket.ticketType === 'program' && ticket.discountSleep === '100%')
+        ) {
+          price += 0
+        } else {
+          price += SLEEP_PRICE
+        }
       }
       return acc + price
     }, 0) -
@@ -133,7 +140,14 @@ async function endAkre() {
       <b>Załóż {{ sleeps > 1 ? 'opaski' : 'opaskę' }} na rękę</b>
       <b v-if="sleeps > 1"> (x{{ sleeps }})</b>
 
-      <div v-if="ticket.ticketType === 'normal'" class="mt-2">
+      <div
+        v-if="
+          ticket.ticketType === 'normal' ||
+          ticket.ticketType === 'program' ||
+          ticket.ticketType === 'others'
+        "
+        class="mt-2"
+      >
         Poinformuj uczestnika, że sleep jest w <b>Prusie</b>
       </div>
     </div>

@@ -33,6 +33,7 @@ export type GsProgram = {
   info?: string
   nick?: string
   discount: Discount
+  discountSleep: '' | '100%'
   group: string
 }
 
