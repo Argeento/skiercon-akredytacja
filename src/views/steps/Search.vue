@@ -36,7 +36,17 @@ const options = computed(() => {
     ...people.value.workers,
     ...people.value.vip
   ]
-    .filter(person => !tickets.value.some(ticket => ticket.id === person.id))
+    .filter(person => {
+      // @ts-ignore
+      if (person.tickets) {
+        return (
+          // @ts-ignore
+          person.tickets >
+          tickets.value.filter(ticket => ticket.id === person.id).length
+        )
+      }
+      return !tickets.value.some(ticket => ticket.id === person.id)
+    })
     .map(person => ({
       labelFirstLine: getTicketFirstLineLabel(person),
       labelSecondLine: getTicketSecondLineLabel(person),
@@ -59,6 +69,7 @@ watch(selected, selected => {
 
 const vselect = ref()
 onMounted(() => {
+  resetTicketsToSell()
   if (!ticket.value.name) {
     vselect.value.searchEl.focus()
   }
@@ -73,6 +84,20 @@ function search(opts: typeof options.value, query: string) {
     ).includes(replacePolishChars(query.toLowerCase()))
   )
 }
+
+const multiTicket = ref(1)
+const soldTickets = computed(
+  () => tickets.value.filter(ticket => ticket.id === selected.value?.id).length
+)
+
+watch(multiTicket, () => {
+  if (selected.value) {
+    resetTicketsToSell()
+    for (let i = 0; i < multiTicket.value; i++) {
+      addTicketToSell(selected.value)
+    }
+  }
+})
 </script>
 
 <template>
@@ -97,11 +122,29 @@ function search(opts: typeof options.value, query: string) {
         </div>
       </template>
     </v-select>
+
     <div class="h-10">
       <div v-if="selected" class="mt-1 ml-2 text-grey-500 text-sm">
         {{ getTicketSecondLineLabel(selected) }}
       </div>
     </div>
+  </div>
+
+  <div
+    v-if="
+      ticket.ticketType !== 'program' &&
+      ticket.ticketType !== 'volunteer' &&
+      ticket.ticketType !== 'normal' &&
+      ticket.tickets > 1 &&
+      ticket.tickets - soldTickets > 0
+    "
+  >
+    <Counter
+      label="Ile wejściówek do wydania?"
+      v-model="multiTicket"
+      :min="1"
+      :max="ticket.tickets === soldTickets ? 100 : ticket.tickets - soldTickets"
+    />
   </div>
 
   <div class="card" v-if="selected && ticket.ticketType">
