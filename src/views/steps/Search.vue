@@ -3,17 +3,15 @@ import Pagination from '@/components/global/Pagination.vue'
 import { RouteName } from '@/rotuer'
 import {
   addTicketToSell,
-  copyLastTicketToSell,
   getDefaultTicket,
   people,
-  removeTicketToSellById,
   resetTicketsToSell,
   ticket,
   tickets,
   ticketsToSell,
   updateTicketToSellByIndex
 } from '@/store'
-import type { GsPerson, GsProgram } from '@/types'
+import type { GsPerson } from '@/types'
 import {
   getBadgeImage,
   getTicketFirstLineLabel,
@@ -26,32 +24,6 @@ import { useRouter } from 'vue-router'
 import TicketsToSellCounter from '../../components/global/TicketsToSellCounter.vue'
 
 const selected = ref<GsPerson>()
-
-const groupName = ref<string | undefined>(
-  ticketsToSell.value[0]
-    ? (ticketsToSell.value[0] as GsProgram).group
-    : undefined
-)
-const group = computed(() => {
-  if (!groupName.value) return []
-
-  return options.value
-    .filter(person => 'group' in person && person.group === groupName.value)
-    .filter(person => !tickets.value.some(ticket => ticket.id === person.id))
-    .filter(person => person.id !== selected.value?.id)
-    .sort((a, b) => a.name.localeCompare(b.name))
-})
-
-function checkPersonInGroup(e: any, person: typeof group.value[number]) {
-  if (e.currentTarget.checked) {
-    addTicketToSell({
-      ...copyLastTicketToSell(),
-      ...person
-    })
-  } else {
-    removeTicketToSellById(person.id)
-  }
-}
 
 const options = computed(() => {
   return [
@@ -77,16 +49,10 @@ const options = computed(() => {
 watch(selected, selected => {
   resetTicketsToSell()
   if (selected) {
-    if (selected.ticketType === 'program' && selected.group) {
-      groupName.value = selected.group
-    } else {
-      groupName.value = undefined
-    }
     addTicketToSell(getDefaultTicket(selected.ticketType))
     updateTicketToSellByIndex(0, selected)
     ticketsToSell.value.length = 1
   } else {
-    groupName.value = undefined
     addTicketToSell(getDefaultTicket('normal'))
   }
 })
@@ -135,31 +101,6 @@ function search(opts: typeof options.value, query: string) {
       <div v-if="selected" class="mt-1 ml-2 text-grey-500 text-sm">
         {{ getTicketSecondLineLabel(selected) }}
       </div>
-    </div>
-  </div>
-
-  <div class="card" v-if="groupName && selected && group.length > 0">
-    <div>
-      Wybrano grupę: <b>{{ groupName }}</b> - Kto jeszcze przyszedł?
-    </div>
-    <div class="mb-3"></div>
-
-    <div>
-      <label
-        v-for="person in group"
-        :key="person.id"
-        class="block cursor-pointer"
-      >
-        <template v-if="person.ticketType === 'program'">
-          <input
-            type="checkbox"
-            :key="selected.id + '.' + person.id"
-            @input="e => checkPersonInGroup(e, person)"
-          />
-          {{ person.name }} {{ person.nick ? `"${person.nick}" ` : ''
-          }}{{ person.lastName }}
-        </template>
-      </label>
     </div>
   </div>
 
