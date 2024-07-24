@@ -120,7 +120,7 @@ export function getTicketLabel(person: GsPerson | Normal) {
   return label
 }
 
-export function getTicketFirstLineLabel(person: GsPerson) {
+export function getTicketFirstLineLabel(person: GsPerson | Normal) {
   switch (person.ticketType) {
     case 'guest':
       return person.nick
@@ -144,12 +144,14 @@ export function getTicketFirstLineLabel(person: GsPerson) {
       return `${person.name} ${person.lastName}`
     case 'others':
       return `${person.name} ${person.lastName}`
+    case 'normal':
+      return '-'
     default:
       assertUnreachable(person)
   }
 }
 
-export function getTicketSecondLineLabel(person: GsPerson) {
+export function getTicketSecondLineLabel(person: GsPerson | Normal) {
   switch (person.ticketType) {
     case 'guest':
       return 'Gość specjalny'
@@ -169,6 +171,8 @@ export function getTicketSecondLineLabel(person: GsPerson) {
       return person.info ? `Pracownik - ${person.info}` : 'Pracownik'
     case 'others':
       return person.info ? `Inne - ${person.info.slice(0, 50)}` : 'Inne'
+    case 'normal':
+      return ''
     default:
       assertUnreachable(person)
   }

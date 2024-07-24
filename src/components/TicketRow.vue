@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { firestoreInstance } from '@/plugins/firestore'
 import type { TicketOutput, TicketType } from '@/types'
-import { getTicketLabel } from '@/utils'
+import { getTicketFirstLineLabel, getTicketSecondLineLabel } from '@/utils'
 import dayjs from 'dayjs'
-import { ref, type PropType } from 'vue'
+import { computed, ref, type PropType } from 'vue'
 
 const props = defineProps({
   ticket: {
@@ -42,13 +42,16 @@ const ticketTypeMap: Record<TicketType, string> = {
   vip: 'VIP',
   workers: 'Pracownik'
 }
+
+const secondLine = computed(() => getTicketSecondLineLabel(props.ticket))
 </script>
 
 <template>
   <tr>
     <td>{{ ticketTypeMap[ticket.ticketType] }}</td>
     <td>
-      {{ getTicketLabel(ticket) }}
+      <div>{{ getTicketFirstLineLabel(ticket) }}</div>
+      <div v-if="secondLine" class="text-sm">{{ secondLine }}</div>
     </td>
     <td>
       {{ ticket.sleep ? 'Tak' : 'Nie' }}

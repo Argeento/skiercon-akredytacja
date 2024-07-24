@@ -57,7 +57,10 @@ const ticketTypeOptions: { label: string; value: TicketType | 'all' }[] = [
   { value: 'normal', label: 'Uczestnicy' },
   { value: 'program', label: 'Twórcy programu' },
   { value: 'vendor', label: 'Wystawcy' },
-  { value: 'volunteer', label: 'Wolontariusze' }
+  { value: 'volunteer', label: 'Wolontariusze' },
+  { value: 'workers', label: 'Pracownicy' },
+  { value: 'vip', label: 'VIP' },
+  { value: 'others', label: 'Inni' }
 ]
 
 watch(ticketTypeFilter, () => (currentPage.value = 1))
