@@ -67,6 +67,10 @@ async function endAkre() {
     label="Liczba opiekunów osoby niepełnosprawnej:"
   />
 
+  <div v-if="guardians > 0" class="card">
+    Naklej na front identyfikatora nalepkę <b>OPIEKUN</b>
+  </div>
+
   <template v-if="ticket.ticketType === 'normal'">
     <div v-if="ticket.numberOfIds > 1" class="card">
       <div class="mb-3">Przyjmij opłatę za konwent:</div>
