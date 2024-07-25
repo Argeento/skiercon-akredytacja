@@ -107,19 +107,9 @@ async function endAkre() {
     </div>
   </div>
 
-  <div v-if="ticket.ticketType === 'guest'">
-    <div v-if="ticket.giftPack" class="card">Wydaj <b>Pakiet Gościa</b></div>
-    <div v-if="ticket.giftPack" class="card">
-      <div class="mb-3">
-        Poinformuj <i>Gościa</i>, że na odwrocie identyfikatora znajdują się
-        numery telefonów do&nbsp;<i>Koordynatorów Gości</i>
-      </div>
-
-      <div>
-        W kwestii noclegu lub ewentualnego rozliczenia dojazdu należy
-        skontaktować się&nbsp;z&nbsp;odpowiednim <i>Koordynatorem</i>
-      </div>
-    </div>
+  <div class="card" v-if="ticket.ticketType === 'guest'">
+    Poinformuj gościa, aby udał się do sklepiku konwentowego po odbiór
+    <b>Pakietu Gościa</b>
   </div>
 
   <div v-if="ticket.ticketType === 'vendor'">
