@@ -28,7 +28,10 @@ export enum Color {
   Media = 'tomato',
   Volunteers = 'grey',
   Vendors = '#87CEFA',
-  Program = '#9ACD32'
+  Program = '#9ACD32',
+  Others = 'LightCoral',
+  VIP = '#4169E1',
+  Workers = '#6A5ACD'
 }
 
 export function getImage(fileName: string): string {

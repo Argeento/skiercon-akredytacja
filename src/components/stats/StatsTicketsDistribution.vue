@@ -3,6 +3,7 @@ import { tickets } from '@/store'
 import type { TicketType } from '@/types'
 import { Color } from '@/utils'
 import { Chart } from 'chart.js'
+import { get } from 'lodash-es'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 
 const ticketsChartRef = ref<HTMLCanvasElement>()
@@ -21,7 +22,10 @@ function getData() {
     getTicketsByType('volunteer'),
     getTicketsByType('vendor'),
     getTicketsByType('guest'),
-    getTicketsByType('medium')
+    getTicketsByType('medium'),
+    getTicketsByType('vip'),
+    getTicketsByType('workers'),
+    getTicketsByType('others')
   ]
 }
 
@@ -50,7 +54,10 @@ onMounted(() => {
         'Wolontariusze',
         'Wystawcy',
         'Goście',
-        'Media'
+        'Media',
+        'VIP',
+        'Pracownicy',
+        'Inni'
       ],
       datasets: [
         {
@@ -61,7 +68,10 @@ onMounted(() => {
             Color.Volunteers,
             Color.Vendors,
             Color.Guests,
-            Color.Media
+            Color.Media,
+            Color.VIP,
+            Color.Workers,
+            Color.Others
           ]
         }
       ]

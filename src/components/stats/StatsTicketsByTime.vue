@@ -20,7 +20,7 @@ function getDataByTicketType(ticketType?: TicketType | 'normal') {
   )
   return [
     {
-      x: '2024-07-28T12:00:00.000Z',
+      x: '2024-07-26T08:00:00.000Z',
       y: 0
     },
     ...x
@@ -53,15 +53,15 @@ function getData() {
         data: getDataByTicketType('program')
       },
       {
-        label: 'Wolontariusze',
+        label: 'Wolo',
         borderColor: Color.Volunteers,
-        data: getDataByTicketType('volunteer'),
-        hidden: true
+        data: getDataByTicketType('volunteer')
       },
       {
         label: 'Goście',
         borderColor: Color.Guests,
-        data: getDataByTicketType('guest')
+        data: getDataByTicketType('guest'),
+        hidden: true
       },
       {
         label: 'Media',
@@ -73,6 +73,24 @@ function getData() {
         label: 'Wystawcy',
         borderColor: Color.Vendors,
         data: getDataByTicketType('vendor'),
+        hidden: true
+      },
+      {
+        label: 'Pracownicy',
+        borderColor: Color.Workers,
+        data: getDataByTicketType('workers'),
+        hidden: true
+      },
+      {
+        label: 'Inni',
+        borderColor: Color.Others,
+        data: getDataByTicketType('others'),
+        hidden: true
+      },
+      {
+        label: 'VIP',
+        borderColor: Color.VIP,
+        data: getDataByTicketType('vip'),
         hidden: true
       }
     ]
@@ -116,8 +134,8 @@ onMounted(() => {
         },
         x: {
           type: 'time',
-          min: '2024-07-28T12:00:00.000Z',
-          max: '2024-07-30T16:00:00.000Z',
+          min: '2024-07-26T08:00:00.000Z',
+          max: '2024-07-28T12:00:00.000Z',
           adapters: {
             date: {
               locale: pl
@@ -173,6 +191,18 @@ onUnmounted(() => {
         <tr>
           <td>Wystawcy</td>
           <td class="text-right">{{ getTicketsByType('vendor') }}</td>
+        </tr>
+        <tr>
+          <td>Pracownicy</td>
+          <td class="text-right">{{ getTicketsByType('workers') }}</td>
+        </tr>
+        <tr>
+          <td>Inni</td>
+          <td class="text-right">{{ getTicketsByType('others') }}</td>
+        </tr>
+        <tr>
+          <td>VIP</td>
+          <td class="text-right">{{ getTicketsByType('vip') }}</td>
         </tr>
         <tr>
           <td><b>Razem</b></td>
