@@ -14,6 +14,13 @@ function getTicketsByType(ticketType: TicketType | 'normal') {
   return tickets.value.filter(ticket => ticket.ticketType === ticketType).length
 }
 
+function getSleepsByType(ticketType: TicketType | 'normal') {
+  // @ts-ignore
+  return tickets.value.filter(
+    ticket => ticket.ticketType === ticketType && ticket.sleep
+  ).length
+}
+
 function getDataByTicketType(ticketType?: TicketType | 'normal') {
   const x = tickets.value.filter(ticket =>
     ticketType ? ticket.ticketType === ticketType : true
@@ -217,6 +224,39 @@ onUnmounted(() => {
     </div>
     <div class="ml-2 mr-8">
       <canvas ref="ticketsByTimeChartRef" width="100" height="60"></canvas>
+    </div>
+  </div>
+  <div class="max-container">
+    <h1 class="text-2xl font-bold text-center mb-12">Sleep</h1>
+    <div class="mb-16 flex justify-around">
+      <table :key="tickets.length">
+        <tr>
+          <th>Typ</th>
+          <th class="text-right">Sleepy</th>
+        </tr>
+        <tr>
+          <td>Uczestnicy</td>
+          <td class="text-right">{{ getSleepsByType('normal') }}</td>
+        </tr>
+        <tr>
+          <td>Program</td>
+          <td class="text-right">{{ getSleepsByType('program') }}</td>
+        </tr>
+        <tr>
+          <td>Wolontariusze</td>
+          <td class="text-right">{{ getSleepsByType('volunteer') }}</td>
+        </tr>
+        <tr>
+          <td>Razem</td>
+          <td class="text-right">
+            <b>{{
+              getSleepsByType('normal') +
+              getSleepsByType('program') +
+              getSleepsByType('volunteer')
+            }}</b>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
 </template>
