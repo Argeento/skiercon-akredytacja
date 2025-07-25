@@ -16,7 +16,8 @@ const error = ref('')
 
 const errorMap: Record<string, string> = {
   'auth/too-many-requests': 'Zbyt dużo prób logowania!',
-  'auth/wrong-password': 'Nieprawidłowe hasło!'
+  'auth/wrong-password': 'Nieprawidłowe hasło!',
+  'auth/invalid-login-credentials': 'Nieprawidłowe dane logowania!',
 }
 
 const router = useRouter()
@@ -35,7 +36,7 @@ async function login() {
     // Login to firebase
     await signInWithEmailAndPassword(
       auth,
-      'argeento@skiercon.pl',
+      'raven@skiercon.pl',
       password.value
     )
 
@@ -55,6 +56,7 @@ async function login() {
         people.value = res.data
       })
 
+    console.log(people.value)
     // await axios
     //   .get<string>(
     //     `https://us-central1-skiercon-akredytacja.cloudfunctions.net/faq?key=${password.value}`
@@ -67,7 +69,7 @@ async function login() {
     isUserAuth.value = true
   } catch (err) {
     if (err instanceof FirebaseError) {
-      error.value = errorMap[err.code] ?? 'Wystąpił nieznany błąd!'
+      error.value = errorMap[err.code] ?? 'Wystąpił potężny błąd'
       console.error(err.code)
     } else {
       throw err

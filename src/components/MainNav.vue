@@ -12,7 +12,7 @@ import { faqLink, tickets } from '@/store'
         :to="{ name: RouteName.Akredytacja }"
         class="skierfont text-violet-600"
       >
-        Skiercon 2024
+        Skiercon 2025
       </router-link>
 
       <div class="ml-4">

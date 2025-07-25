@@ -2,6 +2,7 @@
 import { ticketStartTime } from '@/store'
 import type { TicketInput } from '@/types'
 import { initializeApp } from 'firebase/app'
+import { getAnalytics } from 'firebase/analytics'
 import {
   addDoc,
   collection,
@@ -21,14 +22,13 @@ const COLLECTION_NAME = 'tickets2024'
 
 export function initFirebaseInstance() {
   const firebaseConfig = {
-    authDomain: 'skiercon-akredytacja.firebaseapp.com',
-    databaseURL:
-      'https://skiercon-akredytacja-default-rtdb.europe-west1.firebasedatabase.app',
-    projectId: 'skiercon-akredytacja',
-    storageBucket: 'skiercon-akredytacja.appspot.com',
-    messagingSenderId: '757533505285',
-    appId: '1:757533505285:web:7c08726c8e0e3bc2fea96c',
-    apiKey: 'AIzaSyBFFRkL6yPo8ARSIX3xWmdfcGy9d_7VNT0'
+    apiKey: "AIzaSyDZb7-ioFy32A5bvByg61rOWrdXhqvpXlU",
+    authDomain: "skiercon-akredytacja2025.firebaseapp.com",
+    projectId: "skiercon-akredytacja2025",
+    storageBucket: "skiercon-akredytacja2025.firebasestorage.app",
+    messagingSenderId: "94708514487",
+    appId: "1:94708514487:web:0bcbf9421a96454c225732",
+    measurementId: "G-W7WTELX3X1"
   }
 
   // Initialize Firebase
