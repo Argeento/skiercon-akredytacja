@@ -32,7 +32,7 @@ const router = useRouter()
     label="Liczba sleepów:"
   />
 
-  <div v-if="sleepCounter" class="card">
+  <div v-if="sleepCounter && ticketsToSell[0].ticketType !== 'volunteer'" class="card">
     <div>
       Przygotuj opaskę na rękę <b>x{{ sleepCounter }}</b>
     </div>

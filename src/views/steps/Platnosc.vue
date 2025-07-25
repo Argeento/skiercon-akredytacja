@@ -95,7 +95,7 @@ async function endAkre() {
 
   <div v-if="ticket.ticketType === 'volunteer'">
     <div class="card">
-      Poinformuj <i>Wolontariusza</i> o tym, żeby po akredytacji zgłosił się do
+      Poinformuj <i>Wolontariusza</i>, żeby po akredytacji zgłosił się do
       <span
         v-if="ticket.volunteerType === 'LIS' || ticket.volunteerType === 'SZOP'"
       >
@@ -107,23 +107,25 @@ async function endAkre() {
     </div>
   </div>
 
-  <div class="card" v-if="ticket.ticketType === 'guest'">
+  <!-- <div class="card" v-if="ticket.ticketType === 'guest'">
     Poinformuj gościa, aby udał się do sklepiku konwentowego po odbiór
     <b>Pakietu Gościa</b>
-  </div>
+  </div> -->
 
-  <div v-if="ticket.ticketType === 'vendor'">
+  <!-- <div v-if="ticket.ticketType === 'vendor'">
     <div class="card">Poinformuj <i>Wystawcę</i>, gdzie ma stoisko</div>
     <div class="card">
       Poinformuj <i>Wystawcę</i>, że do stoiska wkrótce podejdzie
       <i>Organizator</i> w sprawie rozliczenia i&nbsp;podpisania umowy
     </div>
-  </div>
+  </div> -->
 
   <div v-if="sleeps > 0" class="card">
     <div class="my-2">
-      <b>Załóż {{ sleeps > 1 ? 'opaski' : 'opaskę' }} na rękę</b>
-      <b v-if="sleeps > 1"> (x{{ sleeps }})</b>
+      <span v-if="ticket.ticketType !== 'volunteer'">
+        <b>Załóż {{ sleeps > 1 ? 'opaski' : 'opaskę' }} na rękę</b>
+        <b v-if="sleeps > 1"> (x{{ sleeps }})</b>
+      </span>
 
       <div
         v-if="
@@ -133,11 +135,11 @@ async function endAkre() {
         "
         class="mt-2"
       >
-        Poinformuj uczestnika, że sleep jest w <b>Prusie</b>
+        Poinformuj <i>Uczestnika</i>, że sleep jest w <b>Liceum Ogólnokształcącym im. B. Prusa</b> Adres: Sienkiewicza 10, 96-100 Skierniewice
       </div>
 
       <div v-if="ticket.ticketType === 'volunteer'">
-        Poinformuj wolontariusza, że sleep jest w <b>Mechaniku</b>
+        Poinformuj <i>Wolontariusza</i>, że sleep jest w <b>Mechaniku (Zespół Szkół Zawodowych nr 2)</b> Adres: Pomologiczna 15, 96-100 Skierniewice
       </div>
     </div>
   </div>

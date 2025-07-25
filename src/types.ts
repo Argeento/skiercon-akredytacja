@@ -35,6 +35,10 @@ export type GsProgram = {
   discount: Discount
   discountSleep: '' | '100%'
   group: string
+  requiresKamilek: boolean
+  peselOk: boolean
+  krkOk: boolean
+  ok: boolean
 }
 
 export type GsVendor = {
@@ -43,6 +47,10 @@ export type GsVendor = {
   name: string
   tickets: number
   place: string
+  requiresKamilek: boolean
+  peselOk: boolean
+  krkOk: boolean
+  ok: boolean
 }
 
 export type GsVolunteer = {
@@ -53,6 +61,10 @@ export type GsVolunteer = {
   lastName: string
   discount: Discount
   volunteerType: VolunteerType
+  requiresKamilek: boolean
+  peselOk: boolean
+  krkOk: boolean
+  ok: boolean
 }
 
 export type GsMedium = {
@@ -63,6 +75,10 @@ export type GsMedium = {
   info?: string
   lastName: string
   mediaName: string
+  requiresKamilek: boolean
+  peselOk: boolean
+  krkOk: boolean
+  ok: boolean
 }
 
 export type GsGuest = {
@@ -74,6 +90,10 @@ export type GsGuest = {
   tickets: number
   info?: string
   giftPack: boolean
+  requiresKamilek: boolean
+  peselOk: boolean
+  krkOk: boolean
+  ok: boolean
 }
 
 export type GsWorker = {
@@ -83,6 +103,10 @@ export type GsWorker = {
   lastName: string
   tickets: number
   info?: string
+  requiresKamilek: boolean
+  peselOk: boolean
+  krkOk: boolean
+  ok: boolean
 }
 
 export type GsOther = {
@@ -92,6 +116,10 @@ export type GsOther = {
   lastName: string
   tickets: number
   info?: string
+  requiresKamilek?: boolean
+  peselOk?: boolean
+  krkOk?: boolean
+  ok?: boolean
 }
 
 export type GsVip = {
@@ -101,6 +129,10 @@ export type GsVip = {
   lastName: string
   tickets: number
   info?: string
+  requiresKamilek: boolean
+  peselOk: boolean
+  krkOk: boolean
+  ok: boolean
 }
 
 export type Normal = {

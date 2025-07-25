@@ -50,7 +50,7 @@ async function login() {
     // Download necessary data
     await axios
       .get<GsPeople>(
-        `https://api.skiercon.pl/google-sheets/static?token=${password.value}`
+        `http://localhost:3002/google-sheets/static?token=${password.value}`
       )
       .then(res => {
         people.value = res.data

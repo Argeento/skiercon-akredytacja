@@ -129,6 +129,24 @@ watch(multiTicket, () => {
       </div>
     </div>
   </div>
+  
+  <!-- kafelek weryfikacji tylko dla program, volunteer i guest -->
+  <div
+    v-if="
+      selected &&
+      ['program', 'volunteer', 'guest'].includes(selected.ticketType) &&
+      selected.requiresKamilek &&
+      !selected.ok
+    "
+    class="card border-red-500 bg-white text-red-600 mt-4"
+  >
+    <div class="border-l-4 border-red-500 pl-4 py-2">
+      <div class="font-bold">⚠️ UWAGA!</div>
+      <div>Ta osoba wymaga <strong>weryfikacji dokumentów o niekaralności</strong>.</div>
+      <div class="mt-1 font-semibold">‼️ Nie wydawaj jeszcze identyfikatora ‼️</div>
+      <div class="mt-2">📞 Zawołaj Raven - tel. 723 002 001</div>
+    </div>
+  </div>
 
   <div
     v-if="
@@ -146,7 +164,7 @@ watch(multiTicket, () => {
       :max="ticket.tickets === soldTickets ? 100 : ticket.tickets - soldTickets"
     />
   </div>
-
+  
   <div class="card" v-if="selected && ticket.ticketType">
     <div class="mb-4">
       Przygotuj odpowiedni identyfikator<TicketsToSellCounter />:
